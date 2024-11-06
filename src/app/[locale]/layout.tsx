@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "../globals.css";
+import "@solana/wallet-adapter-react-ui/styles.css";
 import clsx from "classnames";
 import { notFound } from "next/navigation";
 import { Header } from "@/src/components/Header/Header";

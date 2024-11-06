@@ -10,11 +10,12 @@ interface SectionProps
 export const Section = forwardRef<
   HTMLDivElement,
   React.PropsWithChildren<SectionProps>
->(({ children, ...props }, ref) => {
+>(({ testID, children, ...props }, ref) => {
   return (
     <section
       ref={ref}
       {...props}
+      data-testid={testID}
       className={clsx(
         props.className,
         "grid col-full gap-9 grid-cols-layout content-center"

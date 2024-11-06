@@ -5,7 +5,10 @@ import { CopyButton } from "@/src/components/Buttons/CopyButton";
 import { useTranslations } from "next-intl";
 
 import { getTranslations } from "next-intl/server";
-import Link from "next/link";
+import { PurchaseSteps } from "@/src/components/PurchaseSteps/PurchaseSteps";
+import { ConnectionButton } from "@/src/components/Buttons/ConnectionButton";
+import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
+import { PurchaseButtons } from "@/src/components/Buttons/PurchaseButtons";
 
 export async function generateMetadata({
   params: { locale },
@@ -37,19 +40,7 @@ export async function generateMetadata({
   };
 }
 
-const WALLETS = [
-  {
-    key: "trust",
-    src: "/images/trust.png",
-    label: "Trust Wallet",
-    href: "https://trustwallet.com/download",
-  },
-  {
-    key: "phantom",
-    src: "/images/phantom.png",
-    label: "Phantom Wallet",
-    href: "https://phantom.app/en-GB/download",
-  },
+const MARKETS = [
   {
     key: "solflare",
     src: "/images/solflare.png",
@@ -59,20 +50,14 @@ const WALLETS = [
   {
     key: "jupiter",
     src: "/images/jupiter.png",
-    label: "Jupiter Wallet",
-    href: "https://www.google.com/search?q=Jupiter+wallet+download",
+    label: "Jupiter Marketplace",
+    href: "https://jup.ag/",
   },
   {
     key: "raydium",
     src: "/images/raydium.png",
-    label: "Raydium Wallet",
-    href: "https://www.google.com/search?q=raydium+wallet+download",
-  },
-  {
-    key: "glow",
-    src: "/images/glow.png",
-    label: "Glow Wallet",
-    href: "https://www.google.com/search?q=Jupiter+wallet+download",
+    label: "Raydium Marketplace",
+    href: "https://raydium.io/swap/",
   },
 ];
 
@@ -101,35 +86,12 @@ export default function LocalePage({
             label={t("CopyButtonLabel")}
             value={Brand.contractAddress}
           />
-          <div className="grid gap-5 grid-cols-actions">
-            <Button testID={`${testID}.native`}>
-              {t("PurchaseButtonToken")}
-            </Button>
-            <Button testID={`${testID}.raydium`} inverted>
-              {t("PurchaseButtonRadium")}
-            </Button>
-            {/* <ConnectionButton testID={`${testID}.wallet`} /> */}
-          </div>
+          <PurchaseButtons
+            testID={`${testID}.purchase`}
+            tokenSymbol={t("PurchaseButtonToken")}
+          />
           <h3 className="text-2xl">How to buy $LFV</h3>
-          <ol className="text-2xl">
-            <li>
-              <span>Get one of the wallets below</span>
-              <span className="col-span-2 p-2 flex justify-around gap-2">
-                {WALLETS.map((wallet) => (
-                  <Link key={wallet.key} href={wallet.href}>
-                    <Image
-                      src={wallet.src}
-                      alt={wallet.label}
-                      width={60}
-                      height={60}
-                    />
-                  </Link>
-                ))}
-              </span>
-            </li>
-            <li>Buy some Solana</li>
-            <li>Buy $LFV and get Lambo</li>
-          </ol>
+          <PurchaseSteps testID={`${testID}.steps`} />
         </div>
       </div>
       <Image

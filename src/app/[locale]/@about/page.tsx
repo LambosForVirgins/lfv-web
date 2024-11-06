@@ -31,7 +31,7 @@ export default function LocaleAboutPage() {
       </div>
       <div className="flex flex-col gap-5 justify-center">
         <p className="font-base text-base">{t("Instructions.Description")}</p>
-        <ol>
+        <ol className="instruct">
           <li>{t("Instructions.Steps.Hold")}</li>
           <li>{t("Instructions.Steps.Submit")}</li>
           <li>{t("Instructions.Steps.Wait")}</li>

@@ -1,14 +1,24 @@
 "use client";
 
-import { QueryClientProvider } from "@tanstack/react-query";
-import { WagmiProvider } from "wagmi";
-import { queryClient } from "../utils/clients/queryClient";
-import { wagmiConfig } from "../utils/clients/wagmiConfig";
+import * as web3 from "@solana/web3.js";
+import * as walletAdapterWallets from "@solana/wallet-adapter-wallets";
+import * as walletAdapterReact from "@solana/wallet-adapter-react";
+import { WalletModalProvider } from "@solana/wallet-adapter-react-ui";
+
+const endpoint = web3.clusterApiUrl("devnet");
+
+const wallets = [
+  new walletAdapterWallets.PhantomWalletAdapter(),
+  new walletAdapterWallets.SolflareWalletAdapter(),
+  new walletAdapterWallets.TrustWalletAdapter(),
+];
 
 export const Web3Providers = ({ children }: React.PropsWithChildren) => {
   return (
-    <WagmiProvider config={wagmiConfig}>
-      <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-    </WagmiProvider>
+    <walletAdapterReact.ConnectionProvider endpoint={endpoint}>
+      <walletAdapterReact.WalletProvider wallets={wallets} autoConnect>
+        <WalletModalProvider>{children}</WalletModalProvider>
+      </walletAdapterReact.WalletProvider>
+    </walletAdapterReact.ConnectionProvider>
   );
 };

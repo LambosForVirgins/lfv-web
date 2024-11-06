@@ -12,7 +12,7 @@ export default function LocaleSubmissionsPage() {
       <div className="col-content flex flex-col gap-5 justify-center">
         <h2 className="font-headline text-5xl">{t("Heading")}</h2>
         <p>{t("Directions.Description")}</p>
-        <ul role="list">
+        <ul role="list" className="instruct">
           <li>{t("Directions.Steps.Who")}</li>
           <li>{t("Directions.Steps.Why")}</li>
           <li data-icon="🦄">{t("Directions.Steps.What")}</li>
