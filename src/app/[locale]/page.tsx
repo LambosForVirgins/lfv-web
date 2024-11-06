@@ -40,27 +40,6 @@ export async function generateMetadata({
   };
 }
 
-const MARKETS = [
-  {
-    key: "solflare",
-    src: "/images/solflare.png",
-    label: "Solflare Wallet",
-    href: "https://solflare.com/",
-  },
-  {
-    key: "jupiter",
-    src: "/images/jupiter.png",
-    label: "Jupiter Marketplace",
-    href: "https://jup.ag/",
-  },
-  {
-    key: "raydium",
-    src: "/images/raydium.png",
-    label: "Raydium Marketplace",
-    href: "https://raydium.io/swap/",
-  },
-];
-
 export default function LocalePage({
   testID = "home",
 }: Readonly<Partial<Common.ComponentProps>>) {

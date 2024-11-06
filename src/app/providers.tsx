@@ -5,6 +5,7 @@ import * as walletAdapterWallets from "@solana/wallet-adapter-wallets";
 import * as walletAdapterReact from "@solana/wallet-adapter-react";
 import { WalletModalProvider } from "@solana/wallet-adapter-react-ui";
 
+// TODO: This should be dynamic based on the network
 const endpoint = web3.clusterApiUrl("devnet");
 
 const wallets = [
