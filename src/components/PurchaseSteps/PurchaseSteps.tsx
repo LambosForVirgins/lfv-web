@@ -5,23 +5,9 @@ import { type Adapter } from "@solana/wallet-adapter-base";
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 import { LAMPORTS_PER_SOL } from "@solana/web3.js";
 import clsx from "classnames";
+import { useExchange } from "@/src/utils/exchanges/useExchange";
 
 const MINIMUM_TOKEN_PRICE = 0;
-
-const MARKETS = [
-  {
-    key: "jupiter",
-    src: "/images/jupiter.png",
-    label: "Jupiter Marketplace",
-    href: "https://jup.ag/",
-  },
-  {
-    key: "raydium",
-    src: "/images/raydium.png",
-    label: "Raydium Marketplace",
-    href: "https://raydium.io/swap/",
-  },
-];
 
 const isInstalled = ({ readyState }: Adapter) => readyState === "Installed";
 
@@ -30,6 +16,7 @@ export const PurchaseSteps = ({ testID }: Common.ComponentProps) => {
 
   const { connection } = useConnection();
   const { publicKey, connected, wallets } = useWallet();
+  const { exchanges } = useExchange();
 
   const shouldInstall = useMemo(
     () => !wallets.some((wallet) => wallet.readyState === "Installed"),
@@ -96,9 +83,9 @@ export const PurchaseSteps = ({ testID }: Common.ComponentProps) => {
           <span className="flex flex-col gap-4">
             <span>Buy $LFV and get Lambo</span>
             <span className="col-span-2 flex gap-4 items-center">
-              {MARKETS.map((market) => (
-                <a key={market.key} href={market.href}>
-                  <img src={market.src} width={62} height={62} />
+              {exchanges.map((market) => (
+                <a key={market.name} target={"_blank"} href={market.url}>
+                  <img src={market.icon} width={62} height={62} />
                 </a>
               ))}
             </span>
