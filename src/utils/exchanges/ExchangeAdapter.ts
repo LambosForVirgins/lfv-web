@@ -1,3 +1,5 @@
+import { Brand } from "../config/Brand";
+
 const MARKETS = [
   {
     key: "jupiter",
@@ -26,13 +28,13 @@ abstract class ExchangeAdapter {
 
 class JupiterExchangeAdapter extends ExchangeAdapter {
   name = JupiterExchangeName;
-  url = "https://jup.ag/";
+  url = `https://jup.ag/SOL-${Brand.contractAddress}`;
   icon = "/images/jupiter.png";
 }
 
 class RaydiumExchangeAdapter extends ExchangeAdapter {
   name = RaydiumExchangeName;
-  url = "https://raydium.io/swap/";
+  url = `https://raydium.io/swap/?inputMint=sol&outputMint=${Brand.contractAddress}`;
   icon = "/images/raydium.png";
 }
 
