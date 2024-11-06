@@ -1,20 +1,5 @@
 import { Brand } from "../config/Brand";
 
-const MARKETS = [
-  {
-    key: "jupiter",
-    src: "/images/jupiter.png",
-    label: "Jupiter Marketplace",
-    href: "https://jup.ag/",
-  },
-  {
-    key: "raydium",
-    src: "/images/raydium.png",
-    label: "Raydium Marketplace",
-    href: "https://raydium.io/swap/",
-  },
-];
-
 type ExchangeName<T extends string = string> = T;
 
 const JupiterExchangeName = "Jupiter" as ExchangeName<"Jupiter">;

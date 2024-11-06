@@ -1,13 +1,10 @@
 import Image from "next/image";
-import { Button } from "@/src/components/Buttons/Button";
 import { Brand } from "@/src/utils/config/Brand";
 import { CopyButton } from "@/src/components/Buttons/CopyButton";
 import { useTranslations } from "next-intl";
 
 import { getTranslations } from "next-intl/server";
 import { PurchaseSteps } from "@/src/components/PurchaseSteps/PurchaseSteps";
-import { ConnectionButton } from "@/src/components/Buttons/ConnectionButton";
-import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 import { PurchaseButtons } from "@/src/components/Buttons/PurchaseButtons";
 
 export async function generateMetadata({
