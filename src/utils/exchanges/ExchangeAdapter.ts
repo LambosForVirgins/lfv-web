@@ -13,7 +13,7 @@ abstract class ExchangeAdapter {
 
 class JupiterExchangeAdapter extends ExchangeAdapter {
   name = JupiterExchangeName;
-  url = `https://jup.ag/SOL-${Brand.contractAddress}`;
+  url = `https://jup.ag/swap/SOL-${Brand.contractAddress}`;
   icon = "/images/jupiter.png";
 }
 
