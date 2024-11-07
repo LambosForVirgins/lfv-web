@@ -12,10 +12,16 @@ const socialLinks = [
     link: "https://discord.gg/VfuUAem2dz",
   },
   {
-    key: "twitter",
-    src: "/images/twitter.png",
+    key: "x",
+    src: "/images/x.png",
     label: "@Lambos4V1rgins",
     link: "https://x.com/@Lambos4V1rgins",
+  },
+  {
+    key: "telegram",
+    src: "/images/telegram.png",
+    label: "t.me/lambosForVirgins",
+    link: "https://t.me/lambosForVirgins",
   },
   {
     key: "mail",
