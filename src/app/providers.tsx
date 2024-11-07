@@ -1,12 +1,13 @@
 "use client";
 
-import * as web3 from "@solana/web3.js";
 import * as walletAdapterWallets from "@solana/wallet-adapter-wallets";
 import * as walletAdapterReact from "@solana/wallet-adapter-react";
 import { WalletModalProvider } from "@solana/wallet-adapter-react-ui";
+import { getEnvironmentEndpoint } from "@/src/utils/exchanges/getEnvironmentEndpoint";
 
-// TODO: This should be dynamic based on the network
-const endpoint = web3.clusterApiUrl("devnet");
+const buildEnvironment = process.env.VERCEL_ENV;
+
+const endpoint = getEnvironmentEndpoint(buildEnvironment);
 
 const wallets = [
   new walletAdapterWallets.PhantomWalletAdapter(),
