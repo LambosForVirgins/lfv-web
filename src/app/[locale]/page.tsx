@@ -60,7 +60,7 @@ export default function LocalePage({
           <CopyButton
             testID={`${testID}.copy`}
             label={t("CopyButtonLabel")}
-            value={Brand.contractAddress}
+            value={`0x${Brand.contractAddress}`}
           />
           <PurchaseButtons
             testID={`${testID}.purchase`}
