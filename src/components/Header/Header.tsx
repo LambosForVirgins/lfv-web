@@ -2,6 +2,7 @@ import { Brand } from "@/src/utils/config/Brand";
 import clsx from "classnames";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
+import { LocaleButton } from "../Buttons/LocaleButton";
 
 const MenuItems = [
   // {
@@ -48,6 +49,7 @@ export const Header = ({ testID, ...props }: HeaderProps) => {
             {t(item.key)}
           </Link>
         ))}
+        <LocaleButton testID={`${testID}.locale`} />
       </div>
     </div>
   );
