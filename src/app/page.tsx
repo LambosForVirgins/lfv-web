@@ -6,7 +6,6 @@ import { useTranslations } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import { PurchaseSteps } from "@/src/components/PurchaseSteps/PurchaseSteps";
 import { PurchaseButtons } from "@/src/components/Buttons/PurchaseButtons";
-import { Button } from "@/src/components/Buttons/Button";
 import { SwapButton } from "@/src/components/Buttons/SwapButton";
 
 export async function generateMetadata({

@@ -1,7 +1,10 @@
 "use client";
 
 import * as walletAdapterWallets from "@solana/wallet-adapter-wallets";
-import * as walletAdapterReact from "@solana/wallet-adapter-react";
+import {
+  ConnectionProvider,
+  WalletProvider,
+} from "@solana/wallet-adapter-react";
 import { WalletModalProvider } from "@solana/wallet-adapter-react-ui";
 import { getEnvironmentEndpoint } from "@/src/utils/config/getEnvironmentEndpoint";
 
@@ -17,10 +20,10 @@ const wallets = [
 
 export const SolanaProvider = ({ children }: React.PropsWithChildren) => {
   return (
-    <walletAdapterReact.ConnectionProvider endpoint={endpoint}>
-      <walletAdapterReact.WalletProvider wallets={wallets} autoConnect>
+    <ConnectionProvider endpoint={endpoint}>
+      <WalletProvider wallets={wallets} autoConnect>
         <WalletModalProvider>{children}</WalletModalProvider>
-      </walletAdapterReact.WalletProvider>
-    </walletAdapterReact.ConnectionProvider>
+      </WalletProvider>
+    </ConnectionProvider>
   );
 };
