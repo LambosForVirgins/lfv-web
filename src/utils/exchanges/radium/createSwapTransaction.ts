@@ -1,44 +1,35 @@
 import { PublicKey } from "@solana/web3.js";
 
-import { RadiumQuoteResponse } from "./types";
+import {
+  RadiumQuoteResponse,
+  RadiumSwapRequest,
+  RadiumSwapResponse,
+  RadiumTxVersion,
+} from "./types";
 import { InputToken, OutputToken } from "./types";
-import { LFVTokenMint, SolanaTokenMint } from "../tokens";
-
-const BASE_URL = new URL("https://api-v3.raydium.io");
-
-interface SwapInput<InputToken, OutputToken> {
-  computeUnitPriceMicroLamports: string;
-  swapResponse: RadiumQuoteResponse<InputToken, OutputToken>;
-  txVersion: string;
-  wallet: string;
-  wrapSol: boolean;
-  unwrapSol: boolean; // true means output mint receive sol, false means output mint received wsol
-  inputAccount: InputToken;
-  outputAccount: OutputToken;
-}
 
 export const createSwapTransaction = async (
   quoteResponse: RadiumQuoteResponse<InputToken, OutputToken>,
   publicKey: PublicKey
 ): Promise<string> => {
-  const url = new URL("/transaction", BASE_URL);
+  const url = new URL(
+    "https://transaction-v1.raydium.io/transaction/swap-base-in"
+  );
 
-  const { swapTransaction } = await fetch(url, {
+  const response = (await fetch(url, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
+      computeUnitPriceMicroLamports: "1722351",
       swapResponse: quoteResponse,
-      txVersion: "V0",
+      txVersion: RadiumTxVersion.Version0,
       wallet: publicKey.toBase58(),
-      wrapSol: false,
+      wrapSol: true,
       unwrapSol: false,
-      inputAccount: SolanaTokenMint,
-      outputAccount: LFVTokenMint,
-    } as SwapInput<InputToken, OutputToken>),
-  }).then((res) => res.json());
+    } as RadiumSwapRequest<InputToken, OutputToken>),
+  }).then((res) => res.json())) as RadiumSwapResponse;
 
-  console.log(swapTransaction);
-  return swapTransaction;
+  return response.data[0].transaction;
 };

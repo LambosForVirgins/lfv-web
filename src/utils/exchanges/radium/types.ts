@@ -3,6 +3,11 @@ import { LFVTokenMint, SolanaTokenMint } from "../tokens";
 export type InputToken = typeof SolanaTokenMint;
 export type OutputToken = typeof LFVTokenMint;
 
+export enum RadiumTxVersion {
+  Version0 = "V0",
+  Version1 = "V1",
+}
+
 interface RadiumTokenPrice {
   address: string;
   name: string;
@@ -59,4 +64,32 @@ export interface RadiumQuoteResponse<InputToken, OutputToken> {
       },
     ];
   };
+}
+
+export enum RadiumPricingFee {
+  VeryHighPriority = "3000000",
+  HighPriority = "2000000",
+  MediumPriority = "1000000",
+}
+
+export interface RadiumSwapRequest<InputToken, OutputToken> {
+  computeUnitPriceMicroLamports: string;
+  swapResponse: RadiumQuoteResponse<InputToken, OutputToken>;
+  txVersion: string;
+  wallet: string;
+  wrapSol: boolean;
+  unwrapSol: boolean; // true means output mint receive sol, false means output mint received wsol
+  inputAccount: InputToken;
+  outputAccount: OutputToken;
+}
+
+export interface RadiumSwapResponse {
+  id: string;
+  version: RadiumTxVersion;
+  success: boolean;
+  data: [
+    {
+      transaction: string;
+    },
+  ];
 }

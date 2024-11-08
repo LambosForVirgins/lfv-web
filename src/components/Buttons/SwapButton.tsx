@@ -8,8 +8,8 @@ import { calculateExchangeRate } from "@/src/utils/pricing/calculateExchangeRate
 
 import { LFVTokenMint, SolanaTokenMint } from "@/src/utils/exchanges/tokens";
 import { executeTransaction } from "@/src/utils/exchanges/transactions";
-import { createSwapTransaction } from "@/src/utils/exchanges/jupiter/createSwapTransaction";
-import { getSwapQuote } from "@/src/utils/exchanges/jupiter/getSwapQuote";
+import { createSwapTransaction } from "@/src/utils/exchanges/radium/createSwapTransaction";
+import { getSwapQuote } from "@/src/utils/exchanges/radium/getSwapQuote";
 import { getMarketQuotes } from "@/src/utils/exchanges/jupiter/getMarketQuotes";
 
 export const SwapButton = ({ testID }: Common.ComponentProps) => {
@@ -42,7 +42,7 @@ export const SwapButton = ({ testID }: Common.ComponentProps) => {
   useEffect(() => {
     if (inputAmount > 0 && exchangeRate !== null) {
       getSwapQuote(inputAmount).then((quote) =>
-        setAmount(parseInt(quote.outAmount) / 1_000_000)
+        setAmount(parseInt(quote.data.outputAmount) / 1_000_000)
       );
     }
   }, [inputAmount, exchangeRate]);
