@@ -57,8 +57,10 @@ export const PurchaseSteps = ({ testID }: Common.ComponentProps) => {
                 {
                   key: adapter.name,
                   target: "_blank",
-                  onClick: isInstalled(adapter) && connectAdapter(adapter),
-                  href: !isInstalled(adapter) && adapter.url,
+                  onClick: isInstalled(adapter)
+                    ? connectAdapter(adapter)
+                    : undefined,
+                  href: !isInstalled(adapter) ? adapter.url : undefined,
                 },
                 <img
                   src={adapter.icon}

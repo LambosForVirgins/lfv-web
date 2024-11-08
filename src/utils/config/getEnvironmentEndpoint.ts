@@ -9,7 +9,7 @@ export const getEnvironmentEndpoint = <T extends string = VercelEnvironment>(
     case "production":
       return web3.clusterApiUrl("mainnet-beta");
     case "preview":
-      return web3.clusterApiUrl("testnet");
+      return web3.clusterApiUrl("mainnet-beta");
     case "development":
     default:
       return web3.clusterApiUrl("devnet");

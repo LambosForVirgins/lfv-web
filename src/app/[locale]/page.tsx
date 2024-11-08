@@ -6,6 +6,8 @@ import { useTranslations } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import { PurchaseSteps } from "@/src/components/PurchaseSteps/PurchaseSteps";
 import { PurchaseButtons } from "@/src/components/Buttons/PurchaseButtons";
+import { Button } from "@/src/components/Buttons/Button";
+import { SwapButton } from "@/src/components/Buttons/SwapButton";
 
 export async function generateMetadata({
   params: { locale },
@@ -57,6 +59,7 @@ export default function LocalePage({
           height={186}
         />
         <div className="grid gap-5">
+          <SwapButton testID={`${testID}.swap`} />
           <CopyButton
             testID={`${testID}.copy`}
             label={t("CopyButtonLabel")}

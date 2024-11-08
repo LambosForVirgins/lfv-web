@@ -10,7 +10,7 @@ import customFonts from "../fonts";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { SectionBreak } from "@/src/components/SectionBreak/SectionBreak";
-import { Web3Providers } from "@/src/app/providers";
+import { SolanaProvider } from "@/src/app/providers";
 
 export const metadata: Metadata = {
   title: Brand.displayName,
@@ -45,7 +45,7 @@ export default async function LocaleLayout({
         )}
       >
         <NextIntlClientProvider messages={messages}>
-          <Web3Providers>
+          <SolanaProvider>
             <div className="grid col-full grid-cols-subgrid">
               <Header testID={`header`} className="col-content" />
             </div>
@@ -63,7 +63,7 @@ export default async function LocaleLayout({
               {community}
               {submissions}
             </div>
-          </Web3Providers>
+          </SolanaProvider>
         </NextIntlClientProvider>
       </body>
     </html>
