@@ -30,9 +30,10 @@ export const SwapButton = ({ testID }: Common.ComponentProps) => {
 
   useEffect(() => {
     getMarketQuotes([SolanaTokenMint, LFVTokenMint]).then((prices) => {
+      console.log(prices);
       const rate = calculateExchangeRate(
-        prices.data.getMarketQuotes[0].priceUsd,
-        prices.data.getMarketQuotes[1].priceUsd
+        prices.data.getTokenPrices[0].priceUsd,
+        prices.data.getTokenPrices[1].priceUsd
       );
       setExchangeRate(rate);
     });

@@ -33,6 +33,6 @@ export interface JupiterQuoteResponse<TokenInput, TokenOutput> {
 
 export interface JupiterPricingResponse {
   data: {
-    getMarketQuotes: { priceUsd: number; timestamp: number }[];
+    getTokenPrices: { priceUsd: number; timestamp: number }[];
   };
 }
