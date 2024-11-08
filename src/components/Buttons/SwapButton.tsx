@@ -30,7 +30,6 @@ export const SwapButton = ({ testID }: Common.ComponentProps) => {
 
   useEffect(() => {
     getMarketQuotes([SolanaTokenMint, LFVTokenMint]).then((prices) => {
-      console.log(prices);
       const rate = calculateExchangeRate(
         prices.data.getTokenPrices[0].priceUsd,
         prices.data.getTokenPrices[1].priceUsd
@@ -67,6 +66,7 @@ export const SwapButton = ({ testID }: Common.ComponentProps) => {
       className="grid grid-cols-3 rounded-lg overflow-hidden"
     >
       <input
+        data-testid={`${testID}.input`}
         name="inputAmount"
         placeholder="0.0"
         defaultValue={balance}
@@ -81,10 +81,12 @@ export const SwapButton = ({ testID }: Common.ComponentProps) => {
         Buy $LFV
       </Button>
       <input
+        data-testid={`${testID}.output`}
         name="outputAmount"
         value={amount}
         placeholder="0.0"
         className="text-right border-none"
+        readOnly
       />
     </div>
   );

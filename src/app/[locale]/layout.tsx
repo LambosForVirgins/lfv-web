@@ -11,6 +11,7 @@ import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { SectionBreak } from "@/src/components/SectionBreak/SectionBreak";
 import { SolanaProvider } from "@/src/app/providers";
+import Script from "next/script";
 
 export const metadata: Metadata = {
   title: Brand.displayName,
@@ -38,6 +39,12 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale}>
+      <Script
+        data-domain="lambosforvirgins.com"
+        src="https://plausible.io/js/script.file-downloads.hash.outbound-links.pageview-props.tagged-events.js"
+        defer
+      />
+      <Script src="/js/plausible.js" />
       <body
         className={clsx(
           customFonts,

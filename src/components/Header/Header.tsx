@@ -4,10 +4,10 @@ import { useTranslations } from "next-intl";
 import Link from "next/link";
 
 const MenuItems = [
-  {
-    key: "Navigation.Home",
-    url: "/",
-  },
+  // {
+  //   key: "Navigation.Home",
+  //   url: "/",
+  // },
   {
     key: "Navigation.About",
     url: "#about",
