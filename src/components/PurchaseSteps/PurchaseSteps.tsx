@@ -3,16 +3,18 @@
 import { createElement, useEffect, useMemo, useState } from "react";
 import { type Adapter } from "@solana/wallet-adapter-base";
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
-import { LAMPORTS_PER_SOL } from "@solana/web3.js";
+import { LAMPORTS_PER_SOL, PublicKey } from "@solana/web3.js";
 import clsx from "classnames";
 import { useExchange } from "@/src/utils/exchanges/useExchange";
+import { LFVTokenMint, SolanaTokenMint } from "@/src/utils/exchanges/tokens";
 
-const MINIMUM_TOKEN_PRICE = 0;
+const MINIMUM_TOKEN_PRICE = 1;
 
 const isInstalled = ({ readyState }: Adapter) => readyState === "Installed";
 
 export const PurchaseSteps = ({ testID }: Common.ComponentProps) => {
   const [balance, setBalance] = useState(0);
+  const [tokenBalance, setTokenBalance] = useState(0);
 
   const { connection } = useConnection();
   const { publicKey, connected, wallets } = useWallet();
@@ -28,6 +30,27 @@ export const PurchaseSteps = ({ testID }: Common.ComponentProps) => {
   };
 
   useEffect(() => {
+    const mintPublicKey = new PublicKey(LFVTokenMint);
+    const getTokenBalance = async () => {
+      if (!publicKey) {
+        setTokenBalance(0);
+        return;
+      }
+      const tokenAccounts = await connection.getParsedTokenAccountsByOwner(
+        publicKey,
+        {
+          mint: mintPublicKey,
+        }
+      );
+
+      if (tokenAccounts.value.length > 0) {
+        setTokenBalance(
+          tokenAccounts.value[0].account.data.parsed.info.tokenAmount.uiAmount
+        );
+      } else {
+        setTokenBalance(0);
+      }
+    };
     const getWalletBalance = async () => {
       if (!publicKey) {
         setBalance(0);
@@ -35,10 +58,11 @@ export const PurchaseSteps = ({ testID }: Common.ComponentProps) => {
       }
 
       const balance = await connection.getBalance(publicKey);
-      setBalance(balance / LAMPORTS_PER_SOL);
+      setBalance(balance);
     };
 
     getWalletBalance();
+    getTokenBalance();
   }, [publicKey, connection]);
 
   return (
@@ -81,21 +105,24 @@ export const PurchaseSteps = ({ testID }: Common.ComponentProps) => {
         </span>
       </li>
       <li>
-        {balance > 0 && connected ? (
-          <span className="flex flex-col gap-4">
-            <span>Buy $LFV and get Lambo</span>
-            <span className="col-span-2 flex gap-4 items-center">
-              {exchanges.map((market) => (
-                <a key={market.name} target={"_blank"} href={market.url}>
-                  <img src={market.icon} width={62} height={62} />
-                </a>
-              ))}
-            </span>
+        <span className="flex flex-col gap-4">
+          <span className={clsx(tokenBalance > 0 && "line-through")}>
+            Buy $LFV and get Lambo
           </span>
-        ) : (
-          <span>Buy $LFV and get Lambo</span>
-        )}
+          <span className="col-span-2 flex gap-4 items-center">
+            {exchanges.map((market) => (
+              <a key={market.name} target={"_blank"} href={market.url}>
+                <img src={market.icon} width={62} height={62} />
+              </a>
+            ))}
+          </span>
+        </span>
       </li>
+      {tokenBalance > 0 && (
+        <li>
+          <span>Submit your application</span>
+        </li>
+      )}
     </ol>
   );
 };

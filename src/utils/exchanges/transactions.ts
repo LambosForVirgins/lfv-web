@@ -4,6 +4,15 @@ import {
   type Adapter,
 } from "@solana/wallet-adapter-base";
 
+class SwapError extends Error {
+  code: number;
+  constructor(message: string) {
+    super(message);
+    this.code = 100;
+    this.name = "SwapError";
+  }
+}
+
 export const executeTransaction = async (
   transactionInput: any,
   adapter: Adapter,
@@ -43,5 +52,10 @@ export const executeTransaction = async (
     return result;
   } catch (error) {
     console.error("Error executing", error);
+    if (error instanceof Error) {
+      throw new SwapError(error.message);
+    }
+
+    throw new SwapError("Transaction failed");
   }
 };
