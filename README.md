@@ -29,3 +29,19 @@ bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+<details>
+<summary>Jupiter API</summary>
+<a href="https://station.jup.ag/docs/apis/swap-api">Official Documentation</a>
+<p>
+We use the Jupiter API to fetch token prices, generate a swap quote, and finally create a swap transaction for the user to sign in their wallet.
+</p>
+</details>
+
+<details>
+<summary>Raydium API</summary>
+<a href="https://docs.raydium.io/raydium/traders/trade-api">Official Documentation</a>
+<p>
+We use the Raydium API to fetch token prices, generate a swap quote, and finally create a swap transaction for the user to sign in their wallet.
+</p>
+</details>

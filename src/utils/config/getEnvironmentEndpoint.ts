@@ -7,11 +7,11 @@ export const getEnvironmentEndpoint = <T extends string = VercelEnvironment>(
 ) => {
   switch (environment) {
     case "production":
-      return web3.clusterApiUrl("mainnet-beta");
     case "preview":
-      return web3.clusterApiUrl("testnet");
+      return "https://practical-multi-diamond.solana-mainnet.quiknode.pro/9b31cd9dc3d514d5e7a007861e5e5455de1b920e";
     case "development":
     default:
+      return "https://practical-multi-diamond.solana-mainnet.quiknode.pro/9b31cd9dc3d514d5e7a007861e5e5455de1b920e";
       return web3.clusterApiUrl("devnet");
   }
 };

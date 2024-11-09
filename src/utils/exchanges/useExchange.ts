@@ -1,4 +1,5 @@
-import { createRaydiumAdapter, createJupiterAdapter } from "./ExchangeAdapter";
+import { createJupiterAdapter } from "./jupiter/JupiterExchangeAdapter";
+import { createRaydiumAdapter } from "./radium/RadiumExchangeAdapter";
 
 const exchanges = [createRaydiumAdapter(), createJupiterAdapter()];
 
