@@ -145,14 +145,18 @@ export const SwapButton = ({ testID }: Common.ComponentProps) => {
       <Button
         testID={`${testID}.native`}
         loading={loading}
-        disabled={inputAmount === 0 || inputAmount > balance}
+        disabled={!!error || inputAmount === 0 || inputAmount > balance}
         className="col-start-3 row-span-2"
         onClick={swapToken}
       >
         {`Buy $LFV`}
       </Button>
 
-      <span className="col-span-3 text-sm">{error?.message}</span>
+      {error && (
+        <span className="col-span-3 text-sm bg-red-500 p-1 text-white text-center rounded-md">
+          {error?.message}
+        </span>
+      )}
     </div>
   );
 };

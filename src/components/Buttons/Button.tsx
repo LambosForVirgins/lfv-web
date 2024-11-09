@@ -22,10 +22,10 @@ export const Button = forwardRef<
         props.className,
         "p-3 rounded-lg font-leading text-3xl",
         !props.disabled && "transition hover:scale-105 shadow-xl",
-        inverted
+        inverted || props.disabled
           ? "bg-neutral-100/60 text-[var(--bg-red-500)]"
           : "bg-red-500 text-white",
-        props.disabled && "bg-neutral-100 text-neutral-500",
+        props.disabled && "text-neutral-500",
         loading && "opacity-50 cursor-not-allowed shadow-md"
       )}
       disabled={props.disabled || loading}

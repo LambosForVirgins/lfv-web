@@ -27,6 +27,8 @@ const MenuItems = [
   },
 ];
 
+const ShowLocale = false;
+
 interface HeaderProps extends Common.ComponentProps {
   className?: string;
 }
@@ -49,7 +51,7 @@ export const Header = ({ testID, ...props }: HeaderProps) => {
             {t(item.key)}
           </Link>
         ))}
-        <LocaleButton testID={`${testID}.locale`} />
+        {ShowLocale && <LocaleButton testID={`${testID}.locale`} />}
       </div>
     </div>
   );
