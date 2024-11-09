@@ -11,7 +11,7 @@ import { JupiterQuoteResponse } from "../types";
 export const getSwapQuote = async (
   inputAmount: number
 ): Promise<JupiterQuoteResponse<InputToken, OutputToken>> => {
-  const url = new URL("https://public.jupiterapi.com/quote");
+  const url = new URL("/quote", "https://public.jupiterapi.com");
   url.searchParams.set("inputMint", SolanaTokenMint);
   url.searchParams.set("outputMint", LFVTokenMint);
   url.searchParams.set(

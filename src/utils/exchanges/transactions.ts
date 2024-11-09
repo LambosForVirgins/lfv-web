@@ -45,9 +45,9 @@ export const executeTransaction = async (
       "confirmed"
     );
 
-    console.log("Transaction confirmed", txid);
-    console.log(`https://solscan.io/tx/${txid}`);
-    console.log("Result", result);
+    // console.log("Transaction confirmed", txid);
+    // console.log(`https://solscan.io/tx/${txid}`);
+    // console.log("Result", result);
 
     return result;
   } catch (error) {

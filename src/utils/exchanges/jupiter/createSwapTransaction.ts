@@ -7,7 +7,7 @@ export const createSwapTransaction = async (
   quoteResponse: JupiterQuoteResponse<InputToken, OutputToken>,
   publicKey: PublicKey
 ): Promise<string> => {
-  const url = new URL("https://quote-api.jup.ag/v6/swap");
+  const url = new URL("/swap", "https://public.jupiterapi.com");
 
   const { swapTransaction } = await fetch(url, {
     method: "POST",
@@ -21,6 +21,5 @@ export const createSwapTransaction = async (
     }),
   }).then((res) => res.json());
 
-  console.log(swapTransaction);
   return swapTransaction;
 };
