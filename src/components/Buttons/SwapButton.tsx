@@ -29,14 +29,14 @@ const ErrorMessageMapping = {
   ],
   200: [
     "Not sure how else to say this, but you're broke",
-    "You're broke, but you're also a nerd",
+    "Brokie",
     "Try getting a job",
-    "That's awkward because you don't have that much",
+    "That's a little awkward",
     "Broke and a virgin, that's a tough combo",
     "Not enough cash... and that's not all you're lacking",
     "Try having more money next time",
     "No cash, no Lambos",
-    "No cash... looks like you don't get much of anything",
+    "No cash, but looks like you don't get much of anything...",
   ],
 };
 
