@@ -144,7 +144,7 @@ export const SwapButton = ({ testID }: Common.ComponentProps) => {
         step={1}
         placeholder={"0"}
         defaultValue={outputAmount}
-        className="p-0 col-start-1 text-2xl border-none text-right font-bold bg-transparent"
+        className="p-0 w-full col-start-1 text-2xl border-none text-right font-bold bg-transparent"
         onChange={handleOutputAmountChange}
       />
       <span className="col-start-2 text-2xl font-bold">LFV</span>
