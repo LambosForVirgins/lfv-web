@@ -18,9 +18,12 @@
         }
     },
     "Home": {
-        "CopyButtonLabel": "Copy",
         "PurchaseButtonToken": "Buy $LFV",
         "PurchaseButtonRadium": "Radium"
+    },
+    "Purchase":{
+        "CopyButtonLabel": "Copy",
+        "PurchaseButtonToken": "Buy $LFV"
     },
     "About": {
         "Heading": "About LambosForVirgins",

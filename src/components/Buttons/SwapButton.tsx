@@ -10,6 +10,9 @@ import { executeTransaction } from "@/src/utils/exchanges/transactions";
 import { createSwapTransaction } from "@/src/utils/exchanges/jupiter/createSwapTransaction";
 import { getSwapQuote } from "@/src/utils/exchanges/jupiter/getSwapQuote";
 import { getExchangeRate } from "@/src/utils/exchanges/jupiter/getMarketQuotes";
+import { CopyButton } from "./CopyButton";
+import { Brand } from "@/src/utils/config/Brand";
+import { useTranslations } from "next-intl";
 
 interface SwapError {
   code: number;
@@ -43,6 +46,7 @@ const getRandomErrorMessage = (code: 100 | 200) => {
 };
 
 export const SwapButton = ({ testID }: Common.ComponentProps) => {
+  const t = useTranslations("Purchase");
   const [loading, setLoading] = useState(false);
   const [exchangeRate, setExchangeRate] = useState<number>(1);
   const [balance, setBalance] = useState(0);
@@ -118,6 +122,15 @@ export const SwapButton = ({ testID }: Common.ComponentProps) => {
     getWalletBalance();
   }, [publicKey, connection]);
 
+  if (!publicKey)
+    return (
+      <CopyButton
+        testID={`${testID}.copy`}
+        label={t("CopyButtonLabel")}
+        value={`0x${Brand.contractAddress}`}
+      />
+    );
+
   return (
     <div
       data-testid={testID}
@@ -149,7 +162,7 @@ export const SwapButton = ({ testID }: Common.ComponentProps) => {
         className="col-start-3 row-span-2"
         onClick={swapToken}
       >
-        {`Buy $LFV`}
+        {t("PurchaseButtonToken")}
       </Button>
 
       {error && (

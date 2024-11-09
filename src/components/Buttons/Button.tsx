@@ -25,7 +25,7 @@ export const Button = forwardRef<
         inverted || props.disabled
           ? "bg-neutral-100/60 text-[var(--bg-red-500)]"
           : "bg-red-500 text-white",
-        props.disabled && "text-neutral-500",
+        props.disabled && "bg-neutral-100 text-neutral-500 shadow",
         loading && "opacity-50 cursor-not-allowed shadow-md"
       )}
       disabled={props.disabled || loading}

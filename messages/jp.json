@@ -18,9 +18,12 @@
         }
     },
     "Home": {
-        "CopyButtonLabel": "写し",
         "PurchaseButtonToken": "¥LFVを購入",
         "PurchaseButtonRadium": "ラジウム"
+    },
+    "Purchase":{
+        "CopyButtonLabel": "写し",
+        "PurchaseButtonToken": "¥LFVを購入"
     },
     "About": {
         "Heading": "ランボスフォーヴァージン はどうですか 仕事。",

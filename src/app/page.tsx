@@ -59,11 +59,6 @@ export default function LocalePage({
         />
         <div className="grid gap-5">
           <SwapButton testID={`${testID}.swap`} />
-          <CopyButton
-            testID={`${testID}.copy`}
-            label={t("CopyButtonLabel")}
-            value={`0x${Brand.contractAddress}`}
-          />
           <PurchaseButtons
             testID={`${testID}.purchase`}
             tokenSymbol={t("PurchaseButtonToken")}

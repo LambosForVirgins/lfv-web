@@ -18,9 +18,12 @@
         }
     },
     "Home": {
-        "CopyButtonLabel": "Kopieren",
         "PurchaseButtonToken": "Kaufe €LFV",
         "PurchaseButtonRadium": "Radium"
+    },
+    "Purchase":{
+        "CopyButtonLabel": "Kopieren",
+        "PurchaseButtonToken": "Kaufe €LFV"
     },
     "About": {
         "Heading": "Über LambosFürJungfrauen",
