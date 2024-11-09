@@ -121,7 +121,7 @@ export const SwapButton = ({ testID }: Common.ComponentProps) => {
   return (
     <div
       data-testid={testID}
-      className="relative p-2 gap-x-2 gap-y-0 rounded-lg bg-white grid grid-cols-[1fr auto 1fr] auto-rows items-center"
+      className="relative p-2 gap-x-2 gap-y-0 rounded-lg bg-neutral-100/60 grid grid-cols-[1fr auto 1fr] auto-rows items-center"
     >
       <input
         data-testid={`${testID}.input`}
@@ -131,7 +131,7 @@ export const SwapButton = ({ testID }: Common.ComponentProps) => {
         step={1}
         placeholder={"0"}
         defaultValue={outputAmount}
-        className="p-0 col-start-1 text-2xl border-none text-right font-bold"
+        className="p-0 col-start-1 text-2xl border-none text-right font-bold bg-transparent"
         onChange={handleOutputAmountChange}
       />
       <span className="col-start-2 text-2xl font-bold">LFV</span>
