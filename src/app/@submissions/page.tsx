@@ -15,7 +15,7 @@ export default function LocaleSubmissionsPage() {
         <ul role="list" className="instruct">
           <li>{t("Directions.Steps.Who")}</li>
           <li>{t("Directions.Steps.Why")}</li>
-          <li data-icon="🦄">{t("Directions.Steps.What")}</li>
+          <li>{t("Directions.Steps.What")}</li>
         </ul>
         <p>{t("Directions.Footnote")}</p>
       </div>
