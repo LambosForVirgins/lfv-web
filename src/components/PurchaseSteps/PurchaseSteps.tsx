@@ -3,10 +3,10 @@
 import { createElement, useEffect, useMemo, useState } from "react";
 import { type Adapter } from "@solana/wallet-adapter-base";
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
-import { LAMPORTS_PER_SOL, PublicKey } from "@solana/web3.js";
+import { PublicKey } from "@solana/web3.js";
 import clsx from "classnames";
 import { useExchange } from "@/src/utils/exchanges/useExchange";
-import { LFVTokenMint, SolanaTokenMint } from "@/src/utils/exchanges/tokens";
+import { LFVTokenMint } from "@/src/utils/exchanges/tokens";
 
 const MINIMUM_TOKEN_PRICE = 1;
 
@@ -101,7 +101,7 @@ export const PurchaseSteps = ({ testID }: Common.ComponentProps) => {
         <span className={clsx(balance > MINIMUM_TOKEN_PRICE && "line-through")}>
           {balance >= MINIMUM_TOKEN_PRICE
             ? "Buy some Solana"
-            : `Buy ${MINIMUM_TOKEN_PRICE - balance} more Solana`}
+            : `Buy more Solana`}
         </span>
       </li>
       <li>
