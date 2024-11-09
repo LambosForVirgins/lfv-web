@@ -16,6 +16,32 @@ interface SwapError {
   message: string;
 }
 
+const ErrorMessageMapping = {
+  100: [
+    "Try clicking confirm next time virgin",
+    "No wonder why you're a virgin",
+    "Once a virgin, always a virgin",
+    "That's no way to get a laid",
+    "No Lambos for you",
+  ],
+  200: [
+    "Not sure how else to say this, but you're broke",
+    "You're broke, but you're also a nerd",
+    "Try getting a job",
+    "That's awkward because you don't have that much",
+    "Broke and a virgin, that's a tough combo",
+    "Not enough cash... and that's not all you're lacking",
+    "Try having more money next time",
+    "No cash, no Lambos",
+    "No cash... looks like you don't get much of anything",
+  ],
+};
+
+const getRandomErrorMessage = (code: 100 | 200) => {
+  const messages = ErrorMessageMapping[code];
+  return messages[Math.floor(Math.random() * messages.length)];
+};
+
 export const SwapButton = ({ testID }: Common.ComponentProps) => {
   const [loading, setLoading] = useState(false);
   const [exchangeRate, setExchangeRate] = useState<number>(1);
@@ -26,10 +52,21 @@ export const SwapButton = ({ testID }: Common.ComponentProps) => {
   const { publicKey, wallet } = useWallet();
   const [error, setError] = useState<SwapError | null>(null);
 
-  const changeOutputAmount = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleOutputAmountChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setError(null);
     const amount = parseFloat(event.target.value);
+    const input = amount * exchangeRate;
     setOutputAmount(amount);
-    setInputAmount(amount * exchangeRate);
+    setInputAmount(input);
+
+    if (input <= balance) return;
+
+    setError({
+      code: 200,
+      message: getRandomErrorMessage(200),
+    });
   };
 
   const swapToken = async () => {
@@ -44,7 +81,7 @@ export const SwapButton = ({ testID }: Common.ComponentProps) => {
       if (err.code === 100) {
         setError({
           code: err.code,
-          message: "Try clicking confirm next time nerd",
+          message: getRandomErrorMessage(100),
         });
       } else {
         setError({ code: err.code ?? 0, message: err.message });
@@ -86,12 +123,6 @@ export const SwapButton = ({ testID }: Common.ComponentProps) => {
       data-testid={testID}
       className="relative p-2 gap-x-2 gap-y-0 rounded-lg bg-white grid grid-cols-[1fr auto 1fr] auto-rows items-center"
     >
-      {error && (
-        <span className="absolute p-4 inset-0 grid auto-row-auto to bg-black/50 text-white rounded-lg content-center backdrop-blur-sm text-lg">
-          {error.message}
-        </span>
-      )}
-
       <input
         data-testid={`${testID}.input`}
         type={"number"}
@@ -101,11 +132,11 @@ export const SwapButton = ({ testID }: Common.ComponentProps) => {
         placeholder={"0"}
         defaultValue={outputAmount}
         className="p-0 col-start-1 text-2xl border-none text-right font-bold"
-        onChange={changeOutputAmount}
+        onChange={handleOutputAmountChange}
       />
       <span className="col-start-2 text-2xl font-bold">LFV</span>
       <strong className="col-start-1 row-start-2 text-xs grow text-right font-extrabold">
-        {inputAmount}
+        {Math.floor(inputAmount * 1_000_000) / 1_000_000}
       </strong>
       <strong className="col-start-2 row-start-2 text-xs grow text-left font-extrabold">
         SOL
@@ -120,6 +151,8 @@ export const SwapButton = ({ testID }: Common.ComponentProps) => {
       >
         {`Buy $LFV`}
       </Button>
+
+      <span className="col-span-3 text-sm">{error?.message}</span>
     </div>
   );
 };
