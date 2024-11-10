@@ -15,7 +15,7 @@ describe(getSwapQuote, () => {
     await getSwapQuote(1);
 
     expect(mockFetch).toHaveBeenCalledWith(
-      // @ts-ignore: Fix these custom global type definitions
+      // @ts-expect-error: Fix these custom global type definitions
       expect.urlContains(
         "/quote?inputMint=So11111111111111111111111111111111111111112&outputMint=0x&amount=1000000000&slippageBps=50"
       )
@@ -28,7 +28,7 @@ describe(getSwapQuote, () => {
     await getSwapQuote(1, { highVolatility: true });
 
     expect(mockFetch).toHaveBeenCalledWith(
-      // @ts-ignore: Fix these custom global type definitions
+      // @ts-expect-error: Fix these custom global type definitions
       expect.urlContains(
         "/quote?inputMint=So11111111111111111111111111111111111111112&outputMint=0x&amount=1000000000&autoSlippage=true&maxAutoSlippageBps=100"
       )
