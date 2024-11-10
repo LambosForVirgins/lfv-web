@@ -13,6 +13,7 @@ import { getExchangeRate } from "@/src/utils/exchanges/jupiter/getMarketQuotes";
 import { CopyButton } from "./CopyButton";
 import { Brand } from "@/src/utils/config/Brand";
 import { useTranslations } from "next-intl";
+import { getTokenAvailability } from "@/src/utils/exchanges/jupiter/getTokenAvailability";
 
 interface SwapError {
   code: number;
@@ -48,6 +49,7 @@ const getRandomErrorMessage = (code: 100 | 200) => {
 export const SwapButton = ({ testID }: Common.ComponentProps) => {
   const t = useTranslations("Purchase");
   const [loading, setLoading] = useState(false);
+  const [tokenAvailable, setTokenAvailable] = useState(false);
   const [exchangeRate, setExchangeRate] = useState<number>(1);
   const [balance, setBalance] = useState(0);
   const [inputAmount, setInputAmount] = useState(0);
@@ -77,7 +79,9 @@ export const SwapButton = ({ testID }: Common.ComponentProps) => {
     if (!publicKey || !wallet?.adapter) return;
     setLoading(true);
     try {
-      const latestQuote = await getSwapQuote(inputAmount);
+      const latestQuote = await getSwapQuote(inputAmount, {
+        highVolatility: true,
+      });
       const transaction = await createSwapTransaction(latestQuote, publicKey);
 
       await executeTransaction(transaction, wallet?.adapter, connection);
@@ -96,16 +100,11 @@ export const SwapButton = ({ testID }: Common.ComponentProps) => {
   };
 
   useEffect(() => {
+    // Determine if the token is available for swap
+    getTokenAvailability().then(setTokenAvailable);
+    // Get the exchange rate relative to the base token
     getExchangeRate(LFVTokenMint).then(setExchangeRate);
   }, []);
-
-  useEffect(() => {
-    if (inputAmount > 0 && exchangeRate !== null) {
-      getSwapQuote(inputAmount).then((quote) =>
-        setOutputAmount(parseInt(quote.outAmount) / 1_000_000)
-      );
-    }
-  }, [inputAmount, exchangeRate]);
 
   useEffect(() => {
     const getWalletBalance = async () => {
@@ -122,7 +121,7 @@ export const SwapButton = ({ testID }: Common.ComponentProps) => {
     getWalletBalance();
   }, [publicKey, connection]);
 
-  if (!publicKey)
+  if (!publicKey || !tokenAvailable)
     return (
       <CopyButton
         testID={`${testID}.copy`}

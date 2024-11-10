@@ -44,6 +44,10 @@ export const getExchangeRate = async (
   return await fetch(url)
     .then((res) => res.json())
     .then((res: JupiterPricingResponse) => {
+      if (res.data.getTokenPrices.length < 2) {
+        throw new Error("Invalid response from Jupiter API");
+      }
+
       const [tokenPrice, basePrice] = res.data.getTokenPrices;
 
       return calculateExchangeRate(tokenPrice.priceUsd, basePrice.priceUsd);

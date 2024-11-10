@@ -48,7 +48,7 @@ export default async function RootLayout({
             <div className="grid col-full grid-cols-subgrid">
               <Header testID={`header`} className="col-content" />
             </div>
-            <div className="grid col-full auto-flow-row grid-cols-subgrid">
+            <main className="grid col-full auto-flow-row grid-cols-subgrid">
               {children}
               <SectionBreak
                 testID={`section`}
@@ -61,7 +61,7 @@ export default async function RootLayout({
               />
               {community}
               {submissions}
-            </div>
+            </main>
           </SolanaProvider>
         </LocaleProvider>
       </body>

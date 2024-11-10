@@ -1,7 +1,11 @@
 import { LAMPORTS_PER_SOL } from "@solana/web3.js";
 import { LFVTokenMint, SolanaTokenMint } from "../tokens";
-import { InputToken, OutputToken } from "./types";
-import { JupiterQuoteResponse } from "../types";
+import { type InputToken, type OutputToken } from "./types";
+import { type JupiterQuoteError, JupiterQuoteResponse } from "../types";
+
+interface SwapQuoteOptions {
+  highVolatility?: boolean;
+}
 
 /**
  *
@@ -9,7 +13,8 @@ import { JupiterQuoteResponse } from "../types";
  * @returns
  */
 export const getSwapQuote = async (
-  inputAmount: number
+  inputAmount: number,
+  options: SwapQuoteOptions = {}
 ): Promise<JupiterQuoteResponse<InputToken, OutputToken>> => {
   const url = new URL("/quote", "https://public.jupiterapi.com");
   url.searchParams.set("inputMint", SolanaTokenMint);
@@ -18,11 +23,31 @@ export const getSwapQuote = async (
     "amount",
     Math.round(inputAmount * LAMPORTS_PER_SOL).toString()
   );
-  url.searchParams.set("slippageBps", "50");
 
-  const quoteResponse = (await fetch(url).then((res) =>
-    res.json()
-  )) as JupiterQuoteResponse<InputToken, OutputToken>;
+  if (options.highVolatility) {
+    url.searchParams.set("autoSlippage", "true");
+    url.searchParams.set("maxAutoSlippageBps", "100");
+  } else {
+    url.searchParams.set("slippageBps", "50");
+  }
+
+  const quoteResponse = await fetch(url)
+    .then<JupiterQuoteResponse<InputToken, OutputToken>>((res) => res.json())
+    .then(
+      (
+        res: JupiterQuoteResponse<InputToken, OutputToken> | JupiterQuoteError
+      ) => {
+        if ("error" in res && "errorCode" in res) {
+          throw res;
+        }
+
+        return res;
+      }
+    )
+    .catch((err: JupiterQuoteError | Error) => {
+      console.log("Error fetching swap quote", err);
+      throw err;
+    });
 
   return quoteResponse;
 };
