@@ -26,14 +26,14 @@ const purchaseEvents = {
   Failed: {},
 };
 
-const eventContexts: Record<EventContext, {}> = {
+const eventContexts: Record<EventContext, any> = {
   Purchase: purchaseEvents,
   Locale: {},
 };
 
 const reportTypes: Record<
   ReportType,
-  Record<keyof typeof eventContexts, {}> | {}
+  Record<keyof typeof eventContexts, any> | {}
 > = {
   [ReportType.Event]: eventContexts,
   [ReportType.Exception]: {},
