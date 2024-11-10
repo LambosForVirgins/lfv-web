@@ -7,9 +7,9 @@ import { Brand } from "@/src/utils/config/Brand";
 import customFonts from "./fonts";
 import { getMessages } from "next-intl/server";
 import { SectionBreak } from "@/src/components/SectionBreak/SectionBreak";
-import Script from "next/script";
 import { LocaleProvider } from "../providers/LocaleProvider";
 import { SolanaProvider } from "../providers/SolanaProvider";
+import PlausibleProvider from "next-plausible";
 
 export const metadata: Metadata = {
   title: Brand.displayName,
@@ -31,39 +31,40 @@ export default async function RootLayout({
 
   return (
     <html>
-      <Script
-        data-domain="lambosforvirgins.com"
-        src="https://plausible.io/js/script.file-downloads.hash.outbound-links.pageview-props.tagged-events.js"
-        defer
-      />
-      <Script src="/js/plausible.js" />
       <body
         className={clsx(
           customFonts,
           "antialiased grid auto-flow-row grid-cols-layout"
         )}
       >
-        <LocaleProvider initialLocale={"en"} messages={messages}>
-          <SolanaProvider>
-            <div className="grid col-full grid-cols-subgrid">
-              <Header testID={`header`} className="col-content" />
-            </div>
-            <main className="grid col-full auto-flow-row grid-cols-subgrid">
-              {children}
-              <SectionBreak
-                testID={`section`}
-                className="col-full sticky bottom-0"
-              />
-              {about}
-              <SectionBreak
-                testID={`section`}
-                className="col-full sticky bottom-0"
-              />
-              {community}
-              {submissions}
-            </main>
-          </SolanaProvider>
-        </LocaleProvider>
+        <PlausibleProvider
+          domain="lambosforvirgins.com"
+          // taggedEvents
+          // trackLocalhost
+          // enabled
+        >
+          <LocaleProvider initialLocale={"en"} messages={messages}>
+            <SolanaProvider>
+              <div className="grid col-full grid-cols-subgrid">
+                <Header testID={`header`} className="col-content" />
+              </div>
+              <main className="grid col-full auto-flow-row grid-cols-subgrid">
+                {children}
+                <SectionBreak
+                  testID={`section`}
+                  className="col-full sticky bottom-0"
+                />
+                {about}
+                <SectionBreak
+                  testID={`section`}
+                  className="col-full sticky bottom-0"
+                />
+                {community}
+                {submissions}
+              </main>
+            </SolanaProvider>
+          </LocaleProvider>
+        </PlausibleProvider>
       </body>
     </html>
   );

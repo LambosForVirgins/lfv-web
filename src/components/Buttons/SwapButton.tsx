@@ -14,6 +14,7 @@ import { CopyButton } from "./CopyButton";
 import { Brand } from "@/src/utils/config/Brand";
 import { useTranslations } from "next-intl";
 import { getTokenAvailability } from "@/src/utils/exchanges/jupiter/getTokenAvailability";
+import { useReporting } from "@/src/hooks/useReporting";
 
 interface SwapError {
   code: number;
@@ -49,6 +50,7 @@ const getRandomErrorMessage = (code: 100 | 200) => {
 export const SwapButton = ({ testID }: Common.ComponentProps) => {
   const t = useTranslations("Purchase");
   const [loading, setLoading] = useState(false);
+  const { reportEvent } = useReporting("Purchase");
   const [tokenAvailable, setTokenAvailable] = useState(false);
   const [exchangeRate, setExchangeRate] = useState<number>(1);
   const [balance, setBalance] = useState(0);
@@ -79,13 +81,35 @@ export const SwapButton = ({ testID }: Common.ComponentProps) => {
     if (!publicKey || !wallet?.adapter) return;
     setLoading(true);
     try {
+      reportEvent("Purchase")("Quote", {
+        button: "Input",
+        wallet: wallet.adapter.name,
+        provider: "Jupiter",
+        balance,
+        amount: inputAmount,
+      });
+
       const latestQuote = await getSwapQuote(inputAmount, {
         highVolatility: true,
       });
       const transaction = await createSwapTransaction(latestQuote, publicKey);
 
       await executeTransaction(transaction, wallet?.adapter, connection);
+
+      reportEvent("Purchase")("Success", {
+        wallet: wallet.adapter.name,
+        provider: "Jupiter",
+        balance,
+        amount: inputAmount,
+      });
     } catch (err: Error | any) {
+      reportEvent("Purchase")("Failed", {
+        wallet: wallet.adapter.name,
+        provider: "Jupiter",
+        balance,
+        amount: inputAmount,
+      });
+
       if (err.code === 100) {
         setError({
           code: err.code,

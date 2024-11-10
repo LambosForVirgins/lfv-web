@@ -9421,6 +9421,7 @@ __metadata:
     jsdom: "npm:^25.0.1"
     next: "npm:14.2.16"
     next-intl: "npm:^3.24.0"
+    next-plausible: "npm:^3.12.4"
     pino-pretty: "npm:^11.3.0"
     postcss: "npm:^8"
     prettier: "npm:^3.3.3"
@@ -10049,6 +10050,17 @@ __metadata:
     next: ^10.0.0 || ^11.0.0 || ^12.0.0 || ^13.0.0 || ^14.0.0 || ^15.0.0
     react: ^16.8.0 || ^17.0.0 || ^18.0.0 || >=19.0.0-rc <19.0.0
   checksum: 10/a7ca478ff14d162762b7382ea087f929971a52a10cfd296af6d67092b66cdebdb5bd98792554888ba803b4d2249fde7d035f24195c4918ace5f55def2cccc440
+  languageName: node
+  linkType: hard
+
+"next-plausible@npm:^3.12.4":
+  version: 3.12.4
+  resolution: "next-plausible@npm:3.12.4"
+  peerDependencies:
+    next: "^11.1.0 || ^12.0.0 || ^13.0.0 || ^14.0.0 || ^15.0.0 "
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+    react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+  checksum: 10/fb5cfd14e855ac067244b9b5cb58f6ac60936764e36161170a422aa485762eebce1e788d17c907c66b368775ebac9adffd2085591f407eab22c4aa4927e46225
   languageName: node
   linkType: hard
 

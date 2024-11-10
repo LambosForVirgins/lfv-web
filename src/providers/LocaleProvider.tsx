@@ -1,7 +1,8 @@
 "use client";
 
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { AbstractIntlMessages, NextIntlClientProvider } from "next-intl";
+import { useReporting } from "../hooks/useReporting";
 
 interface LocalContextProps {
   locale: string;
@@ -22,6 +23,11 @@ export const LocaleProvider = ({
   messages,
 }: LocaleProviderProps) => {
   const [locale, setLocale] = useState(initialLocale);
+  const { reportEvent } = useReporting();
+
+  useEffect(() => {
+    reportEvent("Locale")("Change", { locale });
+  }, [locale]);
 
   return (
     <LocaleContext.Provider value={{ locale, setLocale }}>
