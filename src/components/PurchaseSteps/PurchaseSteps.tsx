@@ -10,6 +10,8 @@ import { LFVTokenMint } from "@/src/utils/exchanges/tokens";
 
 const MINIMUM_TOKEN_PRICE = 1;
 
+const ALLOWED_WALLETS = ["Phantom", "Trust", "Solflare"];
+
 const isInstalled = ({ readyState }: Adapter) => readyState === "Installed";
 
 export const PurchaseSteps = ({ testID }: Common.ComponentProps) => {
@@ -75,25 +77,27 @@ export const PurchaseSteps = ({ testID }: Common.ComponentProps) => {
               : "Choose your wallet below"}
           </span>
           <span className="col-span-2 flex gap-4 items-center">
-            {wallets.map(({ adapter }) =>
-              createElement(
-                isInstalled(adapter) ? "button" : "a",
-                {
-                  key: adapter.name,
-                  target: "_blank",
-                  onClick: isInstalled(adapter)
-                    ? connectAdapter(adapter)
-                    : undefined,
-                  href: !isInstalled(adapter) ? adapter.url : undefined,
-                },
-                <img
-                  src={adapter.icon}
-                  alt={adapter.name}
-                  width={64}
-                  height={64}
-                />
-              )
-            )}
+            {wallets
+              .filter((client) => ALLOWED_WALLETS.includes(client.adapter.name))
+              .map(({ adapter }) =>
+                createElement(
+                  isInstalled(adapter) ? "button" : "a",
+                  {
+                    key: adapter.name,
+                    target: "_blank",
+                    onClick: isInstalled(adapter)
+                      ? connectAdapter(adapter)
+                      : undefined,
+                    href: !isInstalled(adapter) ? adapter.url : undefined,
+                  },
+                  <img
+                    src={adapter.icon}
+                    alt={adapter.name}
+                    width={64}
+                    height={64}
+                  />
+                )
+              )}
           </span>
         </span>
       </li>
