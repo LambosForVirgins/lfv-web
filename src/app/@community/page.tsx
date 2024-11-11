@@ -20,8 +20,8 @@ const socialLinks = [
   {
     key: "telegram",
     src: "/images/telegram.png",
-    label: "t.me/lambosForVirgins",
-    link: "https://t.me/lambosForVirgins",
+    label: "t.me/Lambos4Virgins",
+    link: "https://t.me/Lambos4Virgins",
   },
   {
     key: "mail",
