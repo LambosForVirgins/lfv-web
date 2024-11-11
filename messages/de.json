@@ -1,7 +1,7 @@
 {
     "Metadata": {
         "Token": {
-            "Symbol": "€LFV",
+            "Symbol": "€VIRGIN",
             "Name": "LambosFürJungfrauen",
             "DisplayName": "Lambos Für Jungfrauen",
             "Slogan": "Heilt Jungfräulichkeit, ein Lambo nach dem anderen."
@@ -18,22 +18,22 @@
         }
     },
     "Home": {
-        "PurchaseButtonToken": "Kaufe €LFV",
+        "PurchaseButtonToken": "Kaufe €VIRGIN",
         "PurchaseButtonRadium": "Radium"
     },
     "Purchase":{
         "CopyButtonLabel": "Kopieren",
-        "PurchaseButtonToken": "Kaufe €LFV"
+        "PurchaseButtonToken": "Kaufe €VIRGIN"
     },
     "About": {
         "Heading": "Über LambosFürJungfrauen",
-        "Description": "Willkommen bei LambosFürJungfrauen (€LFV). Die Mission: globale Probleme durch die Kraft von Lamborghinis zu lösen. Dieses Projekt vereint den Nervenkitzel italienischer Pferdestärken mit der Kraft der Gemeinschaft. €LFV ist nicht nur eine Münze – es ist eine Bewegung, die sich mit der sinkenden Geburtenrate befasst. Eine einsame Seele nach der anderen. Wir sind hier, um ausgewählten Bag-Haltern Lambos zu schenken und sie unwiderstehlich für das andere Geschlecht zu machen.",
+        "Description": "Willkommen bei LambosFürJungfrauen (€VIRGIN). Die Mission: globale Probleme durch die Kraft von Lamborghinis zu lösen. Dieses Projekt vereint den Nervenkitzel italienischer Pferdestärken mit der Kraft der Gemeinschaft. €VIRGIN ist nicht nur eine Münze – es ist eine Bewegung, die sich mit der sinkenden Geburtenrate befasst. Eine einsame Seele nach der anderen. Wir sind hier, um ausgewählten Bag-Haltern Lambos zu schenken und sie unwiderstehlich für das andere Geschlecht zu machen.",
         "Footnote": "Es ist mutig. Es ist ernst. Es wird die Menschheit vor dem Aussterben bewahren, und es wird definitiv funktionieren.",
         "Instructions": {
-            "Title": "Wie funktioniert €LFV?",
-            "Description": "€LFV ist ein fair gestarteter, gemeinschaftsgetriebener Meme-Coin mit einem Ziel: Lambos in die Hände seiner Halter zu legen. So funktioniert es:",
+            "Title": "Wie funktioniert €VIRGIN?",
+            "Description": "€VIRGIN ist ein fair gestarteter, gemeinschaftsgetriebener Meme-Coin mit einem Ziel: Lambos in die Hände seiner Halter zu legen. So funktioniert es:",
             "Steps": {
-                "Hold": "€LFV-Token halten: Je mehr €LFV du hältst, desto größer sind deine Chancen, an den Verlosungen teilzunehmen.",
+                "Hold": "€VIRGIN-Token halten: Je mehr €VIRGIN du hältst, desto größer sind deine Chancen, an den Verlosungen teilzunehmen.",
                 "Submit": "Lambo-Verlosungen: Halter reichen ihre Wallet-Adresse und ein kurzes Video oder auch nicht ein.",
                 "Wait": "Selbstbewusstseins-Boost: Gewinner erhalten einen Lamborghini. Ihr Selbstbewusstsein steigt in die Höhe, es entstehen Verbindungen, und Lambo-Babys werden geboren."
             }
@@ -51,7 +51,7 @@
                 "Why": "Warum du den Lambo verdienst: Erkläre, warum das Gewinnen eines Lamborghinis dein Selbstbewusstsein stärken und dir vielleicht helfen könnte, mehr Verbindungen zu knüpfen.",
                 "What": "Dein einzigartiger Stil: Verwende Humor, Aufrichtigkeit oder eine persönliche Note – dein Beitrag sollte zeigen, warum die Gemeinschaft dich unterstützen sollte."
             },
-            "Footnote": "Dies ist deine Chance, kreativ zu werden, deine Geschichte zu teilen und mit der €LFV-Gemeinschaft in Kontakt zu treten."
+            "Footnote": "Dies ist deine Chance, kreativ zu werden, deine Geschichte zu teilen und mit der €VIRGIN-Gemeinschaft in Kontakt zu treten."
         },
         "Form": {
             "AddressLabel": "Solana-Adresse",

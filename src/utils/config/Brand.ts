@@ -1,6 +1,6 @@
 class BrandVariables {
   get tokenSymbol(): string {
-    return process.env.NEXT_PUBLIC_TOKEN_SYMBOL ?? "LFV";
+    return process.env.NEXT_PUBLIC_TOKEN_SYMBOL ?? "VIRGIN";
   }
 
   get tokenName(): string {

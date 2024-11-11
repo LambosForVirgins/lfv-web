@@ -5,7 +5,7 @@ import { Button } from "./Button";
 import { useEffect, useState } from "react";
 import { LAMPORTS_PER_SOL } from "@solana/web3.js";
 
-import { LFVTokenMint, SolanaTokenMint } from "@/src/utils/exchanges/tokens";
+import { VIRGINTokenMint, SolanaTokenMint } from "@/src/utils/exchanges/tokens";
 import { executeTransaction } from "@/src/utils/exchanges/transactions";
 import { createSwapTransaction } from "@/src/utils/exchanges/jupiter/createSwapTransaction";
 import { getSwapQuote } from "@/src/utils/exchanges/jupiter/getSwapQuote";
@@ -127,7 +127,7 @@ export const SwapButton = ({ testID }: Common.ComponentProps) => {
     // Determine if the token is available for swap
     getTokenAvailability().then(setTokenAvailable);
     // Get the exchange rate relative to the base token
-    getExchangeRate(LFVTokenMint).then(setExchangeRate);
+    getExchangeRate(VIRGINTokenMint).then(setExchangeRate);
   }, []);
 
   useEffect(() => {
@@ -170,7 +170,7 @@ export const SwapButton = ({ testID }: Common.ComponentProps) => {
         className="p-0 w-full col-start-1 text-2xl border-none text-right font-bold bg-transparent"
         onChange={handleOutputAmountChange}
       />
-      <span className="col-start-2 text-2xl font-bold">LFV</span>
+      <span className="col-start-2 text-2xl font-bold">VIRGIN</span>
       <strong className="col-start-1 row-start-2 text-xs grow text-right font-extrabold">
         {Math.floor(inputAmount * 1_000_000) / 1_000_000}
       </strong>

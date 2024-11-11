@@ -1,5 +1,5 @@
 import { LAMPORTS_PER_SOL } from "@solana/web3.js";
-import { LFVTokenMint, SolanaTokenMint } from "../tokens";
+import { VIRGINTokenMint, SolanaTokenMint } from "../tokens";
 import { InputToken, OutputToken, RadiumTxVersion } from "./types";
 import { RadiumQuoteResponse } from "./types";
 
@@ -8,7 +8,7 @@ export const getSwapQuote = async (
 ): Promise<RadiumQuoteResponse<InputToken, OutputToken>> => {
   const url = new URL("https://transaction-v1.raydium.io/compute/swap-base-in");
   url.searchParams.set("inputMint", SolanaTokenMint);
-  url.searchParams.set("outputMint", LFVTokenMint);
+  url.searchParams.set("outputMint", VIRGINTokenMint);
   url.searchParams.set("amount", (inputAmount * LAMPORTS_PER_SOL).toString());
   url.searchParams.set("slippageBps", "50");
   url.searchParams.set("txVersion", RadiumTxVersion.Version0);

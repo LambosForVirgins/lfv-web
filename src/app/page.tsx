@@ -63,7 +63,7 @@ export default function LocalePage({
             testID={`${testID}.purchase`}
             tokenSymbol={t("PurchaseButtonToken")}
           />
-          <h3 className="text-2xl">How to buy $LFV</h3>
+          <h3 className="text-2xl">How to buy $VIRGIN</h3>
           <PurchaseSteps testID={`${testID}.steps`} />
         </div>
       </div>

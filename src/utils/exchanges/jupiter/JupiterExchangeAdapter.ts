@@ -1,11 +1,11 @@
 import { ExchangeAdapter, type ExchangeName } from "../ExchangeAdapter";
-import { LFVTokenMint } from "../tokens";
+import { VIRGINTokenMint } from "../tokens";
 
 const JupiterExchangeName = "Jupiter" as ExchangeName<"Jupiter">;
 
 class JupiterExchangeAdapter extends ExchangeAdapter {
   name = JupiterExchangeName;
-  url = `https://jup.ag/swap/SOL-${LFVTokenMint}`;
+  url = `https://jup.ag/swap/SOL-${VIRGINTokenMint}`;
   icon = "/images/jupiter.png";
 }
 

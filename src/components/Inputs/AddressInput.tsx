@@ -33,7 +33,7 @@ export const AddressInput = forwardRef<HTMLInputElement, AddressInputProps>(
 
       console.log(validateSolanaAddress(event.target.value));
       // event.currentTarget.setCustomValidity("Error");
-      // Fetch their LFV balance
+      // Fetch their VIRGIN balance
       // fetchWalletBalance(event.target.value);
 
       props.onChange?.(event.target.value);

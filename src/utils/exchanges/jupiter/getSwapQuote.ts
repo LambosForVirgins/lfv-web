@@ -1,5 +1,5 @@
 import { LAMPORTS_PER_SOL } from "@solana/web3.js";
-import { LFVTokenMint, SolanaTokenMint } from "../tokens";
+import { VIRGINTokenMint, SolanaTokenMint } from "../tokens";
 import { type InputToken, type OutputToken } from "./types";
 import { type JupiterQuoteError, JupiterQuoteResponse } from "../types";
 
@@ -9,7 +9,7 @@ interface SwapQuoteOptions {
 
 /**
  *
- * @param inputAmount The amount of Solana (SOL) to swap for LFV
+ * @param inputAmount The amount of Solana (SOL) to swap for VIRGIN
  * @returns
  */
 export const getSwapQuote = async (
@@ -18,7 +18,7 @@ export const getSwapQuote = async (
 ): Promise<JupiterQuoteResponse<InputToken, OutputToken>> => {
   const url = new URL("/quote", "https://public.jupiterapi.com");
   url.searchParams.set("inputMint", SolanaTokenMint);
-  url.searchParams.set("outputMint", LFVTokenMint);
+  url.searchParams.set("outputMint", VIRGINTokenMint);
   url.searchParams.set(
     "amount",
     Math.round(inputAmount * LAMPORTS_PER_SOL).toString()

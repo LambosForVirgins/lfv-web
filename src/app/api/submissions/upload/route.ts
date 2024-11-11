@@ -15,7 +15,7 @@ export async function POST(request: Request): Promise<NextResponse> {
   // Validate file contents
 
   // Validate address format
-  // - Maybe validate address LFV balance?
+  // - Maybe validate address VIRGIN balance?
   // - Maybe check for exiting submissions from the same address?
   // Store
   const blob = await put(address, request.body, {

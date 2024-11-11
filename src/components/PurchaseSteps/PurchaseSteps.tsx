@@ -6,7 +6,7 @@ import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 import { PublicKey } from "@solana/web3.js";
 import clsx from "classnames";
 import { useExchange } from "@/src/utils/exchanges/useExchange";
-import { LFVTokenMint } from "@/src/utils/exchanges/tokens";
+import { VIRGINTokenMint } from "@/src/utils/exchanges/tokens";
 
 const MINIMUM_TOKEN_PRICE = 1;
 
@@ -32,7 +32,7 @@ export const PurchaseSteps = ({ testID }: Common.ComponentProps) => {
   };
 
   useEffect(() => {
-    const mintPublicKey = new PublicKey(LFVTokenMint);
+    const mintPublicKey = new PublicKey(VIRGINTokenMint);
     const getTokenBalance = async () => {
       if (!publicKey) {
         setTokenBalance(0);
@@ -111,7 +111,7 @@ export const PurchaseSteps = ({ testID }: Common.ComponentProps) => {
       <li>
         <span className="flex flex-col gap-4">
           <span className={clsx(tokenBalance > 0 && "line-through")}>
-            Buy $LFV and get Lambo
+            Buy $VIRGIN and get Lambo
           </span>
           <span className="col-span-2 flex gap-4 items-center">
             {exchanges.map((market) => (

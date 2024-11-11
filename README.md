@@ -1,4 +1,4 @@
-# $LFV - LambosForVirgins
+# $VIRGIN - LambosForVirgins
 
 ## Getting Started
 
