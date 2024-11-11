@@ -33,7 +33,7 @@ const eventContexts: Record<EventContext, any> = {
 
 const reportTypes: Record<
   ReportType,
-  Record<keyof typeof eventContexts, any> | {}
+  Record<keyof typeof eventContexts, any> | any
 > = {
   [ReportType.Event]: eventContexts,
   [ReportType.Exception]: {},
