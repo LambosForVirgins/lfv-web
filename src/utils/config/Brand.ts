@@ -19,7 +19,7 @@ class BrandVariables {
   }
 
   get contractAddress(): string {
-    return process.env.NEXT_PUBLIC_CONTRACT_ADDRESS ?? "0x";
+    return process.env.NEXT_PUBLIC_CONTRACT_ADDRESS ?? "";
   }
 }
 

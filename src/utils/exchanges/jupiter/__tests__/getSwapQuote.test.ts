@@ -17,7 +17,7 @@ describe(getSwapQuote, () => {
     expect(mockFetch).toHaveBeenCalledWith(
       // @ts-expect-error: Fix these custom global type definitions
       expect.urlContains(
-        "/quote?inputMint=So11111111111111111111111111111111111111112&outputMint=0x&amount=1000000000&slippageBps=50"
+        "/quote?inputMint=So11111111111111111111111111111111111111112&outputMint=&amount=1000000000&slippageBps=50"
       )
     );
   });
@@ -30,7 +30,7 @@ describe(getSwapQuote, () => {
     expect(mockFetch).toHaveBeenCalledWith(
       // @ts-expect-error: Fix these custom global type definitions
       expect.urlContains(
-        "/quote?inputMint=So11111111111111111111111111111111111111112&outputMint=0x&amount=1000000000&autoSlippage=true&maxAutoSlippageBps=100"
+        "/quote?inputMint=So11111111111111111111111111111111111111112&outputMint=&amount=1000000000&autoSlippage=true&maxAutoSlippageBps=100"
       )
     );
   });

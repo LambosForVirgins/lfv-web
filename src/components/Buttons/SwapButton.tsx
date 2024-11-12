@@ -150,7 +150,7 @@ export const SwapButton = ({ testID }: Common.ComponentProps) => {
       <CopyButton
         testID={`${testID}.copy`}
         label={t("CopyButtonLabel")}
-        value={`0x${Brand.contractAddress}`}
+        value={Brand.contractAddress}
       />
     );
 

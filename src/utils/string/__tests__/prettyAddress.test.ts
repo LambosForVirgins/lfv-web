@@ -1,6 +1,6 @@
 import { prettyAddress } from "../prettyAddress";
 
-const mockAddress = "0x1f3f9D3068568F8040775be2e8c03C103C61f3aF";
+const mockAddress = "1f3f9D3068568F8040775be2e8c03C103C61f3aF";
 
 describe(prettyAddress, () => {
   it.each([null, undefined])(
