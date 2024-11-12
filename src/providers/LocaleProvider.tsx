@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useEffect, useState } from "react";
 import { AbstractIntlMessages, NextIntlClientProvider } from "next-intl";
-import { useReporting } from "../hooks/useReporting";
+import { usePlausible } from "next-plausible";
 
 interface LocalContextProps {
   locale: string;
@@ -23,10 +23,10 @@ export const LocaleProvider = ({
   messages,
 }: LocaleProviderProps) => {
   const [locale, setLocale] = useState(initialLocale);
-  const { reportEvent } = useReporting();
+  const plausible = usePlausible();
 
   useEffect(() => {
-    reportEvent("Locale")("Change", { locale });
+    plausible("Locale/Change", { props: { locale } });
   }, [locale]);
 
   return (

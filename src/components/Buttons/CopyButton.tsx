@@ -1,15 +1,28 @@
 "use client";
 
 import { prettyAddress } from "@/src/utils/string/prettyAddress";
+import { usePlausible } from "next-plausible";
 
 interface CopyButtonProps extends Common.ComponentProps {
   label: string;
   value: string;
+  meta?: Partial<{ wallet: { provider: any; balance: any } }>;
 }
 
-export const CopyButton = ({ testID, ...props }: CopyButtonProps) => {
+export const CopyButton = ({
+  testID,
+  meta = {},
+  ...props
+}: CopyButtonProps) => {
+  const plausible = usePlausible();
   const copyToClipboard = () => {
     navigator.clipboard.writeText(props.value);
+    plausible("Purchase/Copy", {
+      props: {
+        wallet: meta.wallet?.provider,
+        balance: meta.wallet?.balance,
+      },
+    });
   };
 
   return (

@@ -14,7 +14,7 @@ import { CopyButton } from "./CopyButton";
 import { Brand } from "@/src/utils/config/Brand";
 import { useTranslations } from "next-intl";
 import { getTokenAvailability } from "@/src/utils/exchanges/jupiter/getTokenAvailability";
-import { useReporting } from "@/src/hooks/useReporting";
+import { usePlausible } from "next-plausible";
 
 interface SwapError {
   code: number;
@@ -50,7 +50,7 @@ const getRandomErrorMessage = (code: 100 | 200) => {
 export const SwapButton = ({ testID }: Common.ComponentProps) => {
   const t = useTranslations("Purchase");
   const [loading, setLoading] = useState(false);
-  const { reportEvent } = useReporting("Purchase");
+  const plausible = usePlausible();
   const [tokenAvailable, setTokenAvailable] = useState(false);
   const [exchangeRate, setExchangeRate] = useState<number>(1);
   const [balance, setBalance] = useState(0);
@@ -69,6 +69,15 @@ export const SwapButton = ({ testID }: Common.ComponentProps) => {
     setOutputAmount(amount);
     setInputAmount(input);
 
+    plausible("Purchase/Input", {
+      props: {
+        wallet: wallet?.adapter.name,
+        provider: "Jupiter",
+        balance,
+        amount: input,
+      },
+    });
+
     if (input <= balance) return;
 
     setError({
@@ -81,12 +90,14 @@ export const SwapButton = ({ testID }: Common.ComponentProps) => {
     if (!publicKey || !wallet?.adapter) return;
     setLoading(true);
     try {
-      reportEvent("Purchase")("Quote", {
-        button: "Input",
-        wallet: wallet.adapter.name,
-        provider: "Jupiter",
-        balance,
-        amount: inputAmount,
+      plausible("Purchase/Quote", {
+        props: {
+          button: "Input",
+          wallet: wallet.adapter.name,
+          provider: "Jupiter",
+          balance,
+          amount: inputAmount,
+        },
       });
 
       const latestQuote = await getSwapQuote(inputAmount, {
@@ -94,20 +105,35 @@ export const SwapButton = ({ testID }: Common.ComponentProps) => {
       });
       const transaction = await createSwapTransaction(latestQuote, publicKey);
 
-      await executeTransaction(transaction, wallet?.adapter, connection);
+      const result = await executeTransaction(
+        transaction,
+        wallet?.adapter,
+        connection
+      );
 
-      reportEvent("Purchase")("Success", {
-        wallet: wallet.adapter.name,
-        provider: "Jupiter",
-        balance,
-        amount: inputAmount,
+      plausible("Purchase/Success", {
+        props: {
+          wallet: wallet.adapter.name,
+          provider: "Jupiter",
+          balance,
+          amount: inputAmount,
+        },
       });
+
+      console.log("Result", result);
+
+      setInputAmount(0);
+      setOutputAmount(0);
+      setLoading(false);
     } catch (err: Error | any) {
-      reportEvent("Purchase")("Failed", {
-        wallet: wallet.adapter.name,
-        provider: "Jupiter",
-        balance,
-        amount: inputAmount,
+      plausible("Purchase/Failed", {
+        props: {
+          wallet: wallet.adapter.name,
+          provider: "Jupiter",
+          balance,
+          amount: inputAmount,
+          error: err.message,
+        },
       });
 
       if (err.code === 100) {
@@ -139,6 +165,14 @@ export const SwapButton = ({ testID }: Common.ComponentProps) => {
 
       await connection.getBalance(publicKey).then((value) => {
         setBalance(value / LAMPORTS_PER_SOL);
+
+        plausible("Purchase/Balance", {
+          props: {
+            wallet: wallet?.adapter.name,
+            provider: "Jupiter",
+            balance,
+          },
+        });
       });
     };
 
@@ -151,6 +185,7 @@ export const SwapButton = ({ testID }: Common.ComponentProps) => {
         testID={`${testID}.copy`}
         label={t("CopyButtonLabel")}
         value={Brand.contractAddress}
+        meta={{ wallet: { provider: wallet?.adapter.name, balance } }}
       />
     );
 

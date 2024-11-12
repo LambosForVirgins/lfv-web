@@ -1,6 +1,9 @@
+"use client";
+
 import { Section } from "@/src/components/Section/Section";
 import { SectionBreak } from "@/src/components/SectionBreak/SectionBreak";
 import { useTranslations } from "next-intl";
+import { usePlausible } from "next-plausible";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -33,6 +36,7 @@ const socialLinks = [
 
 export default function LocaleCommunityPage() {
   const t = useTranslations("Community");
+  const plausible = usePlausible();
 
   return (
     <Section testID={"community"} id={"community"}>
@@ -53,6 +57,9 @@ export default function LocaleCommunityPage() {
                 key={`${key}-selector`}
                 href={link}
                 className="flex grid-cols-panels gap-4"
+                onClick={() => {
+                  plausible("Social/Link", { props: { link: label } });
+                }}
               >
                 <Image
                   src={src}
