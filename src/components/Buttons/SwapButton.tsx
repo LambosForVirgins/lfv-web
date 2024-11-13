@@ -2,7 +2,7 @@
 
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 import { Button } from "./Button";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { LAMPORTS_PER_SOL } from "@solana/web3.js";
 
 import { VIRGINTokenMint, SolanaTokenMint } from "@/src/utils/exchanges/tokens";
@@ -15,6 +15,9 @@ import { Brand } from "@/src/utils/config/Brand";
 import { useTranslations } from "next-intl";
 import { getTokenAvailability } from "@/src/utils/exchanges/jupiter/getTokenAvailability";
 import { usePlausible } from "next-plausible";
+import { redirect, RedirectType } from "next/navigation";
+import { useExchange } from "@/src/utils/exchanges/useExchange";
+import { SwapErrorCode } from "@/src/utils/exchanges/SwapError";
 
 interface SwapError {
   code: number;
@@ -23,8 +26,8 @@ interface SwapError {
 
 const ErrorMessageMapping = {
   100: [
-    "Try clicking confirm next time virgin",
-    "No wonder why you're a virgin",
+    "Try clicking confirm next time... virgin",
+    "No wonder why you're still a virgin",
     "Once a virgin, always a virgin",
     "That's no way to get a laid",
     "No Lambos for you",
@@ -51,6 +54,7 @@ export const SwapButton = ({ testID }: Common.ComponentProps) => {
   const t = useTranslations("Purchase");
   const [loading, setLoading] = useState(false);
   const plausible = usePlausible();
+  const { exchanges } = useExchange();
   const [tokenAvailable, setTokenAvailable] = useState(false);
   const [exchangeRate, setExchangeRate] = useState<number>(1);
   const [balance, setBalance] = useState(0);
@@ -86,13 +90,24 @@ export const SwapButton = ({ testID }: Common.ComponentProps) => {
     });
   };
 
-  const swapToken = async () => {
+  useEffect(() => {
+    // HACK: Redirect to exchange if the token is not available
+    if (error?.code !== SwapErrorCode.Timeout) return;
+    const exchange = exchanges.find(({ name }) => name === "Jupiter");
+    if (!exchange) return;
+    redirect(exchange.url, RedirectType.push);
+  }, [error]);
+
+  const swapToken = async (event: React.MouseEvent<HTMLButtonElement>) => {
     if (!publicKey || !wallet?.adapter) return;
+
     setLoading(true);
+    setError(null);
+
     try {
       plausible("Purchase/Quote", {
         props: {
-          button: "Input",
+          button: event.currentTarget.name,
           wallet: wallet.adapter.name,
           provider: "Jupiter",
           balance,
@@ -136,13 +151,13 @@ export const SwapButton = ({ testID }: Common.ComponentProps) => {
         },
       });
 
-      if (err.code === 100) {
+      if (err.code === SwapErrorCode.Aborted) {
         setError({
           code: err.code,
           message: getRandomErrorMessage(100),
         });
       } else {
-        setError({ code: err.code ?? 0, message: err.message });
+        setError({ code: err.code, message: err.message });
       }
     } finally {
       setLoading(false);
@@ -150,9 +165,12 @@ export const SwapButton = ({ testID }: Common.ComponentProps) => {
   };
 
   useEffect(() => {
-    // Determine if the token is available for swap
-    getTokenAvailability().then(setTokenAvailable);
-    // Get the exchange rate relative to the base token
+    // HACK: Determine if the token is available for swap
+    getTokenAvailability(balance).then(setTokenAvailable);
+  }, [balance]);
+
+  useEffect(() => {
+    // HACK: Get the exchange rate relative to the base token
     getExchangeRate(VIRGINTokenMint).then(setExchangeRate);
   }, []);
 
@@ -192,7 +210,7 @@ export const SwapButton = ({ testID }: Common.ComponentProps) => {
   return (
     <div
       data-testid={testID}
-      className="relative p-2 gap-x-2 gap-y-0 rounded-lg bg-neutral-100/60 grid grid-cols-[1fr auto 1fr] auto-rows items-center"
+      className="relative p-2 gap-x-2 gap-y-1 rounded-lg bg-neutral-100/60 grid grid-cols-[1fr auto 1fr] auto-rows items-center"
     >
       <input
         data-testid={`${testID}.input`}
@@ -215,8 +233,9 @@ export const SwapButton = ({ testID }: Common.ComponentProps) => {
 
       <Button
         testID={`${testID}.native`}
+        name="inline"
         loading={loading}
-        disabled={!!error || inputAmount === 0 || inputAmount > balance}
+        disabled={inputAmount === 0 || inputAmount > balance}
         className="col-start-3 row-span-2"
         onClick={swapToken}
       >

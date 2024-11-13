@@ -45,7 +45,6 @@ export const getSwapQuote = async (
       }
     )
     .catch((err: JupiterQuoteError | Error) => {
-      console.log("Error fetching swap quote", err);
       throw err;
     });
 
