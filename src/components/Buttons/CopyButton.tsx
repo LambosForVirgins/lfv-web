@@ -2,6 +2,7 @@
 
 import { prettyAddress } from "@/src/utils/string/prettyAddress";
 import { usePlausible } from "next-plausible";
+import { useState } from "react";
 
 interface CopyButtonProps extends Common.ComponentProps {
   label: string;
@@ -15,6 +16,7 @@ export const CopyButton = ({
   ...props
 }: CopyButtonProps) => {
   const plausible = usePlausible();
+  const [copied, setCopied] = useState(false);
   const copyToClipboard = () => {
     navigator.clipboard.writeText(props.value);
     plausible("Purchase/Copy", {
@@ -23,6 +25,7 @@ export const CopyButton = ({
         balance: meta.wallet?.balance,
       },
     });
+    setCopied(true);
   };
 
   return (
@@ -40,7 +43,7 @@ export const CopyButton = ({
         data-testid={`${testID}.action`}
         className="p-3 pl-9 pr-9 bg-red-500 opacity-50 text-white rounded-xl font-[Arial] text-sm shadow-xl transition ease-in-out duration-300 hover:scale-105"
       >
-        {props.label}
+        {copied ? `Copied` : props.label}
       </span>
     </button>
   );
