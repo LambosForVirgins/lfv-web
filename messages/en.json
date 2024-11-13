@@ -55,7 +55,7 @@
         },
         "Form": {
             "AddressLabel": "Solana address",
-            "NameLabel": "Your vergin name",
+            "NameLabel": "Your virgin name",
             "ReasonLabel": "Reason why need Lambo",
             "SubmitLabel": "Submit",
             "Errors": {

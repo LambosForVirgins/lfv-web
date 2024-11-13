@@ -15,6 +15,18 @@ export const createSwapTransaction = async (
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
+      allowOptimizedWrappedSolTokenAccount: true,
+      asLegacyTransaction: false,
+      correctLastValidBlockHeight: true,
+      dynamicComputeUnitLimit: true,
+      dynamicSlippage: { maxBps: 300 },
+      prioritizationFeeLamports: {
+        priorityLevelWithMaxLamports: {
+          global: false,
+          maxLamports: 4_000_000,
+          priorityLevel: "veryHigh",
+        },
+      },
       quoteResponse,
       userPublicKey: publicKey?.toString(),
       wrapAndUnwrapSol: true,
