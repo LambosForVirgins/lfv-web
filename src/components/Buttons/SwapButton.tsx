@@ -18,6 +18,7 @@ import { usePlausible } from "next-plausible";
 import { redirect, RedirectType } from "next/navigation";
 import { useExchange } from "@/src/utils/exchanges/useExchange";
 import { SwapErrorCode } from "@/src/utils/exchanges/SwapError";
+import { PurchaseButtons } from "./PurchaseButtons";
 
 interface SwapError {
   code: number;
@@ -199,54 +200,65 @@ export const SwapButton = ({ testID }: Common.ComponentProps) => {
 
   if (!publicKey || !tokenAvailable)
     return (
-      <CopyButton
-        testID={`${testID}.copy`}
-        label={t("CopyButtonLabel")}
-        value={Brand.contractAddress}
-        meta={{ wallet: { provider: wallet?.adapter.name, balance } }}
-      />
+      <div className="grid gap-5">
+        <CopyButton
+          testID={`${testID}.copy`}
+          label={t("CopyButtonLabel")}
+          value={Brand.contractAddress}
+          meta={{ wallet: { provider: wallet?.adapter.name, balance } }}
+        />
+      </div>
     );
 
   return (
-    <div
-      data-testid={testID}
-      className="relative p-2 gap-x-2 gap-y-1 rounded-lg bg-neutral-100/60 grid grid-cols-[1fr auto 1fr] auto-rows items-center"
-    >
-      <input
-        data-testid={`${testID}.input`}
-        type={"number"}
-        name="amount"
-        min={0}
-        step={1}
-        placeholder={"0"}
-        defaultValue={outputAmount}
-        className="p-0 w-full col-start-1 text-2xl border-none text-right font-bold bg-transparent"
-        onChange={handleOutputAmountChange}
-      />
-      <span className="col-start-2 text-2xl font-bold">VIRGIN</span>
-      <strong className="col-start-1 row-start-2 text-xs grow text-right font-extrabold">
-        {Math.floor(inputAmount * 1_000_000) / 1_000_000}
-      </strong>
-      <strong className="col-start-2 row-start-2 text-xs grow text-left font-extrabold">
-        SOL
-      </strong>
+    <div className="grid gap-5">
+      <div
+        data-testid={testID}
+        className="relative p-2 gap-x-2 gap-y-1 rounded-lg bg-neutral-100/60 grid grid-cols-[1fr auto 1fr] auto-rows items-center"
+      >
+        <input
+          data-testid={`${testID}.input`}
+          type={"number"}
+          name="amount"
+          min={0}
+          step={1}
+          placeholder={"0"}
+          defaultValue={outputAmount}
+          className="p-0 w-full col-start-1 text-2xl border-none text-right font-bold bg-transparent"
+          onChange={handleOutputAmountChange}
+        />
+        <span className="col-start-2 text-2xl font-bold">VIRGIN</span>
+        <strong className="col-start-1 row-start-2 text-xs grow text-right font-extrabold">
+          {Math.floor(inputAmount * 1_000_000) / 1_000_000}
+        </strong>
+        <strong className="col-start-2 row-start-2 text-xs grow text-left font-extrabold">
+          SOL
+        </strong>
 
-      <Button
-        testID={`${testID}.native`}
-        name="inline"
+        <Button
+          testID={`${testID}.native`}
+          name="inline"
+          loading={loading}
+          disabled={inputAmount === 0 || inputAmount > balance}
+          className="col-start-3 row-span-2"
+          onClick={swapToken}
+        >
+          {t("PurchaseButtonToken")}
+        </Button>
+
+        {error && (
+          <span className="col-span-3 text-sm bg-red-500 p-1 text-white text-center rounded-md">
+            {error?.message}
+          </span>
+        )}
+      </div>
+      <PurchaseButtons
+        testID={`${testID}.purchase`}
+        tokenSymbol={t("PurchaseButtonToken")}
         loading={loading}
         disabled={inputAmount === 0 || inputAmount > balance}
-        className="col-start-3 row-span-2"
-        onClick={swapToken}
-      >
-        {t("PurchaseButtonToken")}
-      </Button>
-
-      {error && (
-        <span className="col-span-3 text-sm bg-red-500 p-1 text-white text-center rounded-md">
-          {error?.message}
-        </span>
-      )}
+        onPurchase={swapToken}
+      />
     </div>
   );
 };
