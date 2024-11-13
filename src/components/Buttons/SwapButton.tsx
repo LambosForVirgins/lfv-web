@@ -140,7 +140,7 @@ export const SwapButton = ({ testID }: Common.ComponentProps) => {
       setInputAmount(0);
       setOutputAmount(0);
       setLoading(false);
-    } catch (err: Error | any) {
+    } catch (err: any) {
       plausible("Purchase/Failed", {
         props: {
           wallet: wallet.adapter.name,
