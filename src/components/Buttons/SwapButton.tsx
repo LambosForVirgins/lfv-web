@@ -207,6 +207,12 @@ export const SwapButton = ({ testID }: Common.ComponentProps) => {
           value={Brand.contractAddress}
           meta={{ wallet: { provider: wallet?.adapter.name, balance } }}
         />
+        <PurchaseButtons
+          testID={`${testID}.purchase`}
+          tokenSymbol={t("PurchaseButtonToken")}
+          loading={loading}
+          disabled
+        />
       </div>
     );
 
