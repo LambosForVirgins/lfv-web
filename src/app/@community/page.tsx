@@ -30,13 +30,22 @@ const socialLinks = [
     key: "mail",
     src: "/images/mail.png",
     label: "LambosForVirgins@protonmail.com",
-    link: "mailto:LambosForVirgins@protonmail.com",
+    link: "mailto:lambosforvirgins@protonmail.com",
   },
 ];
 
-export default function LocaleCommunityPage() {
+export default function CommunityPage({
+  testID = "community",
+}: Readonly<Partial<Common.ComponentProps>>) {
   const t = useTranslations("Community");
   const plausible = usePlausible();
+
+  const handleClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
+    plausible("Social/Link", {
+      props: { link: event.currentTarget.ariaLabel },
+    });
+    event.target.dispatchEvent(event.nativeEvent);
+  };
 
   return (
     <Section testID={"community"} id={"community"}>
@@ -51,15 +60,16 @@ export default function LocaleCommunityPage() {
           <h2 className="font-headline text-5xl text-red-500">
             {t("Heading")}
           </h2>
-          <div className="grid gap-5 p-5">
+          <div role="list" className="grid gap-5 p-5">
             {socialLinks.map(({ key, src, label, link }) => (
-              <Link
+              <a
                 key={`${key}-selector`}
+                data-testid={`${testID}.link`}
+                role="listitem"
                 href={link}
+                aria-label={label}
                 className="flex grid-cols-panels gap-4"
-                onClick={() => {
-                  plausible("Social/Link", { props: { link: label } });
-                }}
+                onClick={handleClick}
               >
                 <Image
                   src={src}
@@ -71,7 +81,7 @@ export default function LocaleCommunityPage() {
                 <div className="flex-auto p-4 rounded-md bg-red-100 content-center overflow-hidden text-ellipsis">
                   {label}
                 </div>
-              </Link>
+              </a>
             ))}
           </div>
         </div>
