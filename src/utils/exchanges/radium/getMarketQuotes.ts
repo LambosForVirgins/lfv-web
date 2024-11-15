@@ -1,9 +1,3 @@
-import { TokenMint } from "../types";
-import { RaydiumPricingResponse } from "./types";
+import { getMarketQuotes as getJupiterMarketQuotes } from "../jupiter/getMarketQuotes";
 
-enum RaydiumTokenTag {
-  Listed = "lst",
-  Community = "community",
-}
-
-export const getMarketQuotes = require("../jupiter/getMarketQuotes");
+export const getMarketQuotes = getJupiterMarketQuotes;
