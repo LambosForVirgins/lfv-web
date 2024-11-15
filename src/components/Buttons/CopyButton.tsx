@@ -7,7 +7,7 @@ import { useState } from "react";
 interface CopyButtonProps extends Common.ComponentProps {
   label: string;
   value: string;
-  meta?: Partial<{ wallet: { provider: any; balance: any } }>;
+  meta?: Partial<{ wallet: { balance: any } }>;
 }
 
 export const CopyButton = ({
@@ -21,7 +21,7 @@ export const CopyButton = ({
     navigator.clipboard.writeText(props.value);
     plausible("Purchase/Copy", {
       props: {
-        wallet: meta.wallet?.provider,
+        wallet: "Unknown", // TODO: Store meta or something
         balance: meta.wallet?.balance,
       },
     });
