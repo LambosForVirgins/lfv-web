@@ -20,6 +20,8 @@ import { useExchange } from "@/src/utils/exchanges/useExchange";
 import { SwapErrorCode } from "@/src/utils/exchanges/SwapError";
 import { PurchaseButtons } from "./PurchaseButtons";
 
+const STEP_AMOUNT = Number(process.env.NEXT_TOKEN_AMOUNT_STEP || "1");
+
 interface SwapError {
   code: number;
   message: string;
@@ -227,7 +229,7 @@ export const SwapButton = ({ testID }: Common.ComponentProps) => {
           type={"number"}
           name="amount"
           min={0}
-          step={5000}
+          step={STEP_AMOUNT}
           placeholder={"0"}
           defaultValue={outputAmount}
           className="p-0 w-full col-start-1 text-2xl border-none text-right font-bold bg-transparent"
