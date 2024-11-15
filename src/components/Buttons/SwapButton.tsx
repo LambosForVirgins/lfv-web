@@ -2,18 +2,18 @@
 
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
 import { Button } from "./Button";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { LAMPORTS_PER_SOL } from "@solana/web3.js";
 
-import { VIRGINTokenMint, SolanaTokenMint } from "@/src/utils/exchanges/tokens";
+import { VIRGINTokenMint } from "@/src/utils/exchanges/tokens";
 import { executeTransaction } from "@/src/utils/exchanges/transactions";
-import { createSwapTransaction } from "@/src/utils/exchanges/jupiter/createSwapTransaction";
-import { getSwapQuote } from "@/src/utils/exchanges/jupiter/getSwapQuote";
+import { createSwapTransaction } from "@/src/utils/exchanges/radium/createSwapTransaction";
+import { getSwapQuote } from "@/src/utils/exchanges/radium/getSwapQuote";
 import { getExchangeRate } from "@/src/utils/exchanges/jupiter/getMarketQuotes";
 import { CopyButton } from "./CopyButton";
 import { Brand } from "@/src/utils/config/Brand";
 import { useTranslations } from "next-intl";
-import { getTokenAvailability } from "@/src/utils/exchanges/jupiter/getTokenAvailability";
+import { getTokenAvailability } from "@/src/utils/exchanges/radium/getTokenAvailability";
 import { usePlausible } from "next-plausible";
 import { redirect, RedirectType } from "next/navigation";
 import { useExchange } from "@/src/utils/exchanges/useExchange";
@@ -77,7 +77,7 @@ export const SwapButton = ({ testID }: Common.ComponentProps) => {
     plausible("Purchase/Input", {
       props: {
         wallet: wallet?.adapter.name,
-        provider: "Jupiter",
+        provider: "Raydium",
         balance,
         amount: input,
       },
@@ -94,7 +94,7 @@ export const SwapButton = ({ testID }: Common.ComponentProps) => {
   useEffect(() => {
     // HACK: Redirect to exchange if the token is not available
     if (error?.code !== SwapErrorCode.Timeout) return;
-    const exchange = exchanges.find(({ name }) => name === "Jupiter");
+    const exchange = exchanges.find(({ name }) => name === "Raydium");
     if (!exchange) return;
     redirect(exchange.url, RedirectType.push);
   }, [error]);
@@ -110,7 +110,7 @@ export const SwapButton = ({ testID }: Common.ComponentProps) => {
         props: {
           button: event.currentTarget.name,
           wallet: wallet.adapter.name,
-          provider: "Jupiter",
+          provider: "Raydium",
           balance,
           amount: inputAmount,
         },
@@ -130,7 +130,7 @@ export const SwapButton = ({ testID }: Common.ComponentProps) => {
       plausible("Purchase/Success", {
         props: {
           wallet: wallet.adapter.name,
-          provider: "Jupiter",
+          provider: "Raydium",
           balance,
           amount: inputAmount,
         },
@@ -145,7 +145,7 @@ export const SwapButton = ({ testID }: Common.ComponentProps) => {
       plausible("Purchase/Failed", {
         props: {
           wallet: wallet.adapter.name,
-          provider: "Jupiter",
+          provider: "Raydium",
           balance,
           amount: inputAmount,
           error: err.message,
@@ -188,7 +188,7 @@ export const SwapButton = ({ testID }: Common.ComponentProps) => {
         plausible("Purchase/Balance", {
           props: {
             wallet: wallet?.adapter.name,
-            provider: "Jupiter",
+            provider: "Raydium",
             balance,
           },
         });

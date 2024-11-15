@@ -1,7 +1,7 @@
 import { LAMPORTS_PER_SOL } from "@solana/web3.js";
 import { VIRGINTokenMint, SolanaTokenMint } from "../tokens";
-import { type InputToken, type OutputToken } from "./types";
-import { type JupiterQuoteError, JupiterQuoteResponse } from "../types";
+import { JupiterQuoteError, type InputToken, type OutputToken } from "./types";
+import { JupiterQuoteResponse } from "../types";
 
 interface SwapQuoteOptions {
   highVolatility?: boolean;

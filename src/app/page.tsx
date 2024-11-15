@@ -1,11 +1,9 @@
 import Image from "next/image";
 import { Brand } from "@/src/utils/config/Brand";
-import { CopyButton } from "@/src/components/Buttons/CopyButton";
 import { useTranslations } from "next-intl";
 
 import { getTranslations } from "next-intl/server";
 import { PurchaseSteps } from "@/src/components/PurchaseSteps/PurchaseSteps";
-import { PurchaseButtons } from "@/src/components/Buttons/PurchaseButtons";
 import { SwapButton } from "@/src/components/Buttons/SwapButton";
 
 export async function generateMetadata({

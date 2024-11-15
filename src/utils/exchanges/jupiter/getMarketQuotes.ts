@@ -50,6 +50,10 @@ export const getExchangeRate = async (
 
       const [tokenPrice, basePrice] = res.data.getTokenPrices;
 
-      return calculateExchangeRate(tokenPrice.priceUsd, basePrice.priceUsd);
+      if (!tokenPrice || !basePrice) {
+        throw new Error("Invalid response from Jupiter API");
+      }
+
+      return calculateExchangeRate(tokenPrice?.priceUsd, basePrice?.priceUsd);
     });
 };

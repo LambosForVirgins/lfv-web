@@ -8,6 +8,10 @@ export enum RadiumTxVersion {
   Version1 = "V1",
 }
 
+export enum RaydiumQuoteErrorCode {
+  RouteNotFound = "ROUTE_NOT_FOUND",
+}
+
 interface RadiumTokenPrice {
   address: string;
   name: string;
@@ -92,4 +96,11 @@ export interface RadiumSwapResponse {
       transaction: string;
     },
   ];
+}
+
+export interface RaydiumQuoteError {
+  id: string;
+  success: boolean;
+  version: RadiumTxVersion;
+  msg: RaydiumQuoteErrorCode;
 }

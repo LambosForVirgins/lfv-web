@@ -5,7 +5,6 @@ import { SectionBreak } from "@/src/components/SectionBreak/SectionBreak";
 import { useTranslations } from "next-intl";
 import { usePlausible } from "next-plausible";
 import Image from "next/image";
-import Link from "next/link";
 
 const socialLinks = [
   {

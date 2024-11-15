@@ -1,6 +1,5 @@
-import { type JupiterQuoteError } from "./types";
 import { getSwapQuote } from "./getSwapQuote";
-import { JupiterQuoteErrorCode } from "./types";
+import { type RaydiumQuoteError, RaydiumQuoteErrorCode } from "./types";
 
 export const getTokenAvailability = async (
   balance: number
@@ -9,8 +8,8 @@ export const getTokenAvailability = async (
 
   return getSwapQuote(balance)
     .then(() => true)
-    .catch((error: JupiterQuoteError | any) => {
-      if (error.errorCode === JupiterQuoteErrorCode.TokenNotListed) {
+    .catch((error: RaydiumQuoteError | any) => {
+      if (error.errorCode === RaydiumQuoteErrorCode.RouteNotFound) {
         return false;
       }
 

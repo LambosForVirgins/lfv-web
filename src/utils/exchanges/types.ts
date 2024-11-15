@@ -2,11 +2,6 @@ export type JupiterSwapMode = "ExactIn";
 
 export type TokenMint<T extends string = string> = T;
 
-export enum JupiterQuoteErrorCode {
-  TokenNotListed = "TOKEN_NOT_TRADABLE",
-  RouteNotFound = "COULD_NOT_FIND_ANY_ROUTE",
-}
-
 export interface JupiterSwapPlan<TokenInput, TokenOutput> {
   swapInfo: {
     ammKey: string;
@@ -34,11 +29,6 @@ export interface JupiterQuoteResponse<TokenInput, TokenOutput> {
   routePlan: JupiterSwapPlan<TokenInput, TokenOutput>[];
   contextSlot: number;
   timeTaken: number;
-}
-
-export interface JupiterQuoteError {
-  error: string;
-  errorCode: JupiterQuoteErrorCode | string;
 }
 
 export interface JupiterPricingResponse {

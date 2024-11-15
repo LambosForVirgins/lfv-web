@@ -3,13 +3,21 @@ import { VIRGINTokenMint, SolanaTokenMint } from "../tokens";
 import { InputToken, OutputToken, RadiumTxVersion } from "./types";
 import { RadiumQuoteResponse } from "./types";
 
+interface RaydiumSwapQuoteOptions {
+  highVolatility: boolean;
+}
+
 export const getSwapQuote = async (
-  inputAmount: number
+  inputAmount: number,
+  options: Partial<RaydiumSwapQuoteOptions> = {}
 ): Promise<RadiumQuoteResponse<InputToken, OutputToken>> => {
   const url = new URL("https://transaction-v1.raydium.io/compute/swap-base-in");
   url.searchParams.set("inputMint", SolanaTokenMint);
   url.searchParams.set("outputMint", VIRGINTokenMint);
-  url.searchParams.set("amount", (inputAmount * LAMPORTS_PER_SOL).toString());
+  url.searchParams.set(
+    "amount",
+    Math.round(inputAmount * LAMPORTS_PER_SOL).toString()
+  );
   url.searchParams.set("slippageBps", "50");
   url.searchParams.set("txVersion", RadiumTxVersion.Version0);
 
