@@ -1,15 +1,15 @@
 import { PublicKey } from "@solana/web3.js";
 
 import {
-  RadiumQuoteResponse,
-  RadiumSwapRequest,
-  RadiumSwapResponse,
-  RadiumTxVersion,
+  RaydiumQuoteResponse,
+  RaydiumSwapRequest,
+  RaydiumSwapResponse,
+  RaydiumTxVersion,
 } from "./types";
 import { InputToken, OutputToken } from "./types";
 
 export const createSwapTransaction = async (
-  quoteResponse: RadiumQuoteResponse<InputToken, OutputToken>,
+  quoteResponse: RaydiumQuoteResponse<InputToken, OutputToken>,
   publicKey: PublicKey
 ): Promise<string> => {
   const url = new URL(
@@ -24,12 +24,12 @@ export const createSwapTransaction = async (
     body: JSON.stringify({
       computeUnitPriceMicroLamports: "1722351",
       swapResponse: quoteResponse,
-      txVersion: RadiumTxVersion.Version0,
+      txVersion: RaydiumTxVersion.Version0,
       wallet: publicKey.toBase58(),
       wrapSol: true,
       unwrapSol: false,
-    } as RadiumSwapRequest<InputToken, OutputToken>),
-  }).then((res) => res.json())) as RadiumSwapResponse;
+    } as RaydiumSwapRequest<InputToken, OutputToken>),
+  }).then((res) => res.json())) as RaydiumSwapResponse;
 
   return response.data[0].transaction;
 };

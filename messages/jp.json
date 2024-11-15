@@ -19,7 +19,7 @@
     },
     "Home": {
         "PurchaseButtonToken": "¥VIRGINを購入",
-        "PurchaseButtonRadium": "ラジウム"
+        "PurchaseButtonRaydium": "ラジウム"
     },
     "Purchase":{
         "CopyButtonLabel": "写し",

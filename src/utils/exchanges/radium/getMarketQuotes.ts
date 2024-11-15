@@ -1,7 +1,7 @@
 import { TokenMint } from "../types";
-import { RadiumPricingResponse } from "./types";
+import { RaydiumPricingResponse } from "./types";
 
-enum RadiumTokenTag {
+enum RaydiumTokenTag {
   Listed = "lst",
   Community = "community",
 }

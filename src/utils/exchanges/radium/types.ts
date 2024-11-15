@@ -3,7 +3,7 @@ import { VIRGINTokenMint, SolanaTokenMint } from "../tokens";
 export type InputToken = typeof SolanaTokenMint;
 export type OutputToken = typeof VIRGINTokenMint;
 
-export enum RadiumTxVersion {
+export enum RaydiumTxVersion {
   Version0 = "V0",
   Version1 = "V1",
 }
@@ -12,7 +12,7 @@ export enum RaydiumQuoteErrorCode {
   RouteNotFound = "ROUTE_NOT_FOUND",
 }
 
-interface RadiumTokenPrice {
+interface RaydiumTokenPrice {
   address: string;
   name: string;
   symbol: string;
@@ -32,11 +32,11 @@ interface RadiumTokenPrice {
 
 type Tags = "verified" | "community";
 
-export type RadiumPricingResponse = RadiumTokenPrice[];
+export type RaydiumPricingResponse = RaydiumTokenPrice[];
 
-type RadiumSwapType = "BaseIn" | "BaseOut";
+type RaydiumSwapType = "BaseIn" | "BaseOut";
 
-export interface RadiumQuoteResponse<InputToken, OutputToken> {
+export interface RaydiumQuoteResponse<InputToken, OutputToken> {
   id: string;
   success: boolean;
   version: string;
@@ -46,7 +46,7 @@ export interface RadiumQuoteResponse<InputToken, OutputToken> {
      * amount of token received. In this mode, slippage is
      * inputted to the base token.
      */
-    swapType: RadiumSwapType;
+    swapType: RaydiumSwapType;
     inputMint: InputToken;
     inputAmount: string;
     outputMint: OutputToken;
@@ -70,15 +70,15 @@ export interface RadiumQuoteResponse<InputToken, OutputToken> {
   };
 }
 
-export enum RadiumPricingFee {
+export enum RaydiumPricingFee {
   VeryHighPriority = "3000000",
   HighPriority = "2000000",
   MediumPriority = "1000000",
 }
 
-export interface RadiumSwapRequest<InputToken, OutputToken> {
+export interface RaydiumSwapRequest<InputToken, OutputToken> {
   computeUnitPriceMicroLamports: string;
-  swapResponse: RadiumQuoteResponse<InputToken, OutputToken>;
+  swapResponse: RaydiumQuoteResponse<InputToken, OutputToken>;
   txVersion: string;
   wallet: string;
   wrapSol: boolean;
@@ -87,9 +87,9 @@ export interface RadiumSwapRequest<InputToken, OutputToken> {
   outputAccount: OutputToken;
 }
 
-export interface RadiumSwapResponse {
+export interface RaydiumSwapResponse {
   id: string;
-  version: RadiumTxVersion;
+  version: RaydiumTxVersion;
   success: boolean;
   data: [
     {
@@ -101,6 +101,6 @@ export interface RadiumSwapResponse {
 export interface RaydiumQuoteError {
   id: string;
   success: boolean;
-  version: RadiumTxVersion;
+  version: RaydiumTxVersion;
   msg: RaydiumQuoteErrorCode;
 }

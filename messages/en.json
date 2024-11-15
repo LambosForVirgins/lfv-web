@@ -19,7 +19,7 @@
     },
     "Home": {
         "PurchaseButtonToken": "Buy $VIRGIN",
-        "PurchaseButtonRadium": "Radium"
+        "PurchaseButtonRaydium": "Raydium"
     },
     "Purchase":{
         "CopyButtonLabel": "Copy",
