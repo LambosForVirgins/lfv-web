@@ -227,7 +227,7 @@ export const SwapButton = ({ testID }: Common.ComponentProps) => {
           type={"number"}
           name="amount"
           min={0}
-          step={1}
+          step={5000}
           placeholder={"0"}
           defaultValue={outputAmount}
           className="p-0 w-full col-start-1 text-2xl border-none text-right font-bold bg-transparent"
