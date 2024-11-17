@@ -16,7 +16,7 @@ export async function generateMetadata({
   return {
     title: t("Token.DisplayName"),
     description: t("Token.Slogan"),
-    keywords: [], // TODO: SEO Keywords
+    keywords: ["meme", "coin", "crypto", "lamborghini", "meme coin", "trade"],
     openGraph: {
       title: t("Token.DisplayName"),
       description: t("Token.Slogan"),
