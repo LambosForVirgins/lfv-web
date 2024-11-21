@@ -28,8 +28,8 @@ const socialLinks = [
   {
     key: "mail",
     src: "/images/mail.png",
-    label: "LambosForVirgins@protonmail.com",
-    link: "mailto:lambosforvirgins@protonmail.com",
+    label: "contact@lambosforvirgins.com",
+    link: "mailto:contact@lambosforvirgins.com",
   },
 ];
 
