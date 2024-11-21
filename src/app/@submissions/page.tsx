@@ -23,7 +23,9 @@ export default function LocaleSubmissionsPage() {
         data-testid={`waterfall`}
         className="col-gutter-right bg-texture-lambo bg-no-repeat bg-left"
       />
-      {isSubmissionsEnabled && <SubmissionForm testID={"form"} />}
+      {isSubmissionsEnabled && (
+        <SubmissionForm testID={"form"} className="col-content" />
+      )}
     </Section>
   );
 }
