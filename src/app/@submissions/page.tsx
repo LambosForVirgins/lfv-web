@@ -1,10 +1,7 @@
 import { Section } from "@/src/components/Section/Section";
-import { SubmissionForm } from "@/src/components/SubmissionForm/SubmissionForm";
 import { useTranslations } from "next-intl";
 
-const isSubmissionsEnabled = false;
-
-export default function LocaleSubmissionsPage() {
+export default function SubmissionsPage() {
   const t = useTranslations("Submissions");
 
   return (
@@ -23,9 +20,6 @@ export default function LocaleSubmissionsPage() {
         data-testid={`waterfall`}
         className="col-gutter-right bg-texture-lambo bg-no-repeat bg-left"
       />
-      {isSubmissionsEnabled && (
-        <SubmissionForm testID={"form"} className="col-content" />
-      )}
     </Section>
   );
 }

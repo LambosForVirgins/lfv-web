@@ -6,6 +6,7 @@ import { forwardRef, useState } from "react";
 import clsx from "classnames";
 import { prettyAddress } from "@/src/utils/string/prettyAddress";
 import { Brand } from "@/src/utils/config/Brand";
+import { useWallet } from "@solana/wallet-adapter-react";
 
 interface AddressInputProps extends Common.ComponentProps {
   label: string;
@@ -15,6 +16,7 @@ interface AddressInputProps extends Common.ComponentProps {
 
 export const AddressInput = forwardRef<HTMLInputElement, AddressInputProps>(
   ({ testID, ...props }, ref) => {
+    const { publicKey, connecting } = useWallet();
     const [isValid, setIsValid] = useState(false);
     const [balance, setBalance] = useState(123);
 
@@ -39,9 +41,18 @@ export const AddressInput = forwardRef<HTMLInputElement, AddressInputProps>(
       props.onChange?.(event.target.value);
     };
 
+    if (publicKey) {
+      return (
+        <div className="grid grid-cols-1">
+          <span>{`Your Solana address`}</span>
+          <span>{publicKey.toBase58()}</span>
+        </div>
+      );
+    }
+
     return (
-      <label htmlFor="address" className="grid grid-cols-2 content-center">
-        <span className="col-span-2">{props.label}</span>
+      <label htmlFor="address" className="grid grid-cols-1 content-center">
+        <span>{props.label}</span>
         <input
           ref={ref}
           data-testid={testID}
@@ -52,9 +63,6 @@ export const AddressInput = forwardRef<HTMLInputElement, AddressInputProps>(
           className={clsx(props.className)}
           required
         />
-        <span className="text-lg">
-          {balance} {Brand.tokenSymbol}
-        </span>
       </label>
     );
   }

@@ -10,20 +10,25 @@ const MenuItems = [
   //   url: "/",
   // },
   {
-    key: "Navigation.About",
-    url: "#about",
+    key: "About",
+    url: "/#about",
   },
   {
-    key: "Navigation.Instructions",
+    key: "Instructions",
     url: "/",
   },
   {
-    key: "Navigation.Community",
-    url: "#community",
+    key: "Community",
+    url: "/#community",
   },
   {
-    key: "Navigation.Submissions",
-    url: "#submissions",
+    key: "Membership",
+    url: "/members",
+    active: true,
+  },
+  {
+    key: "Submissions",
+    url: "/#submissions",
   },
 ];
 
@@ -46,11 +51,13 @@ export const Header = ({ testID, ...props }: HeaderProps) => {
     >
       <h1 className="font-headline text-4xl">{t("Title")}</h1>
       <div className="flex flex-auto flex-row gap-1 justify-around items-end">
-        {MenuItems.map((item, idx) => (
-          <Link key={`${item.key}-${idx}`} href={item.url}>
-            {t(item.key)}
-          </Link>
-        ))}
+        {MenuItems.map((item, idx) =>
+          item.active === false ? null : (
+            <Link key={`${item.key}-${idx}`} href={item.url}>
+              {t(`Navigation.${item.key}`)}
+            </Link>
+          )
+        )}
         {ShowLocale && <LocaleButton testID={`${testID}.locale`} />}
       </div>
     </div>

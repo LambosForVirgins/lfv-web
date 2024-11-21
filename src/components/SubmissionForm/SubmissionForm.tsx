@@ -50,7 +50,7 @@ export const SubmissionForm = ({ testID, ...props }: SubmissionFormProps) => {
   };
 
   const uploadAddressSubmission = async (address: string, file: File) => {
-    const response = await fetch(`/api/submissions/upload?address=${address}`, {
+    const response = await fetch(`/api/submission/upload?address=${address}`, {
       method: "POST",
       body: file,
     });

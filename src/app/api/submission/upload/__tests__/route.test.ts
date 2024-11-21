@@ -12,9 +12,9 @@ const MockRequest = (path: string, body?: BodyInit | null | undefined) => {
 
 vi.mock("@vercel/blob");
 
-describe("POST /api/submissions/upload", () => {
+describe("POST /api/submission/upload", () => {
   it("should return a 400 if no filename is provided", async () => {
-    const request = MockRequest("/api/submissions/upload");
+    const request = MockRequest("/api/submission/upload");
 
     const response = await uploadFile(request);
     // Don't store the file
@@ -26,7 +26,7 @@ describe("POST /api/submissions/upload", () => {
   });
 
   it("should return a 400 if no file contents are provided", async () => {
-    const request = MockRequest("/api/submissions/upload?filename=test.txt");
+    const request = MockRequest("/api/submission/upload?filename=test.txt");
 
     const response = await uploadFile(request);
     // Don't store the file
@@ -44,7 +44,7 @@ describe("POST /api/submissions/upload", () => {
     } as unknown as PutBlobResult);
 
     const request = MockRequest(
-      "/api/submissions/upload?filename=test.txt",
+      "/api/submission/upload?filename=test.txt",
       "Hello, world!"
     );
 

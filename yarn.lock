@@ -2211,6 +2211,30 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@solana/pay@npm:^0.2.5":
+  version: 0.2.5
+  resolution: "@solana/pay@npm:0.2.5"
+  dependencies:
+    "@solana/qr-code-styling": "npm:^1.6.0"
+    "@solana/spl-token": "npm:^0.3.5"
+    "@solana/web3.js": "npm:^1.61.0"
+    bignumber.js: "npm:^9.1.0"
+    cross-fetch: "npm:^3.1.5"
+    js-base64: "npm:^3.7.2"
+    tweetnacl: "npm:^1.0.3"
+  checksum: 10/4e8faa397ced173e8f42d48c7267c7baa67ee7d9034a8b8804bfd9359ea4461be9412e0a4783b8f6241b9ff5da050a2915304b6a79fecf2e06ccec2285f1fea4
+  languageName: node
+  linkType: hard
+
+"@solana/qr-code-styling@npm:^1.6.0":
+  version: 1.6.0
+  resolution: "@solana/qr-code-styling@npm:1.6.0"
+  dependencies:
+    qrcode-generator: "npm:^1.4.3"
+  checksum: 10/6e42d2104b9900e6fbd405de6f29563f756c5cf300223315e539a4a3dbec148ecc359dcc57f1b300c6526bcc9ed8dc80b0be805328b0761303546b89bafafe6c
+  languageName: node
+  linkType: hard
+
 "@solana/spl-token-group@npm:^0.0.7":
   version: 0.0.7
   resolution: "@solana/spl-token-group@npm:0.0.7"
@@ -2222,7 +2246,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@solana/spl-token-metadata@npm:^0.1.6":
+"@solana/spl-token-metadata@npm:^0.1.2, @solana/spl-token-metadata@npm:^0.1.6":
   version: 0.1.6
   resolution: "@solana/spl-token-metadata@npm:0.1.6"
   dependencies:
@@ -2230,6 +2254,20 @@ __metadata:
   peerDependencies:
     "@solana/web3.js": ^1.95.3
   checksum: 10/c38c656c22248aff6c89c52930301cbcf571061e0d99ba80f05cd7d4bde7cb243e4a13c0d28116a0e6e8ccd2dac1f5094c206426a95d3cc6c188cfd6f6a8d2b5
+  languageName: node
+  linkType: hard
+
+"@solana/spl-token@npm:^0.3.5":
+  version: 0.3.11
+  resolution: "@solana/spl-token@npm:0.3.11"
+  dependencies:
+    "@solana/buffer-layout": "npm:^4.0.0"
+    "@solana/buffer-layout-utils": "npm:^0.2.0"
+    "@solana/spl-token-metadata": "npm:^0.1.2"
+    buffer: "npm:^6.0.3"
+  peerDependencies:
+    "@solana/web3.js": ^1.88.0
+  checksum: 10/e2f424f034c5b99de5aaaf15f05e11045aa3e92e2940e2b727790aff3c212b64b8eb8238a5c24f81a2b5c23b9e43ec6a226a98b8bd4619a7266cdf484b89d9b9
   languageName: node
   linkType: hard
 
@@ -2883,6 +2921,29 @@ __metadata:
     rpc-websockets: "npm:^9.0.2"
     superstruct: "npm:^2.0.2"
   checksum: 10/353e04ac1110035ff108f16af4029c7a98f71cce841d45877c9bc4a354cdc58a051681603c92289b81e3dc5ef6b1567c6f866e4ba56a434db145e38a5a41d276
+  languageName: node
+  linkType: hard
+
+"@solana/web3.js@npm:^1.61.0":
+  version: 1.95.5
+  resolution: "@solana/web3.js@npm:1.95.5"
+  dependencies:
+    "@babel/runtime": "npm:^7.25.0"
+    "@noble/curves": "npm:^1.4.2"
+    "@noble/hashes": "npm:^1.4.0"
+    "@solana/buffer-layout": "npm:^4.0.1"
+    agentkeepalive: "npm:^4.5.0"
+    bigint-buffer: "npm:^1.1.5"
+    bn.js: "npm:^5.2.1"
+    borsh: "npm:^0.7.0"
+    bs58: "npm:^4.0.1"
+    buffer: "npm:6.0.3"
+    fast-stable-stringify: "npm:^1.0.0"
+    jayson: "npm:^4.1.1"
+    node-fetch: "npm:^2.7.0"
+    rpc-websockets: "npm:^9.0.2"
+    superstruct: "npm:^2.0.2"
+  checksum: 10/4d59780e2339b39e5a4dcbecf9e5e1c3842776311c8770df9e0389457a19f02393c998ececab09a106f510c8a18b5e3aa32f6e18137b73a4deb0972256ef8e57
   languageName: node
   linkType: hard
 
@@ -5270,7 +5331,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"bignumber.js@npm:^9.0.0, bignumber.js@npm:^9.0.1, bignumber.js@npm:^9.1.1, bignumber.js@npm:^9.1.2":
+"bignumber.js@npm:^9.0.0, bignumber.js@npm:^9.0.1, bignumber.js@npm:^9.1.0, bignumber.js@npm:^9.1.1, bignumber.js@npm:^9.1.2":
   version: 9.1.2
   resolution: "bignumber.js@npm:9.1.2"
   checksum: 10/d89b8800a987225d2c00dcbf8a69dc08e92aa0880157c851c287b307d31ceb2fc2acb0c62c3e3a3d42b6c5fcae9b004035f13eb4386e56d529d7edac18d5c9d8
@@ -6105,6 +6166,15 @@ __metadata:
   version: 1.1.1
   resolution: "create-require@npm:1.1.1"
   checksum: 10/a9a1503d4390d8b59ad86f4607de7870b39cad43d929813599a23714831e81c520bddf61bcdd1f8e30f05fd3a2b71ae8538e946eb2786dc65c2bbc520f692eff
+  languageName: node
+  linkType: hard
+
+"cross-fetch@npm:^3.1.5":
+  version: 3.1.8
+  resolution: "cross-fetch@npm:3.1.8"
+  dependencies:
+    node-fetch: "npm:^2.6.12"
+  checksum: 10/ac8c4ca87d2ac0e17a19b6a293a67ee8934881aee5ec9a5a8323c30e9a9a60a0f5291d3c0d633ec2a2f970cbc60978d628804dfaf03add92d7e720b6d37f392c
   languageName: node
   linkType: hard
 
@@ -9101,7 +9171,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"js-base64@npm:^3.7.5":
+"js-base64@npm:^3.7.2, js-base64@npm:^3.7.5":
   version: 3.7.7
   resolution: "js-base64@npm:3.7.7"
   checksum: 10/185e34c536a6b1c4e1ad8bd96d25b49a9ea4e6803e259eaaaca95f1b392a0d590b2933c5ca8580c776f7279507944b81ff1faf889d84baa5e31f026e96d676a5
@@ -9398,6 +9468,7 @@ __metadata:
   resolution: "lfv@workspace:."
   dependencies:
     "@raydium-io/raydium-sdk-v2": "npm:^0.1.74-alpha"
+    "@solana/pay": "npm:^0.2.5"
     "@solana/wallet-adapter-react": "npm:^0.15.35"
     "@solana/wallet-adapter-react-ui": "npm:^0.9.35"
     "@solana/wallet-adapter-wallets": "npm:^0.19.32"
@@ -11165,6 +11236,13 @@ __metadata:
   version: 0.0.0
   resolution: "qr.js@npm:0.0.0"
   checksum: 10/a05943d13cbc478e48935de8669b72312fe02de05057c35ebfab59a574c084530a9afb9ee651d53c8c870a54f9ec93ea7b63231de202740ce16a71c797e37ce9
+  languageName: node
+  linkType: hard
+
+"qrcode-generator@npm:^1.4.3":
+  version: 1.4.4
+  resolution: "qrcode-generator@npm:1.4.4"
+  checksum: 10/65b2bba237d1f230eba0d08ae4267d04f326859c2265775ade99191be1b522158b623fcc0b613bbfc9d4edbbafb928fc41c66d61053b333f2eb0bcedb2ebadca
   languageName: node
   linkType: hard
 
@@ -12938,6 +13016,13 @@ __metadata:
   version: 2.8.1
   resolution: "tslib@npm:2.8.1"
   checksum: 10/3e2e043d5c2316461cb54e5c7fe02c30ef6dccb3384717ca22ae5c6b5bc95232a6241df19c622d9c73b809bea33b187f6dbc73030963e29950c2141bc32a79f7
+  languageName: node
+  linkType: hard
+
+"tweetnacl@npm:^1.0.3":
+  version: 1.0.3
+  resolution: "tweetnacl@npm:1.0.3"
+  checksum: 10/ca122c2f86631f3c0f6d28efb44af2a301d4a557a62a3e2460286b08e97567b258c2212e4ad1cfa22bd6a57edcdc54ba76ebe946847450ab0999e6d48ccae332
   languageName: node
   linkType: hard
 
