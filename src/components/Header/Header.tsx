@@ -1,30 +1,28 @@
-import { Brand } from "@/src/utils/config/Brand";
+"use client";
+
 import clsx from "classnames";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { LocaleButton } from "../Buttons/LocaleButton";
+import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 
 const MenuItems = [
-  // {
-  //   key: "Navigation.Home",
-  //   url: "/",
-  // },
+  {
+    key: "Membership",
+    url: "/members",
+    active: true,
+  },
   {
     key: "About",
     url: "/#about",
   },
   {
-    key: "Instructions",
-    url: "/",
+    key: "Purchase",
+    url: "/purchase",
   },
   {
     key: "Community",
     url: "/#community",
-  },
-  {
-    key: "Membership",
-    url: "/members",
-    active: true,
   },
   {
     key: "Submissions",
@@ -44,13 +42,13 @@ export const Header = ({ testID, ...props }: HeaderProps) => {
   return (
     <div
       data-testid={testID}
-      className={clsx(
-        props.className,
-        "flex flex-row flex-wrap grid-cols-panels gap-6 p-4"
-      )}
+      className={clsx(props.className, "grid flex-column flex-wrap gap-6 p-4")}
     >
-      <h1 className="font-headline text-4xl">{t("Title")}</h1>
-      <div className="flex flex-auto flex-row gap-1 justify-around items-end">
+      <div className="flex flex-row">
+        <h1 className="flex-grow font-headline text-4xl">{t("Title")}</h1>
+        <WalletMultiButton className="bg-red-500 text-white" />
+      </div>
+      <nav className="flex flex-auto flex-row gap-1 justify-around items-end">
         {MenuItems.map((item, idx) =>
           item.active === false ? null : (
             <Link key={`${item.key}-${idx}`} href={item.url}>
@@ -59,7 +57,7 @@ export const Header = ({ testID, ...props }: HeaderProps) => {
           )
         )}
         {ShowLocale && <LocaleButton testID={`${testID}.locale`} />}
-      </div>
+      </nav>
     </div>
   );
 };

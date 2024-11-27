@@ -8,7 +8,7 @@ import {
 import { WalletModalProvider } from "@solana/wallet-adapter-react-ui";
 import { getEnvironmentEndpoint } from "@/src/utils/config/getEnvironmentEndpoint";
 
-const buildEnvironment = process.env.VERCEL_ENV;
+const buildEnvironment = process.env.VERCEL_ENV || "development";
 
 const endpoint = getEnvironmentEndpoint(buildEnvironment);
 

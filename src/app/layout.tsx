@@ -6,7 +6,6 @@ import { Header } from "@/src/components/Header/Header";
 import { Brand } from "@/src/utils/config/Brand";
 import customFonts from "./fonts";
 import { getMessages } from "next-intl/server";
-import { SectionBreak } from "@/src/components/SectionBreak/SectionBreak";
 import { LocaleProvider } from "../providers/LocaleProvider";
 import { SolanaProvider } from "../providers/SolanaProvider";
 import PlausibleProvider from "next-plausible";
@@ -18,9 +17,6 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({
   children,
-  about,
-  community,
-  submissions,
 }: Readonly<{
   children: React.ReactNode;
   about: React.ReactNode;
@@ -48,20 +44,10 @@ export default async function RootLayout({
               <div className="grid col-full grid-cols-subgrid">
                 <Header testID={`header`} className="col-content" />
               </div>
-              <main className="grid col-full auto-flow-row grid-cols-subgrid">
-                {children}
-                <SectionBreak
-                  testID={`section`}
-                  className="col-full sticky bottom-0"
-                />
-                {about}
-                <SectionBreak
-                  testID={`section`}
-                  className="col-full sticky bottom-0"
-                />
-                {community}
-                {submissions}
-              </main>
+              {children}
+              <footer>
+                <span>Community</span>
+              </footer>
             </SolanaProvider>
           </LocaleProvider>
         </PlausibleProvider>

@@ -7,6 +7,7 @@ import { PublicKey } from "@solana/web3.js";
 import clsx from "classnames";
 import { useExchange } from "@/src/utils/exchanges/useExchange";
 import { VIRGINTokenMint } from "@/src/utils/exchanges/tokens";
+import Image from "next/image";
 
 const MINIMUM_TOKEN_PRICE = 1;
 
@@ -90,7 +91,7 @@ export const PurchaseSteps = ({ testID }: Common.ComponentProps) => {
                       : undefined,
                     href: !isInstalled(adapter) ? adapter.url : undefined,
                   },
-                  <img
+                  <Image
                     src={adapter.icon}
                     alt={adapter.name}
                     width={64}
@@ -116,7 +117,12 @@ export const PurchaseSteps = ({ testID }: Common.ComponentProps) => {
           <span className="col-span-2 flex gap-4 items-center">
             {exchanges.map((market) => (
               <a key={market.name} target={"_blank"} href={market.url}>
-                <img src={market.icon} width={62} height={62} />
+                <Image
+                  src={market.icon}
+                  alt={market.name}
+                  width={62}
+                  height={62}
+                />
               </a>
             ))}
           </span>

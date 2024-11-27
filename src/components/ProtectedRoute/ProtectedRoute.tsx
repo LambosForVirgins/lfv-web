@@ -2,6 +2,17 @@
 
 import { useMembership } from "@/src/hooks/useMembership";
 
+export const MemberUpSell = ({
+  testID = "upsell",
+  ...props
+}: Partial<Common.ComponentProps> & { onClick: (amount: number) => void }) => {
+  return (
+    <div className="col-content p-9">
+      <h1>Virgins need Lambos</h1>
+    </div>
+  );
+};
+
 export default function ProtectedRoute({
   children,
 }: Readonly<React.PropsWithChildren>) {
@@ -10,38 +21,12 @@ export default function ProtectedRoute({
 
   console.log(isAuthorized);
 
+  const purchaseMembershipAmount = (amount: number) => {
+    console.log("Purchase membership amount", amount);
+  };
+
   if (!isAuthorized) {
-    return (
-      <div className="col-content p-9">
-        <h2>Automatically receive our member-only bonuses:</h2>
-        <div>
-          <div>
-            <h4>Bonus #1</h4>
-            <p>Get free entries into</p>
-            <p>Every giveaway!</p>
-            <p>(Cars, Houses, & More)</p>
-          </div>
-          <div>
-            <h4>Bonus #2</h4>
-            <p>Go into the draw to</p>
-            <p>Win a Lambo!</p>
-          </div>
-        </div>
-        <div>
-          <p>Become a member for only 1 VIRGIN</p>
-        </div>
-        <div>
-          <div>
-            <h3>Virgins</h3>
-            <p>10,000 VIRGINS</p>
-          </div>
-          <div>
-            <h3>Giga Chads</h3>
-            <p>1 Million VIRGINS</p>
-          </div>
-        </div>
-      </div>
-    );
+    return <MemberUpSell onClick={purchaseMembershipAmount} />;
   }
 
   return children;

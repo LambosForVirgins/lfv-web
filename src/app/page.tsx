@@ -1,10 +1,11 @@
-import Image from "next/image";
 import { Brand } from "@/src/utils/config/Brand";
-import { useTranslations } from "next-intl";
-
 import { getTranslations } from "next-intl/server";
-import { PurchaseSteps } from "@/src/components/PurchaseSteps/PurchaseSteps";
-import { SwapButton } from "@/src/components/Buttons/SwapButton";
+import { SectionBreak } from "../components/SectionBreak/SectionBreak";
+import { CommunitySection } from "../sections/CommunitySection/CommunitySection";
+import { MembershipSection } from "../sections/MembershipSection/MembershipSection";
+import { PurchaseSection } from "../sections/PurchaseSection/PurchaseSection";
+import { AboutSection } from "../sections/AboutSection/AboutSection";
+import { SubmissionSection } from "../sections/SubmissionSection/SubmissionSection";
 
 export async function generateMetadata({
   params: { locale },
@@ -36,38 +37,18 @@ export async function generateMetadata({
   };
 }
 
-export default function LocalePage({
-  testID = "home",
-}: Readonly<Partial<Common.ComponentProps>>) {
-  const t = useTranslations("Home");
-
+export default function LandingPage() {
   return (
-    <section
-      id={"welcome"}
-      data-testid={testID}
-      className="grid p-5 gap-9 col-content grid-cols-panels content-center items-center"
-    >
-      <div data-testid={`${testID}.content`}>
-        <Image
-          data-testid={`${testID}.image`}
-          src={"/images/lambos.png"}
-          alt={`${Brand.tokenSymbol} stamp logo`}
-          width={501}
-          height={186}
-        />
-        <div className="grid gap-5">
-          <SwapButton testID={`${testID}.swap`} />
-          <h3 className="text-2xl">How to buy $VIRGIN</h3>
-          <PurchaseSteps testID={`${testID}.steps`} />
-        </div>
-      </div>
-      <Image
-        src={"/images/logo-stamp.png"}
-        alt={`${Brand.tokenSymbol} stamp logo`}
-        width={400}
-        height={250}
-        className="justify-self-center"
-      />
-    </section>
+    <>
+      <MembershipSection testID={"membership"} />
+      <SectionBreak testID={`section`} className="col-full sticky bottom-0" />
+      <PurchaseSection testID={`purchase`} />
+      <SectionBreak testID={`section`} className="col-full sticky bottom-0" />
+      <AboutSection testID={`about`} />
+      <SectionBreak testID={`section`} className="col-full sticky bottom-0" />
+      <CommunitySection testID={"community"} />
+      <SectionBreak testID={`section`} className="col-full sticky bottom-0" />
+      <SubmissionSection testID={"submission"} />
+    </>
   );
 }

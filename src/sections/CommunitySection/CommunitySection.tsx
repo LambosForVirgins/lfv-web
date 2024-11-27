@@ -33,9 +33,9 @@ const socialLinks = [
   },
 ];
 
-export default function CommunityPage({
+export const CommunitySection = ({
   testID = "community",
-}: Readonly<Partial<Common.ComponentProps>>) {
+}: Readonly<Partial<Common.ComponentProps>>) => {
   const t = useTranslations("Community");
   const plausible = usePlausible();
 
@@ -89,7 +89,6 @@ export default function CommunityPage({
         data-testid={`waterfall`}
         className="col-gutter-right bg-texture-cash bg-repeat-y bg-start"
       />
-      <SectionBreak testID={`section`} className="col-full sticky bottom-0" />
     </Section>
   );
-}
+};

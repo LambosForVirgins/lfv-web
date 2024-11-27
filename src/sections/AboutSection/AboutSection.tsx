@@ -1,7 +1,9 @@
+"use client";
+
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 
-export default function LocaleAboutPage() {
+export const AboutSection = ({ testID }: Common.ComponentProps) => {
   const t = useTranslations("About");
 
   return (
@@ -39,4 +41,4 @@ export default function LocaleAboutPage() {
       </div>
     </section>
   );
-}
+};

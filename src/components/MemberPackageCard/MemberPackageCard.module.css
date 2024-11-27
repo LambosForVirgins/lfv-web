@@ -1,0 +1,22 @@
+.frame {
+    border: 2px solid red;
+}
+
+.content {
+    flex-grow: 1;
+}
+
+.highlight {
+    border: 2px solid red;
+}
+
+@container (width > 60ch) {
+    .frame {
+        border: none;
+    }
+
+    .highlight {
+        border: 2px solid red;
+        transform: scale(1.15);
+    }
+}

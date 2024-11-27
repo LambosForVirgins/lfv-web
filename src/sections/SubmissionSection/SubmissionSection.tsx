@@ -1,7 +1,9 @@
+"use client";
+
 import { Section } from "@/src/components/Section/Section";
 import { useTranslations } from "next-intl";
 
-export default function SubmissionsPage() {
+export const SubmissionSection = ({ testID }: Common.ComponentProps) => {
   const t = useTranslations("Submissions");
 
   return (
@@ -22,4 +24,4 @@ export default function SubmissionsPage() {
       />
     </Section>
   );
-}
+};
