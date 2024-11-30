@@ -12,9 +12,10 @@
         "Navigation": {
             "Home": "Home",
             "About": "About",
-            "Purchase": "Purchase",
+            "Store": "Store",
             "Community": "Community",
-            "Membership": "Membership",
+            "Members": "Members",
+            "Rewards": "Rewards",
             "Submissions": "Submissions"
         }
     },
@@ -65,5 +66,6 @@
                 "NameEmpty": "Please enter your virgin name"
             }
         }
-    }
+    },
+    "Draws": {}
 }

@@ -7,7 +7,7 @@ import { LAMPORTS_PER_SOL } from "@solana/web3.js";
 
 import { VIRGINTokenMint } from "@/src/utils/exchanges/tokens";
 import { executeTransaction } from "@/src/utils/exchanges/transactions";
-import { createSwapTransaction } from "@/src/utils/exchanges/radium/createSwapTransaction";
+import { getSwapTransaction } from "@/src/utils/exchanges/radium/getSwapTransaction";
 import { getSwapQuote } from "@/src/utils/exchanges/radium/getSwapQuote";
 import { getExchangeRate } from "@/src/utils/exchanges/jupiter/getMarketQuotes";
 import { CopyButton } from "./CopyButton";
@@ -121,7 +121,7 @@ export const SwapButton = ({ testID }: Common.ComponentProps) => {
       const latestQuote = await getSwapQuote(inputAmount, {
         highVolatility: true,
       });
-      const transaction = await createSwapTransaction(latestQuote, publicKey);
+      const transaction = await getSwapTransaction(latestQuote, publicKey);
 
       const result = await executeTransaction(
         transaction,

@@ -9,6 +9,7 @@ import { getMessages } from "next-intl/server";
 import { LocaleProvider } from "../providers/LocaleProvider";
 import { SolanaProvider } from "../providers/SolanaProvider";
 import PlausibleProvider from "next-plausible";
+import { Footer } from "../components/Footer/Footer";
 
 export const metadata: Metadata = {
   title: Brand.displayName,
@@ -19,9 +20,6 @@ export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
-  about: React.ReactNode;
-  community: React.ReactNode;
-  submissions: React.ReactNode;
 }>) {
   const messages = await getMessages();
 
@@ -45,9 +43,9 @@ export default async function RootLayout({
                 <Header testID={`header`} className="col-content" />
               </div>
               {children}
-              <footer>
-                <span>Community</span>
-              </footer>
+              <div className="grid col-full grid-cols-subgrid">
+                <Footer />
+              </div>
             </SolanaProvider>
           </LocaleProvider>
         </PlausibleProvider>

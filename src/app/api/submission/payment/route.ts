@@ -1,6 +1,11 @@
 import { type NextRequest, NextResponse } from "next/server";
-import { PublicKey } from "@solana/web3.js";
-import { encodeURL, createQR } from "@solana/pay";
+import { LAMPORTS_PER_SOL, PublicKey } from "@solana/web3.js";
+import BigNumber from "bignumber.js";
+import {
+  encodeURL,
+  createQR,
+  type TransferRequestURLFields,
+} from "@solana/pay";
 
 export async function POST(request: NextRequest): Promise<NextResponse> {
   try {
@@ -21,9 +26,9 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
       return NextResponse.json({ error: "Invalid amount" }, { status: 400 });
     }
 
-    const paymentParams = {
+    const paymentParams: TransferRequestURLFields = {
       recipient: recipientPublicKey,
-      amount: amountInSOL,
+      amount: BigNumber(amountInSOL * LAMPORTS_PER_SOL),
       reference: reference ? new PublicKey(reference) : undefined,
       label: label || "Your Payment Label",
       message: message || "Thanks for your payment",

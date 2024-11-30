@@ -11,7 +11,7 @@
     "test": "vitest"
   },
   "dependencies": {
-    "@raydium-io/raydium-sdk-v2": "^0.1.74-alpha",
+    "@raydium-io/raydium-sdk-v2": "^0.1.92-alpha",
     "@solana/pay": "^0.2.5",
     "@solana/wallet-adapter-react": "^0.15.35",
     "@solana/wallet-adapter-react-ui": "^0.9.35",
@@ -19,12 +19,17 @@
     "@solana/web3.js": "^1.95.4",
     "@vercel/blob": "^0.25.1",
     "@vercel/flags": "^2.6.2",
+    "bignumber.js": "^9.1.2",
+    "bs58": "^6.0.0",
+    "canvas": "^2.11.2",
+    "date-fns": "^4.1.0",
     "next": "14.2.16",
     "next-intl": "^3.24.0",
     "next-plausible": "^3.12.4",
     "pino-pretty": "^11.3.0",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "recoil": "^0.7.7"
   },
   "devDependencies": {
     "@tailwindcss/forms": "^0.5.9",

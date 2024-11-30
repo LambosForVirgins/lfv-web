@@ -3,7 +3,7 @@ import { PublicKey } from "@solana/web3.js";
 import { JupiterQuoteResponse } from "../types";
 import { InputToken, OutputToken } from "./types";
 
-export const createSwapTransaction = async (
+export const getSwapTransaction = async (
   quoteResponse: JupiterQuoteResponse<InputToken, OutputToken>,
   publicKey: PublicKey
 ): Promise<string> => {

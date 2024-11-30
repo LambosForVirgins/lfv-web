@@ -6,9 +6,28 @@ import Link from "next/link";
 import { LocaleButton } from "../Buttons/LocaleButton";
 import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 
+const GuestMenuItems = [
+  {
+    key: "About",
+    url: "/#about",
+  },
+  {
+    key: "Store",
+    url: "/store",
+  },
+  {
+    key: "Community",
+    url: "/#community",
+  },
+  {
+    key: "Submissions",
+    url: "/#submissions",
+  },
+];
+
 const MenuItems = [
   {
-    key: "Membership",
+    key: "Members",
     url: "/members",
     active: true,
   },
@@ -17,12 +36,12 @@ const MenuItems = [
     url: "/#about",
   },
   {
-    key: "Purchase",
-    url: "/purchase",
+    key: "Store",
+    url: "/store",
   },
   {
-    key: "Community",
-    url: "/#community",
+    key: "Rewards",
+    url: "/rewards",
   },
   {
     key: "Submissions",

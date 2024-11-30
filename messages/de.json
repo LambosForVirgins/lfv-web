@@ -12,7 +12,7 @@
         "Navigation": {
             "Home": "Startseite",
             "About": "Über uns",
-            "Purchase": "So kaufen Sie",
+            "Store": "So kaufen Sie",
             "Community": "Gemeinschaft",
             "Submissions": "Einsendungen"
         }
@@ -64,5 +64,6 @@
                 "NameEmpty": "Bitte gib deinen Jungfrauen-Namen ein"
             }
         }
-    }
+    },
+    "Draws": {}
 }

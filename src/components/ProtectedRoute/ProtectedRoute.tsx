@@ -4,8 +4,11 @@ import { useMembership } from "@/src/hooks/useMembership";
 
 export const MemberUpSell = ({
   testID = "upsell",
-  ...props
-}: Partial<Common.ComponentProps> & { onClick: (amount: number) => void }) => {
+}: Partial<Common.ComponentProps>) => {
+  const purchaseMembershipAmount = (amount: number) => {
+    console.log("Purchase membership amount", amount);
+  };
+
   return (
     <div className="col-content p-9">
       <h1>Virgins need Lambos</h1>
@@ -19,15 +22,13 @@ export default function ProtectedRoute({
   const { loading, isAuthorized } = useMembership();
   if (loading) return <div>Loading...</div>;
 
-  console.log(isAuthorized);
-
-  const purchaseMembershipAmount = (amount: number) => {
-    console.log("Purchase membership amount", amount);
-  };
-
-  if (!isAuthorized) {
-    return <MemberUpSell onClick={purchaseMembershipAmount} />;
-  }
+  console.log("Is authorized", isAuthorized);
 
   return children;
+
+  if (isAuthorized) {
+    return children;
+  }
+
+  return <MemberUpSell />;
 }
