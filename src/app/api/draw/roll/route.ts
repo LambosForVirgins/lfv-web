@@ -1,20 +1,14 @@
 import { DrawStatus } from "@/src/state/types";
 import { AccountDB } from "@/src/utils/accounts/MockAccountDB";
-import { createDraw } from "@/src/utils/gaming/Draws";
+import { DrawDB } from "@/src/utils/gaming/DrawDB";
 import { mergeRandomly } from "@/src/utils/string/mergeRandom";
 import { NextRequest, NextResponse } from "next/server";
 import { v4 as generateRandom } from "uuid";
 
-const defaultDraw = createDraw(0);
-
-defaultDraw.open();
-
 const rollPrice = 1;
 
-const draws = [defaultDraw];
-
 export async function GET(req: NextRequest) {
-  const draw = draws[draws.length - 1];
+  const draw = await DrawDB.getCurrentDraw();
 
   if (!draw) {
     return NextResponse.json({ error: "No open draws" }, { status: 400 });
@@ -31,7 +25,7 @@ export async function GET(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
   const address = 0;
-  const draw = draws[draws.length - 1],
+  const draw = await DrawDB.getCurrentDraw(),
     balance = await AccountDB.getBalance(address);
 
   console.log("Balance", balance);

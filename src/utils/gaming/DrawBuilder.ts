@@ -16,13 +16,7 @@ class DrawBuilder implements DrawRound {
   timeDraws: number;
   winner: number;
   readonly logs: DrawLog[] = [];
-  readonly entries: DrawEntry[] = [
-    { address: generateRandom(), name: "Tommy" },
-    { address: generateRandom(), name: "Mitch" },
-    { address: generateRandom(), name: "Hudson" },
-    { address: generateRandom(), name: "Thomas" },
-    { address: generateRandom(), name: "Phu" },
-  ];
+  readonly entries: DrawEntry[] = [];
 
   constructor(_drawNumber: number, _duration: number = 60) {
     this.drawNumber = _drawNumber;

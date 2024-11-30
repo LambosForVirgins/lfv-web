@@ -44,7 +44,10 @@ export default async function RootLayout({
               </div>
               {children}
               <div className="grid col-full grid-cols-subgrid">
-                <Footer />
+                <Footer testID="footer" />
+              </div>
+              <div className="grid col-full sticky bottom-0 left-0 right-0 bg-red-500">
+                <h1>Promo</h1>
               </div>
             </SolanaProvider>
           </LocaleProvider>

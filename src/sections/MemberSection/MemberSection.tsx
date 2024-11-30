@@ -1,43 +1,15 @@
+"use client";
+
 import { BoostButton } from "@/src/components/Buttons/BoostButton";
 import { DrawSimulator } from "@/src/components/Draws/DrawSimulator";
 import { EntrySlider } from "@/src/components/EntrySlider/EntrySlider";
-import { useDraw } from "@/src/state/submissions";
-import { type DrawRound } from "@/src/state/types";
-
-const rollCurrentDraw = async (): Promise<DrawRound | null> => {
-  try {
-    const result = await fetch("/api/draw/roll", { method: "POST" }).then(
-      (res) => res.json()
-    );
-
-    console.log(JSON.stringify(result, null, " "));
-
-    return result;
-  } catch (err) {
-    return null;
-  }
-};
-
-const enterDraw = async (
-  drawNumber: number,
-  details: { address: string; name: string }
-) => {
-  const body = JSON.stringify(details);
-
-  return await fetch(`/api/draw/${drawNumber}/enter`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body,
-  }).then((res) => res.json());
-};
+import { useMarketCap } from "@/src/state/marketCap";
+import { useDraw, useRollDraw } from "@/src/state/submissions";
 
 export const MemberSection = ({ testID }: Common.ComponentProps) => {
   // const t = useTranslations("Members");
-  const { draw: currentDraw } = useDraw();
-
-  const rollDraw = async () => {
-    await rollCurrentDraw();
-  };
+  const { draw: currentDraw, enterDraw } = useDraw();
+  const { roll } = useRollDraw();
 
   const enterDailyDraw = async (): Promise<boolean> => {
     try {
@@ -50,6 +22,7 @@ export const MemberSection = ({ testID }: Common.ComponentProps) => {
       return false;
     }
   };
+
   return (
     <section data-testid={testID} className="col-content p-5">
       <div>
@@ -59,7 +32,7 @@ export const MemberSection = ({ testID }: Common.ComponentProps) => {
 
       <BoostButton label="boost" progress={30} />
 
-      <div className="grid gap-9 p-9">
+      <div className="grid gap-9">
         <h2 className="text-2xl">Win 1000 to 10,000 VIRGIN every day!</h2>
         <h3 className="text-xl">
           Test your virginity with our daily virgin rewards
@@ -74,16 +47,13 @@ export const MemberSection = ({ testID }: Common.ComponentProps) => {
       </div>
 
       {currentDraw && (
-        <div>
-          <h2>Draw seed</h2>
-          <p>{currentDraw.seed}</p>
-          <DrawSimulator
-            testID={`${testID}.draw`}
-            timeOpens={currentDraw.timeOpens}
-            timeCloses={currentDraw.timeCloses}
-            onRoll={rollDraw}
-          />
-        </div>
+        <DrawSimulator
+          testID={`${testID}.draw`}
+          draw={currentDraw}
+          timeOpens={currentDraw.timeOpens}
+          timeCloses={currentDraw.timeCloses}
+          onRoll={roll}
+        />
       )}
     </section>
   );

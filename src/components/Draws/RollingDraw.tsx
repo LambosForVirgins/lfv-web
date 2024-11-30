@@ -15,13 +15,11 @@ const COUNTDOWN_TIME = 120;
 interface RollingDrawProps {
   entries: DrawEntry[];
   duration?: number;
-  onDraw?: (entryIndex: number) => void;
 }
 
 export const RollingDraw = ({
   entries = [],
   duration = COUNTDOWN_TIME,
-  ...props
 }: RollingDrawProps) => {
   const currentSeed = useRecoilValue(currentSeedSelector);
   const [selectedEntry, setSelectedEntry] = useState<number>(

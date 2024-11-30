@@ -4,10 +4,14 @@ import { Section } from "@/src/components/Section/Section";
 import Image from "next/image";
 import { Brand } from "@/src/utils/config/Brand";
 import { MembershipSell } from "@/src/components/MembershipSell/MembershipSell";
+import { useMarketCap } from "@/src/state/marketCap";
+import { ProgressIndicator } from "@/src/components/ProgressIndicator/ProgressIndicator";
 
 export const MembershipSection = ({
   testID,
 }: Readonly<Common.ComponentProps>) => {
+  const { marketCapDiluted } = useMarketCap();
+
   return (
     <Section testID="membership" id={"membership"}>
       <div className="grid gap-9 col-content content-center">
@@ -22,6 +26,11 @@ export const MembershipSection = ({
         <h1 className="text-2xl">
           {`We're celebrating $100 million market cap with a Lambo giveaway!`}
         </h1>
+        <ProgressIndicator
+          testID={`${testID}.progress`}
+          progress={marketCapDiluted / 100_000_000}
+          label={`$${Math.floor(marketCapDiluted / 100_000) / 10} Million`}
+        />
         <p>
           Gain access to our exclusive club and member benefits with only one
           $VIRGIN token today!
@@ -54,7 +63,7 @@ export const MembershipSection = ({
         <p>
           Not interested in membership but still want your chance at giveaway
         </p>
-        <p>Become a liquidty provider for...</p>
+        <p>Become a liquidity provider for...</p>
       </div>
     </Section>
   );

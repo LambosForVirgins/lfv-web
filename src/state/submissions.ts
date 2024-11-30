@@ -1,9 +1,13 @@
-import { atom, DefaultValue, selector, useRecoilState } from "recoil";
+import {
+  atom,
+  DefaultValue,
+  selector,
+  useRecoilState,
+  useSetRecoilState,
+} from "recoil";
 import { type DrawRound, SubmissionEntry } from "./types";
-import { v4 as generateRandom } from "uuid";
-import { mergeRandomly } from "../utils/string/mergeRandom";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export const submissionsAtom = atom<SubmissionEntry[]>({
   key: "submission-entries-atom",
@@ -78,15 +82,45 @@ export const useDraw = () => {
     });
   }, [setCurrentDraw]);
 
-  const rollDrawHash = (seed: string) => {
-    setCurrentDraw((prev) => ({
-      ...prev,
-      seed: mergeRandomly(seed, generateRandom().substring(0, 8)),
-    }));
+  const enterDraw = async (
+    drawNumber: number,
+    details: { address: string; name: string }
+  ) => {
+    const body = JSON.stringify(details);
+
+    return await fetch(`/api/draw/${drawNumber}/enter`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body,
+    }).then((res) => res.json());
   };
 
   return {
     draw: currentRound,
-    roll: rollDrawHash,
+    enterDraw,
   };
+};
+
+export const useRollDraw = () => {
+  const [loading, setLoading] = useState(false);
+  const setCurrentDraw = useSetRecoilState(currentRoundSelector);
+
+  const rollDrawHash = async (): Promise<DrawRound | null> => {
+    try {
+      setLoading(true);
+      const result = await fetch("/api/draw/roll", { method: "POST" }).then(
+        (res) => res.json() as Promise<DrawRound>
+      );
+
+      setCurrentDraw(result);
+      setLoading(false);
+
+      return result;
+    } catch (err) {
+      setLoading(false);
+      return null;
+    }
+  };
+
+  return { roll: rollDrawHash, loading };
 };

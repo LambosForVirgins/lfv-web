@@ -26,7 +26,7 @@ export const MembershipSell = ({ testID }: Common.ComponentProps) => {
 
   return (
     <div className={clsx(styles.options, styles.frame, "col-content")}>
-      <h1>Balance {Math.floor(availableBalance * 100) / 100} SOL</h1>
+      {/* <h1>Balance {Math.floor(availableBalance * 100) / 100} SOL</h1> */}
       <MemberPackageCard
         testID={`${testID}.membership`}
         title={"SupaChad"}

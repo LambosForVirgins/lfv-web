@@ -1,10 +1,6 @@
 import { DrawStatus } from "@/src/state/types";
-import { createDraw } from "@/src/utils/gaming/Draws";
+import { DrawDB } from "@/src/utils/gaming/DrawDB";
 import { NextRequest, NextResponse } from "next/server";
-
-const defaultDraw = createDraw(1).open();
-
-const draws = [defaultDraw];
 
 interface DrawEntryParams {
   drawNumber: string;
@@ -16,7 +12,7 @@ export async function POST(
 ) {
   const body = await req.json();
   const drawNumber = parseInt(params.drawNumber, 0);
-  const draw = draws.find((draw) => draw.drawNumber === drawNumber);
+  const draw = await DrawDB.find(drawNumber);
 
   if (!draw) {
     return NextResponse.json({ error: "Draw not found" }, { status: 400 });

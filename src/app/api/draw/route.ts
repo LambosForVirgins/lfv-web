@@ -1,12 +1,8 @@
-import { createDraw } from "@/src/utils/gaming/Draws";
+import { DrawDB } from "@/src/utils/gaming/DrawDB";
 import { NextRequest, NextResponse } from "next/server";
 
-const defaultDraw = createDraw(0);
-
-const draws = [defaultDraw];
-
 export async function GET(req: NextRequest) {
-  const draw = draws[draws.length - 1];
+  const draw = await DrawDB.getCurrentDraw();
 
   if (!draw) {
     return NextResponse.json({ error: "No open draws" }, { status: 400 });

@@ -32,20 +32,12 @@ const MenuItems = [
     active: true,
   },
   {
-    key: "About",
-    url: "/#about",
-  },
-  {
     key: "Store",
     url: "/store",
   },
   {
     key: "Rewards",
     url: "/rewards",
-  },
-  {
-    key: "Submissions",
-    url: "/#submissions",
   },
 ];
 
