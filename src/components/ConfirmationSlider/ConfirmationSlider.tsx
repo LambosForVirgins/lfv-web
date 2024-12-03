@@ -1,9 +1,9 @@
-import styles from "./EntrySlider.module.css";
+import styles from "./ConfirmationSlider.module.css";
 import clsx from "classnames";
 import { useRef, useState } from "react";
 import { v4 as generateRandom } from "uuid";
 
-interface EntrySliderProps extends Common.ComponentProps {
+interface ConfirmationSliderProps extends Common.ComponentProps {
   name?: string;
   label: string;
   tolerance?: number;
@@ -23,7 +23,7 @@ type InteractionMetrics = {
 const DEFAULT_COMPLETION_TOLERANCE = 0.65;
 
 /**
- * The draw entry slider should serve as a
+ * The confirmation slider should serve as a
  * Captcha style slider to enter the daily draw
  * and prevent bots from spamming entries.
  *
@@ -34,11 +34,11 @@ const DEFAULT_COMPLETION_TOLERANCE = 0.65;
  * Seed: Another random code generated to catch bots. If this
  * code is not sent with the entry, the entry is rejected.
  */
-export const EntrySlider = ({
+export const ConfirmationSlider = ({
   testID,
   tolerance = DEFAULT_COMPLETION_TOLERANCE,
   ...props
-}: EntrySliderProps) => {
+}: ConfirmationSliderProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const labelRef = useRef<HTMLSpanElement>(null);
   const handleRef = useRef<HTMLSpanElement>(null);
@@ -129,6 +129,7 @@ export const EntrySlider = ({
     >
       <span
         ref={handleRef}
+        data-testid={`${testID}.handle`}
         onMouseDown={handleMouseDown}
         className={styles.handle}
       />

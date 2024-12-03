@@ -15,7 +15,7 @@
             "Store": "Store",
             "Community": "Community",
             "Members": "Members",
-            "Rewards": "Rewards",
+            "Giveaways": "Giveaways",
             "Submissions": "Submissions"
         }
     },
@@ -27,6 +27,7 @@
         "CopyButtonLabel": "Copy",
         "PurchaseButtonToken": "Buy $VIRGIN"
     },
+    "Giveaways": {},
     "About": {
         "Heading": "About LambosForVirgins",
         "Description": "Welcome to LambosForVirgins ($VIRGIN). The mission: to solve global issues through the power of Lamborghini's. This project brings together the thrill of Italian horsepower and the power of the community. $VIRGIN isn't just a coin - it's a movement that tackles the declining birth rate. One lonely soul at a time. We're here to gift Lambos to selected bag holders making them irresistible to the opposite sex.",

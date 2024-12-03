@@ -2,6 +2,7 @@ import {
   atom,
   DefaultValue,
   selector,
+  selectorFamily,
   useRecoilState,
   useSetRecoilState,
 } from "recoil";
@@ -19,7 +20,28 @@ export const drawRoundsAtom = atom<DrawRound[] | [DrawRound]>({
   default: [],
 });
 
-export const currentRoundSelector = selector<DrawRound>({
+export const drawRoundSelector = selectorFamily<DrawRound, number>({
+  key: "draw-round-selector",
+  get:
+    (drawNumber: number) =>
+    ({ get }) => {
+      const rounds = get(drawRoundsAtom);
+      return rounds[drawNumber];
+    },
+  set:
+    (drawNumber: number) =>
+    ({ set }, newValue: DrawRound | DefaultValue) => {
+      if (newValue instanceof DefaultValue) return;
+
+      set(drawRoundsAtom, (prev) => {
+        const updated = [...prev];
+        updated[drawNumber] = newValue;
+        return updated;
+      });
+    },
+});
+
+export const roundSelector = selector<DrawRound>({
   key: "current-round-selector",
   get: ({ get }) => {
     const rounds = get(drawRoundsAtom);
@@ -39,15 +61,15 @@ export const currentRoundSelector = selector<DrawRound>({
 export const currentSeedSelector = selector<string>({
   key: "current-seed-selector",
   get: ({ get }) => {
-    return get(currentRoundSelector).seed;
+    return get(roundSelector).seed;
   },
 });
 
 export const useEntries = () => {
-  const [currentRound, setCurrentDraw] = useRecoilState(currentRoundSelector);
+  const [round, setRound] = useRecoilState(roundSelector);
 
   const setWinningEntry = (index: number) => {
-    setCurrentDraw((prev) => ({
+    setRound((prev) => ({
       ...prev,
       winner: index,
     }));
@@ -55,8 +77,8 @@ export const useEntries = () => {
 
   return {
     setWinningEntry,
-    entries: currentRound.entries,
-    isOpen: !currentRound.winner,
+    entries: round.entries,
+    isOpen: !round.winner,
   };
 };
 
@@ -72,20 +94,17 @@ const getCurrentDraw = async (): Promise<DrawRound | null> => {
   }
 };
 
-export const useDraw = () => {
-  const [currentRound, setCurrentDraw] = useRecoilState(currentRoundSelector);
+export const useDraw = (drawNumber: number) => {
+  const [round, setRound] = useRecoilState(drawRoundSelector(drawNumber));
 
   useEffect(() => {
     getCurrentDraw().then((draw) => {
       if (!draw) return;
-      setCurrentDraw(draw);
+      setRound(draw);
     });
-  }, [setCurrentDraw]);
+  }, [setRound]);
 
-  const enterDraw = async (
-    drawNumber: number,
-    details: { address: string; name: string }
-  ) => {
+  const enterDraw = async (details: { address: string; name: string }) => {
     const body = JSON.stringify(details);
 
     return await fetch(`/api/draw/${drawNumber}/enter`, {
@@ -96,14 +115,14 @@ export const useDraw = () => {
   };
 
   return {
-    draw: currentRound,
+    draw: round,
     enterDraw,
   };
 };
 
 export const useRollDraw = () => {
   const [loading, setLoading] = useState(false);
-  const setCurrentDraw = useSetRecoilState(currentRoundSelector);
+  const setRound = useSetRecoilState(roundSelector);
 
   const rollDrawHash = async (): Promise<DrawRound | null> => {
     try {
@@ -112,7 +131,7 @@ export const useRollDraw = () => {
         (res) => res.json() as Promise<DrawRound>
       );
 
-      setCurrentDraw(result);
+      setRound(result);
       setLoading(false);
 
       return result;

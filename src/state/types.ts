@@ -32,3 +32,18 @@ export type DrawRound = {
   entries: DrawEntry[];
   logs: DrawLog[];
 };
+
+export type Giveaway = {
+  id: string;
+  title: string;
+  description: string | undefined | null;
+  active: boolean;
+  providers: string[];
+  criteria: EntryCriteria[];
+};
+
+export type EntryCriteria = {
+  type: string;
+  parameter: string;
+  value: number | number[] | undefined | null;
+};

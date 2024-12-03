@@ -36,8 +36,8 @@ const MenuItems = [
     url: "/store",
   },
   {
-    key: "Rewards",
-    url: "/rewards",
+    key: "Giveaways",
+    url: "/giveaways",
   },
 ];
 

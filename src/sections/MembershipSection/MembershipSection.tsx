@@ -52,10 +52,10 @@ export const MembershipSection = ({
           <p>More entries every month</p>
         </div>
       </div>
-      <div className="col-content">
-        <p>Join the club today for only 1 VIRGIN</p>
-        <p>OR</p>
-        <p>Become a Chad</p>
+      <div className="grid gap-2 col-content text-center">
+        <h3 className="text-2xl">Join the club today for only 1 VIRGIN</h3>
+        <p className="text-xl">OR</p>
+        <h3 className="text-2xl">Become a Chad</h3>
       </div>
       <MembershipSell testID={`${testID}.promo`} />
       <hr />

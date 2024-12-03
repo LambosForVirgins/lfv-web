@@ -2,26 +2,11 @@
 
 import { BoostButton } from "@/src/components/Buttons/BoostButton";
 import { DrawSimulator } from "@/src/components/Draws/DrawSimulator";
-import { EntrySlider } from "@/src/components/EntrySlider/EntrySlider";
-import { useMarketCap } from "@/src/state/marketCap";
 import { useDraw, useRollDraw } from "@/src/state/submissions";
+import { DailyEntrySlider } from "@/src/components/DailyEntrySlider/DailyEntrySlider";
 
 export const MemberSection = ({ testID }: Common.ComponentProps) => {
   // const t = useTranslations("Members");
-  const { draw: currentDraw, enterDraw } = useDraw();
-  const { roll } = useRollDraw();
-
-  const enterDailyDraw = async (): Promise<boolean> => {
-    try {
-      const result = enterDraw(1, { address: "abc123", name: "Test" });
-
-      console.log(JSON.stringify(result, null, " "));
-      return true;
-    } catch (err) {
-      console.error(err);
-      return false;
-    }
-  };
 
   return (
     <section data-testid={testID} className="col-content p-5">
@@ -37,24 +22,9 @@ export const MemberSection = ({ testID }: Common.ComponentProps) => {
         <h3 className="text-xl">
           Test your virginity with our daily virgin rewards
         </h3>
-        <EntrySlider
-          testID={`${testID}.entry`}
-          name={"daily"}
-          label={`Slide to enter today's draw`}
-          onComplete={enterDailyDraw}
-        />
+        <DailyEntrySlider testID={`${testID}.daily`} />
         <small>Entries are drawn next day</small>
       </div>
-
-      {currentDraw && (
-        <DrawSimulator
-          testID={`${testID}.draw`}
-          draw={currentDraw}
-          timeOpens={currentDraw.timeOpens}
-          timeCloses={currentDraw.timeCloses}
-          onRoll={roll}
-        />
-      )}
     </section>
   );
 };
