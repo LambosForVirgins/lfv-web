@@ -8,6 +8,10 @@ class DrawDatabase {
     this._draws = _initialDraws;
   }
 
+  async addDraw(draw: DrawRound): Promise<void> {
+    this._draws.push(draw);
+  }
+
   async find(drawNumber: number): Promise<DrawRound | undefined> {
     return this._draws.find((draw) => draw.drawNumber === drawNumber);
   }

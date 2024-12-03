@@ -2,10 +2,12 @@
 
 import { DrawSimulator } from "@/src/components/Draws/DrawSimulator";
 import ProtectedRoute from "@/src/components/ProtectedRoute/ProtectedRoute";
-import { RewardCard } from "@/src/components/RewardCard/RewardCard";
-import { useGiveaways } from "@/src/state/giveaways";
-import { useDraw, useRollDraw } from "@/src/state/submissions";
+import { GiveawayCard } from "@/src/components/GiveawayCard/GiveawayCard";
+import { SunRays } from "@/src/components/SunRays/SunRays";
 import { RecoilRoot } from "recoil";
+import { useGiveaways } from "@/src/state/giveaways/useGiveaways";
+import { useDraw } from "@/src/state/draws/useDraws";
+import { useRollDraw } from "@/src/state/draws/useRollDraw";
 
 export const GiveawaySection = ({ testID }: Common.ComponentProps) => {
   const { giveaways } = useGiveaways();
@@ -14,6 +16,7 @@ export const GiveawaySection = ({ testID }: Common.ComponentProps) => {
 
   return (
     <div data-testid={testID} className="col-content">
+      <SunRays />
       <div data-testid={`${testID}.feature`}>
         {currentDraw && (
           <DrawSimulator
@@ -31,7 +34,7 @@ export const GiveawaySection = ({ testID }: Common.ComponentProps) => {
         className="grid grid-cols-3 gap-5 p-5"
       >
         {giveaways.map((label, index) => (
-          <RewardCard
+          <GiveawayCard
             key={index}
             testID={`${testID}.reward`}
             label={label.title}

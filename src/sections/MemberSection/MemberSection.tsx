@@ -1,8 +1,5 @@
 "use client";
 
-import { BoostButton } from "@/src/components/Buttons/BoostButton";
-import { DrawSimulator } from "@/src/components/Draws/DrawSimulator";
-import { useDraw, useRollDraw } from "@/src/state/submissions";
 import { DailyEntrySlider } from "@/src/components/DailyEntrySlider/DailyEntrySlider";
 
 export const MemberSection = ({ testID }: Common.ComponentProps) => {
@@ -11,11 +8,9 @@ export const MemberSection = ({ testID }: Common.ComponentProps) => {
   return (
     <section data-testid={testID} className="col-content p-5">
       <div>
-        <h1>GigChad</h1>
+        <h1>GigaChad</h1>
         <div>Progress indicator until next level</div>
       </div>
-
-      <BoostButton label="boost" progress={30} />
 
       <div className="grid gap-9">
         <h2 className="text-2xl">Win 1000 to 10,000 VIRGIN every day!</h2>

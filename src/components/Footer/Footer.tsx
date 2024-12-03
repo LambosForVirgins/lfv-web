@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export const Footer = ({ testID }: Common.ComponentProps) => {
   return (
     <footer data-testid={testID} className="grid col-content grid-cols-3 gap-5">
@@ -12,7 +14,9 @@ export const Footer = ({ testID }: Common.ComponentProps) => {
       <div>
         <h3 className="text-xl">Tools</h3>
         <ul>
-          <li>Tokenomics</li>
+          <Link href={"/treasury/vesting"}>
+            <li>Tokenomics</li>
+          </Link>
         </ul>
       </div>
       <div>

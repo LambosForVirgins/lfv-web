@@ -4,11 +4,11 @@ import { useEffect, useState } from "react";
 import styles from "./RollingDraw.module.css";
 import { type DrawEntry } from "@/src/state/types";
 import { useRecoilValue } from "recoil";
-import { currentSeedSelector } from "@/src/state/submissions";
 import { deriveNumberFromSeed } from "@/src/utils/string/deriveNumberFromSeed";
 import clsx from "classnames";
 import { InfiniteSlider } from "./InfiniteSlider";
 import { Countdown } from "../Countdown/Countdown";
+import { currentSeedSelector } from "@/src/state/draws/selectors";
 
 const COUNTDOWN_TIME = 120;
 

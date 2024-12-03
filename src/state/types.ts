@@ -1,9 +1,3 @@
-export interface SubmissionEntry {
-  id: string;
-  name: string;
-  sex: 0 | 1;
-}
-
 export enum DrawStatus {
   Closed = 0,
   Pending = 1,
@@ -17,11 +11,13 @@ export type DrawLog = {
 };
 
 export type DrawEntry = {
+  id: string;
   address: string;
   name?: string;
 };
 
 export type DrawRound = {
+  id: string;
   drawNumber: number;
   timeOpens: number;
   timeCloses: number;
@@ -40,6 +36,7 @@ export type Giveaway = {
   active: boolean;
   providers: string[];
   criteria: EntryCriteria[];
+  draws: string[];
 };
 
 export type EntryCriteria = {

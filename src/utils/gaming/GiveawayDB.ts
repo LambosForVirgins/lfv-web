@@ -4,11 +4,19 @@ import { v4 as generateRandom } from "uuid";
 class GiveawayDatabase {
   private readonly _records: Giveaway[] = [];
 
-  constructor(_initialDraws: Giveaway[] = []) {
-    this._records = _initialDraws;
+  constructor(_initialGiveaways: Giveaway[] = []) {
+    this._records = _initialGiveaways;
   }
 
-  async all(): Promise<Giveaway[]> {
+  async all(options?: { filters?: { active?: boolean } }): Promise<Giveaway[]> {
+    if (options?.filters) {
+      return this._records.filter((record) => {
+        if (options.filters?.active) {
+          return record.active;
+        }
+      });
+    }
+
     return this._records;
   }
 
@@ -19,7 +27,7 @@ class GiveawayDatabase {
 
 export const GiveawayDB = new GiveawayDatabase([
   {
-    id: generateRandom().slice(0, 8),
+    id: "bc923fbe",
     title: "Daily Top Up",
     description:
       "Top up your holdings with 1000 and 10,000 VIRGIN awarded every day",
@@ -28,7 +36,7 @@ export const GiveawayDB = new GiveawayDatabase([
     criteria: [{ type: "balance", parameter: "VIRGIN", value: 1 }],
   },
   {
-    id: generateRandom().slice(0, 8),
+    id: "b079ae3a",
     title: "Gold Bullion",
     description: null,
     active: true,
@@ -36,7 +44,7 @@ export const GiveawayDB = new GiveawayDatabase([
     criteria: [{ type: "balance", parameter: "VIRGIN", value: 1000 }],
   },
   {
-    id: generateRandom().slice(0, 8),
+    id: "fa36b192",
     title: "Rolex Giveaway",
     description: null,
     active: true,
@@ -44,7 +52,7 @@ export const GiveawayDB = new GiveawayDatabase([
     criteria: [{ type: "balance", parameter: "VIRGIN", value: 25_000 }],
   },
   {
-    id: generateRandom().slice(0, 8),
+    id: "aa22a5f7",
     title: "$10K Cash",
     description: "$10,000 USD in cash",
     active: true,
@@ -52,7 +60,7 @@ export const GiveawayDB = new GiveawayDatabase([
     criteria: [{ type: "balance", parameter: "VIRGIN", value: 10_000 }],
   },
   {
-    id: generateRandom().slice(0, 8),
+    id: "c57d992d",
     title: "Bahamas Escape",
     description:
       "Escape to the Bahama's with your favorite person on a one week getaway",
@@ -61,7 +69,7 @@ export const GiveawayDB = new GiveawayDatabase([
     criteria: [{ type: "balance", parameter: "VIRGIN", value: 17_000 }],
   },
   {
-    id: generateRandom().slice(0, 8),
+    id: "005cc69b",
     title: "$100M Lambo",
     description: "Celebrating $100M USD Market Cap with a Lamborghini giveaway",
     active: true,

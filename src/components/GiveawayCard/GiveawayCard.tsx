@@ -1,5 +1,5 @@
 import { type EntryCriteria } from "@/src/state/types";
-import styles from "./RewardCard.module.css";
+import styles from "./GiveawayCard.module.css";
 import clsx from "classnames";
 import { ProgressIndicator } from "../ProgressIndicator/ProgressIndicator";
 import Image from "next/image";
@@ -12,7 +12,7 @@ interface RewardCardProps extends Common.ComponentProps {
 
 const mockBalanceVirgin = 15_432;
 
-export const RewardCard = ({
+export const GiveawayCard = ({
   testID,
   criteria = [],
   ...props
