@@ -4,13 +4,15 @@ import { useState } from "react";
 
 export const DailyEntrySlider = ({ testID }: Common.ComponentProps) => {
   const [hasEntered, setHasEntered] = useState(false);
-  const { giveaway, enterDraw } = useDailyGiveaway();
+  const { draw, enterDraw } = useDailyGiveaway();
 
-  console.log(giveaway);
+  console.log(draw);
 
   const enterDailyDraw = async (): Promise<boolean> => {
     try {
-      const result = enterDraw({ address: "abc123", name: "Test" });
+      if (!draw) throw new Error("No draw available");
+
+      const result = enterDraw({ id: draw, address: "abc123", name: "Test" });
 
       console.log(JSON.stringify(result, null, " "));
       setHasEntered(false);
@@ -21,8 +23,17 @@ export const DailyEntrySlider = ({ testID }: Common.ComponentProps) => {
     }
   };
 
-  if (hasEntered) {
+  if (!draw) {
     return null;
+  }
+
+  if (hasEntered) {
+    return (
+      <div>
+        <h2>{`You're entered into today's draw!`}</h2>
+        <p>{`Come back tomorrow to find out if you've won!`}</p>
+      </div>
+    );
   }
 
   return (

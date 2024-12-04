@@ -1,4 +1,4 @@
-import { type EntryCriteria } from "@/src/state/types";
+import { Giveaway, type EntryCriteria } from "@/src/state/types";
 import styles from "./GiveawayCard.module.css";
 import clsx from "classnames";
 import { ProgressIndicator } from "../ProgressIndicator/ProgressIndicator";
@@ -8,6 +8,7 @@ interface RewardCardProps extends Common.ComponentProps {
   label: string;
   description?: string | null;
   criteria?: EntryCriteria[];
+  onClick?: () => void;
 }
 
 const mockBalanceVirgin = 15_432;
@@ -35,6 +36,7 @@ export const GiveawayCard = ({
     <div
       data-testid={testID}
       className={clsx(styles.frame, isDisabled && styles.disabled)}
+      onClick={props.onClick}
     >
       <Image src="/images/coin.png" alt={"coins"} width={160} height={160} />
       <div

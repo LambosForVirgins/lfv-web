@@ -56,7 +56,7 @@ export const Header = ({ testID, ...props }: HeaderProps) => {
       className={clsx(props.className, "grid flex-column flex-wrap gap-6 p-4")}
     >
       <div className="flex flex-row">
-        <h1 className="flex-grow font-headline text-4xl">{t("Title")}</h1>
+        {/* <h1 className="flex-grow font-headline text-4xl">{t("Title")}</h1> */}
         <WalletMultiButton className="bg-red-500 text-white" />
       </div>
       <nav className="flex flex-auto flex-row gap-1 justify-around items-end">

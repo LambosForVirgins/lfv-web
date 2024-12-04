@@ -5,5 +5,12 @@ export const useDailyGiveaway = () => {
   const [errors, setErrors] = useState<string[]>([]);
   const [entries, setEntries] = useState([]);
 
-  return useGiveaway("bc923fbe");
+  const { giveaway, enterDraw } = useGiveaway("bc923fbe");
+
+  const currentDraw = giveaway?.draws[0];
+
+  return {
+    draw: currentDraw,
+    enterDraw,
+  };
 };
