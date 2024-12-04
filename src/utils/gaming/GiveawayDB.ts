@@ -30,10 +30,11 @@ export const GiveawayDB = new GiveawayDatabase([
     id: "bc923fbe",
     title: "Daily Top Up",
     description:
-      "Top up your holdings with 1000 and 10,000 VIRGIN awarded every day",
+      "Top up your holdings with 10,000 and 100,000 VIRGIN awarded every day",
     active: true,
     providers: ["LambosForVirgins"],
     criteria: [{ type: "balance", parameter: "VIRGIN", value: 1 }],
+    draws: ["36ffef35", "2a934bf9"],
   },
   {
     id: "b079ae3a",
@@ -42,6 +43,7 @@ export const GiveawayDB = new GiveawayDatabase([
     active: true,
     providers: ["ABC Bullion"],
     criteria: [{ type: "balance", parameter: "VIRGIN", value: 1000 }],
+    draws: [],
   },
   {
     id: "fa36b192",
@@ -50,6 +52,7 @@ export const GiveawayDB = new GiveawayDatabase([
     active: true,
     providers: ["Some Watch Company"],
     criteria: [{ type: "balance", parameter: "VIRGIN", value: 25_000 }],
+    draws: [],
   },
   {
     id: "aa22a5f7",
@@ -58,6 +61,7 @@ export const GiveawayDB = new GiveawayDatabase([
     active: true,
     providers: ["The Whales"],
     criteria: [{ type: "balance", parameter: "VIRGIN", value: 10_000 }],
+    draws: [],
   },
   {
     id: "c57d992d",
@@ -67,6 +71,7 @@ export const GiveawayDB = new GiveawayDatabase([
     active: true,
     providers: ["Travel World"],
     criteria: [{ type: "balance", parameter: "VIRGIN", value: 17_000 }],
+    draws: [],
   },
   {
     id: "005cc69b",
@@ -75,5 +80,6 @@ export const GiveawayDB = new GiveawayDatabase([
     active: true,
     providers: ["LambosForVirgins"],
     criteria: [],
+    draws: [],
   },
 ]);
