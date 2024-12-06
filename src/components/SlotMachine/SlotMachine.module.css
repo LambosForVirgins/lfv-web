@@ -9,7 +9,9 @@
     position: relative;
     height: 80%;
     background-color: #ededed;
-    width: 21px;
+    min-width: 11px;
+    max-width: 21px;
+    width: 100%;
 
     &:before {
         content: "";
@@ -22,7 +24,9 @@
 .lock {
     background-color: #e3e3e3;
     height: 30%;
-    width: 32px;
+    min-width: 19px;
+    max-width: 32px;
+    width: 100%;
 }
 
 .pointer {

@@ -14,8 +14,8 @@ export const DailyEntrySlider = ({ testID }: Common.ComponentProps) => {
 
       const result = enterDraw({ id: draw, address: "abc123", name: "Test" });
 
-      console.log(JSON.stringify(result, null, " "));
-      setHasEntered(false);
+      console.log("REsult", JSON.stringify(result, null, " "));
+      setHasEntered(true);
       return true;
     } catch (err) {
       console.error(err);

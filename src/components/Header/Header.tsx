@@ -5,6 +5,8 @@ import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { LocaleButton } from "../Buttons/LocaleButton";
 import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
+import { MemberButton } from "../MemberButton/MemberButton";
+import { BoostButton } from "../BoostButton/BoostButton";
 
 const GuestMenuItems = [
   {
@@ -53,21 +55,26 @@ export const Header = ({ testID, ...props }: HeaderProps) => {
   return (
     <div
       data-testid={testID}
-      className={clsx(props.className, "grid flex-column flex-wrap gap-6 p-4")}
+      className={clsx(props.className, "grid flex-column flex-wrap p-3")}
     >
-      <div className="flex flex-row">
-        {/* <h1 className="flex-grow font-headline text-4xl">{t("Title")}</h1> */}
-        <WalletMultiButton className="bg-red-500 text-white" />
-      </div>
       <nav className="flex flex-auto flex-row gap-1 justify-around items-end">
-        {MenuItems.map((item, idx) =>
+        <WalletMultiButton className="bg-red-500 text-white" />
+        {/* {MenuItems.map((item, idx) =>
           item.active === false ? null : (
             <Link key={`${item.key}-${idx}`} href={item.url}>
               {t(`Navigation.${item.key}`)}
             </Link>
           )
-        )}
+        )} */}
         {ShowLocale && <LocaleButton testID={`${testID}.locale`} />}
+        <BoostButton testID={`${testID}.store`} label={`Store`} />
+        <BoostButton
+          testID={`${testID}.boost`}
+          label={`Giveaways`}
+          progress={10}
+          highlight
+        />
+        <MemberButton testID={`${testID}.member`} name={`mitch`} />
       </nav>
     </div>
   );

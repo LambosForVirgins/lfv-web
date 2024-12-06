@@ -1507,6 +1507,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@oddbird/popover-polyfill@npm:^0.5.2":
+  version: 0.5.2
+  resolution: "@oddbird/popover-polyfill@npm:0.5.2"
+  checksum: 10/f5f8487b1bbfd0c8fef89380a0b0f6b266e0f6a262defa931780ddb98585354b0144b027ce85d7d071890ec9068d75fc147b77918882ce6810a274de75e58c87
+  languageName: node
+  linkType: hard
+
 "@parcel/watcher-android-arm64@npm:2.5.0":
   version: 2.5.0
   resolution: "@parcel/watcher-android-arm64@npm:2.5.0"
@@ -9503,6 +9510,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "lfv@workspace:."
   dependencies:
+    "@oddbird/popover-polyfill": "npm:^0.5.2"
     "@raydium-io/raydium-sdk-v2": "npm:^0.1.92-alpha"
     "@solana/pay": "npm:^0.2.5"
     "@solana/wallet-adapter-react": "npm:^0.15.35"

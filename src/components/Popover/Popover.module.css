@@ -1,0 +1,19 @@
+.frame {
+    position-anchor: --member-options;
+    border: 0;
+    outline: 0;
+    border-radius: 8px;
+    padding: 8px;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    position: absolute;
+    margin: 0;
+    inset: auto;
+    top: anchor(bottom);
+    left: anchor(left);
+    margin-block-start: 4px;
+
+    &:popover-open {
+        display: grid;
+    }
+}

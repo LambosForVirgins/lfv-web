@@ -8,6 +8,7 @@ import {
 } from "@/src/state/types";
 
 class DrawBuilder implements DrawRound {
+  readonly id: string;
   readonly drawNumber: number;
   readonly seed: string;
   status: DrawStatus;
@@ -18,7 +19,8 @@ class DrawBuilder implements DrawRound {
   readonly logs: DrawLog[] = [];
   readonly entries: DrawEntry[] = [];
 
-  constructor(_drawNumber: number, _duration: number = 60) {
+  constructor(_drawNumber: number, id?: string, _duration: number = 60) {
+    this.id = id || generateRandom();
     this.drawNumber = _drawNumber;
     this.timeOpens = Date.now();
     this.timeCloses = Date.now() + _duration * 60 * 1000;
@@ -54,6 +56,7 @@ class DrawBuilder implements DrawRound {
 
   toJSON(): DrawRound {
     return {
+      id: this.id,
       drawNumber: this.drawNumber,
       seed: this.seed,
       status: this.status,
@@ -67,4 +70,5 @@ class DrawBuilder implements DrawRound {
   }
 }
 
-export const createDraw = (drawNumber: number) => new DrawBuilder(drawNumber);
+export const createDraw = (drawNumber: number, id?: string) =>
+  new DrawBuilder(drawNumber, id);

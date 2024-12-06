@@ -45,13 +45,7 @@ export const GiveawayCard = ({
       >
         {props.label}
       </div>
-      <ul>
-        {criteria.map((criterion, index) => (
-          <li key={index}>
-            {criterion.parameter} {criterion.value}
-          </li>
-        ))}
-      </ul>
+
       {isDisabled && (
         <ProgressIndicator
           testID={`${testID}.progress`}
@@ -72,6 +66,17 @@ export const GiveawayCard = ({
           }
         />
       )}
+
+      <div className={styles.overlay}>
+        <div>{props.description}</div>
+        <ul>
+          {criteria.map((criterion, index) => (
+            <li key={index}>
+              {criterion.parameter} {criterion.value}
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };

@@ -1,0 +1,43 @@
+.frame {
+    display: grid;
+    position: relative;
+    border-radius: 16px;
+    background-color: rgba(0, 0, 0, 0.2);
+    max-height: 48px;
+    height: 100%;
+    padding: 4px;
+    transition: background-color 300ms;
+
+    &:hover {
+        background-color: rgba(0, 0, 0, 0.3);
+    }
+
+    &:has(:active) {
+        background-color: rgba(0, 0, 0, 0.4);
+    }
+}
+
+.inset {
+    background-color: #de3b40;
+    color: white;
+    border: none;
+    border-radius: 13px;
+    font-size: 16px;
+    cursor: pointer;
+    outline: none;
+    min-width: 38px;
+    min-height: 38px;
+    background: url('/svg/present.svg') no-repeat center center;
+    transition: transform 150ms ease-in-out;
+
+    &:hover {
+        transform: scale(1.05);
+    }
+
+    &.highlight {
+        color: #ffcd02;
+        border: 2px solid #ffcd02;
+        background: url('/svg/lightning.svg') no-repeat center center;
+        background-color: var(--bg-red-400);
+    }
+}

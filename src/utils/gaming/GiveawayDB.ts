@@ -1,5 +1,7 @@
 import { type Giveaway } from "@/src/state/types";
 import { v4 as generateRandom } from "uuid";
+import { DrawDB } from "./DrawDB";
+import { createDraw } from "./DrawBuilder";
 
 class GiveawayDatabase {
   private readonly _records: Giveaway[] = [];
@@ -24,6 +26,8 @@ class GiveawayDatabase {
     return this._records.find((record) => record.id === giveawayId);
   }
 }
+DrawDB.addDraw(createDraw(1, "36ffef35"));
+DrawDB.addDraw(createDraw(2, "2a934bf9").open());
 
 export const GiveawayDB = new GiveawayDatabase([
   {

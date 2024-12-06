@@ -1,9 +1,10 @@
 import { DrawStatus } from "@/src/state/types";
 import { DrawDB } from "@/src/utils/gaming/DrawDB";
 import { NextRequest, NextResponse } from "next/server";
+import { v4 as generateRandom } from "uuid";
 
 interface DrawEntryParams {
-  drawNumber: string;
+  drawId: string;
 }
 
 export async function POST(
@@ -11,8 +12,7 @@ export async function POST(
   { params }: { params: DrawEntryParams }
 ) {
   const body = await req.json();
-  const drawNumber = parseInt(params.drawNumber, 0);
-  const draw = await DrawDB.find(drawNumber);
+  const draw = await DrawDB.find(params.drawId);
 
   if (!draw) {
     return NextResponse.json({ error: "Draw not found" }, { status: 400 });
@@ -34,10 +34,13 @@ export async function POST(
     return NextResponse.json({ error: "Name is required" }, { status: 400 });
   }
 
-  draw.entries.push({
+  const entry = {
+    id: generateRandom(),
     address: body.address,
     name: body.name,
-  });
+  };
 
-  return NextResponse.json(draw, { status: 200 });
+  draw.entries.push(entry);
+
+  return NextResponse.json(entry, { status: 200 });
 }

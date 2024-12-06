@@ -10,21 +10,21 @@ import styles from "./GiveawaysSection.module.css";
 import Link from "next/link";
 import { SlotMachine } from "@/src/components/SlotMachine/SlotMachine";
 import { useState } from "react";
+import clsx from "classnames";
+import { DrawMachine } from "@/src/components/DrawMachine/DrawMachine";
 
 export const GiveawaySection = ({ testID }: Common.ComponentProps) => {
   const { giveaways } = useGiveaways();
   const { draw: currentDraw } = useDraw(1);
-  const { roll } = useRollDraw();
-  const [tempRoll, setTempRoll] = useState(0);
 
   return (
-    <div data-testid={testID} className="col-content">
-      <div data-testid={`${testID}.feature`}>
-        {currentDraw && (
-          <SlotMachine testID={`${testID}.draw`} selected={tempRoll} />
+    <div data-testid={testID} className={clsx("col-content", styles.frame)}>
+      <div data-testid={`${testID}.feature`} className={styles.banner}>
+        {currentDraw ? (
+          <DrawMachine testID={`${testID}.draw`} drawId={currentDraw.id} />
+        ) : (
+          <h1>Next mega giveaway in 10 days</h1>
         )}
-        <button onClick={() => setTempRoll((r) => r + 1)}>Spin</button>
-        <h1>Next mega giveaway in 10 days</h1>
       </div>
       <div data-testid={`${testID}.collection`} className={styles.collection}>
         {giveaways.map((promo, index) => (

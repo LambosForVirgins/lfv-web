@@ -26,23 +26,27 @@ export const drawRoundSelector = selectorFamily<DrawRound, number>({
 export const currentSeedSelector = selector<string>({
   key: "current-seed-selector",
   get: ({ get }) => {
-    return get(roundSelector).seed;
+    return get(roundSelector(""))?.seed;
   },
 });
 
-export const roundSelector = selector<DrawRound>({
+export const roundSelector = selectorFamily<DrawRound, string>({
   key: "current-round-selector",
-  get: ({ get }) => {
-    const rounds = get(drawRoundsAtom);
-    return rounds[rounds.length - 1];
-  },
-  set: ({ set }, newValue: DrawRound | DefaultValue) => {
-    if (newValue instanceof DefaultValue) return;
+  get:
+    (drawId: string) =>
+    ({ get }) => {
+      const rounds = get(drawRoundsAtom);
+      return rounds[rounds.length - 1];
+    },
+  set:
+    (drawId: string) =>
+    ({ set }, newValue: DrawRound | DefaultValue) => {
+      if (newValue instanceof DefaultValue) return;
 
-    set(drawRoundsAtom, (prev) => {
-      const updated = [...prev];
-      updated[updated.length - 1] = newValue;
-      return updated;
-    });
-  },
+      set(drawRoundsAtom, (prev) => {
+        const updated = [...prev];
+        updated[updated.length - 1] = newValue;
+        return updated;
+      });
+    },
 });

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useGiveaway } from "./useGiveaway";
 
 export const useDailyGiveaway = () => {
@@ -7,7 +7,9 @@ export const useDailyGiveaway = () => {
 
   const { giveaway, enterDraw } = useGiveaway("bc923fbe");
 
-  const currentDraw = giveaway?.draws[0];
+  const currentDraw = useMemo(() => {
+    return giveaway?.draws[giveaway.draws.length - 1];
+  }, [giveaway]);
 
   return {
     draw: currentDraw,

@@ -16,6 +16,8 @@ export const SlotMachine = ({ testID, ...props }: SlotMachineProps) => {
         <SlotChannel testID={`${testID}.channel`} groups={props.selected} />
         <SlotChannel testID={`${testID}.channel`} groups={props.selected} />
         <SlotChannel testID={`${testID}.channel`} groups={props.selected} />
+        <SlotChannel testID={`${testID}.channel`} groups={props.selected} />
+        <SlotChannel testID={`${testID}.channel`} groups={props.selected} />
         <span className={clsx(styles.pointer, styles.left)} />
         <span className={clsx(styles.pointer, styles.right)} />
       </div>

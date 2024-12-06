@@ -1,7 +1,5 @@
 .frame {
     display: grid;
-    align-items: center;
-    justify-content: center;
     background-color: white;
     border-radius: 6px;
     aspect-ratio: 1;
@@ -21,8 +19,22 @@
 .label {
     text-align: center;
     padding: 6px;
+    outline: 2px solid blue;
 }
 
 .description {
     text-align: center;
+    outline: 2px solid green;
+}
+
+.overlay {
+    position: relative;
+
+    &:before {
+        content: '';
+        position: absolute;
+        outline: 2px solid red;
+        inset: 0;
+        backdrop-filter: blur(4px);
+    }
 }

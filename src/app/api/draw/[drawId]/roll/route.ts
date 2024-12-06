@@ -5,15 +5,14 @@ import { NextRequest, NextResponse } from "next/server";
 import { v4 as generateRandom } from "uuid";
 
 interface RouteParams {
-  drawNumber: string;
+  drawId: string;
 }
 
 export async function GET(
   req: NextRequest,
   { params }: { params: RouteParams }
 ) {
-  const drawNumber = parseInt(params.drawNumber, 0);
-  const draw = await DrawDB.find(drawNumber);
+  const draw = await DrawDB.find(params.drawId);
 
   if (!draw) {
     return NextResponse.json({ error: "Draw not found" }, { status: 400 });
@@ -26,8 +25,7 @@ export async function POST(
   req: NextRequest,
   { params }: { params: RouteParams }
 ) {
-  const drawNumber = parseInt(params.drawNumber, 0);
-  const draw = await DrawDB.find(drawNumber);
+  const draw = await DrawDB.find(params.drawId);
 
   if (!draw) {
     return NextResponse.json({ error: "Draw not found" }, { status: 400 });

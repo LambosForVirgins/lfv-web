@@ -12,14 +12,14 @@ class DrawDatabase {
     this._draws.push(draw);
   }
 
-  async find(drawNumber: number): Promise<DrawRound | undefined> {
-    return this._draws.find((draw) => draw.drawNumber === drawNumber);
+  async find(drawId: string): Promise<DrawRound | undefined> {
+    return this._draws.find((draw) => draw.id === drawId);
   }
 
   async getCurrentDraw(): Promise<DrawRound | undefined> {
     return this._draws[this._draws.length - 1];
   }
 }
-const defaultDraw = createDraw(1).open();
+const defaultDraw = createDraw(1, "bc923fbe").open();
 
 export const DrawDB = new DrawDatabase([defaultDraw]);

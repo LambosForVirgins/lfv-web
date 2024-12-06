@@ -16,13 +16,22 @@ export const MembershipSection = ({
     <Section testID="membership" id={"membership"}>
       <div className="grid gap-9 col-content content-center">
         <h1 className="text-2xl">Virgins need Lambos</h1>
-        <Image
-          src={"/images/logo-stamp.png"}
-          alt={`${Brand.tokenSymbol} stamp logo`}
-          width={400}
-          height={250}
-          className="justify-self-center"
-        />
+        <div className="grid">
+          <Image
+            src={"/images/logo-stamp.png"}
+            alt={`${Brand.tokenSymbol} stamp logo`}
+            width={400}
+            height={250}
+            className="justify-self-center"
+          />
+          <Image
+            src={"/images/banner.png"}
+            alt={"banner"}
+            width={618}
+            height={123}
+            className="justify-self-center"
+          />
+        </div>
         <h1 className="text-2xl">
           {`We're celebrating $100 million market cap with a Lambo giveaway!`}
         </h1>

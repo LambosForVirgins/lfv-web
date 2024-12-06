@@ -1,5 +1,16 @@
+.frame {
+    display: grid;
+    gap: 16px;
+}
+
 .collection {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    padding: 16px;
     gap: 16px;
+}
+
+
+.feature {
+    background: url('/images/banner.png');
 }
