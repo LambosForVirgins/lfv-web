@@ -7,6 +7,9 @@ import { v4 as generateRandom } from "uuid";
 
 const rollPrice = 1;
 
+/**
+ * @deprecated Use /draw/[drawId]/remix instead
+ */
 export async function GET(req: NextRequest) {
   const draw = await DrawDB.getCurrentDraw();
 
@@ -23,6 +26,9 @@ export async function GET(req: NextRequest) {
   return NextResponse.json(lastRoll, { status: 200 });
 }
 
+/**
+ * @deprecated Use /draw/[drawId]/remix instead
+ */
 export async function POST(req: NextRequest) {
   const address = 0;
   const draw = await DrawDB.getCurrentDraw(),

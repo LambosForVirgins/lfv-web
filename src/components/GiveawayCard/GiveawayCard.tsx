@@ -3,6 +3,9 @@ import styles from "./GiveawayCard.module.css";
 import clsx from "classnames";
 import { ProgressIndicator } from "../ProgressIndicator/ProgressIndicator";
 import Image from "next/image";
+import { Button } from "../Buttons/Button";
+import { getProgressFromBalance } from "@/src/utils/membership/getProgressFromBalance";
+import { validateEntryCriteria } from "@/src/utils/entry-criteria/validateEntryCriteria";
 
 interface RewardCardProps extends Common.ComponentProps {
   label: string;
@@ -18,19 +21,9 @@ export const GiveawayCard = ({
   criteria = [],
   ...props
 }: RewardCardProps) => {
-  const isDisabled = criteria.some((criterion) => {
-    if (criterion.type === "balance" && criterion.value) {
-      if (criterion.value instanceof Array) {
-        return (
-          mockBalanceVirgin < criterion.value[0] ||
-          mockBalanceVirgin > criterion.value[1]
-        );
-      }
+  const { errors } = validateEntryCriteria(criteria, mockBalanceVirgin);
 
-      return mockBalanceVirgin < criterion.value;
-    }
-    return false;
-  });
+  const isDisabled = errors.length > 0;
 
   return (
     <div
@@ -38,44 +31,44 @@ export const GiveawayCard = ({
       className={clsx(styles.frame, isDisabled && styles.disabled)}
       onClick={props.onClick}
     >
-      <Image src="/images/coin.png" alt={"coins"} width={160} height={160} />
-      <div
-        data-testid={`${testID}.label`}
-        className={clsx(styles.label, "text-xl")}
-      >
-        {props.label}
+      <div className={styles.image}>
+        <Image src="/images/coin.png" alt={"coins"} width={160} height={160} />
       </div>
 
-      {isDisabled && (
-        <ProgressIndicator
-          testID={`${testID}.progress`}
-          size="small"
-          progress={
-            mockBalanceVirgin /
-            criteria.reduce((sum, criterion) => {
-              if (criterion.type === "balance" && criterion.value) {
-                if (criterion.value instanceof Array) {
-                  return sum + criterion.value[0];
-                }
+      <div className={styles.featured}>
+        {isDisabled && (
+          <ProgressIndicator
+            testID={`${testID}.progress`}
+            size="small"
+            progress={getProgressFromBalance(criteria, mockBalanceVirgin)}
+          />
+        )}
+      </div>
 
-                return sum + criterion.value;
-              }
+      <div className={styles.content}>
+        <h2 data-testid={`${testID}.label`} className={styles.title}>
+          {props.label}
+        </h2>
 
-              return sum;
-            }, 0)
-          }
-        />
-      )}
+        <p className={styles.description}>{props.description}</p>
 
-      <div className={styles.overlay}>
-        <div>{props.description}</div>
-        <ul>
-          {criteria.map((criterion, index) => (
-            <li key={index}>
-              {criterion.parameter} {criterion.value}
-            </li>
-          ))}
-        </ul>
+        <div className={styles.actions}>
+          <button
+            data-testid={`${testID}.button`}
+            className={clsx(styles.button, styles.muted)}
+          >{`More info`}</button>
+          {isDisabled ? (
+            <button
+              data-testid={`${testID}.button`}
+              className={styles.button}
+            >{`Stake more`}</button>
+          ) : (
+            <button
+              data-testid={`${testID}.button`}
+              className={styles.button}
+            >{`Enter draw`}</button>
+          )}
+        </div>
       </div>
     </div>
   );

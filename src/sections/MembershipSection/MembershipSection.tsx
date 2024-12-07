@@ -32,8 +32,8 @@ export const MembershipSection = ({
             className="justify-self-center"
           />
         </div>
-        <h1 className="text-2xl">
-          {`We're celebrating $100 million market cap with a Lambo giveaway!`}
+        <h1 className="text-2xl text-center">
+          {`We're celebrating $100 million market cap with a Lambo giveaway for one lucky member!`}
         </h1>
         <ProgressIndicator
           testID={`${testID}.progress`}
@@ -47,18 +47,18 @@ export const MembershipSection = ({
         <h2>Plus many more weekly member giveaways</h2>
         <p>(Watches, Cars, & More)</p>
       </div>
-      <div className="grid gap-9 col-content">
+      <div className="grid gap-9 col-content grid-cols-2">
         <div className="bg-white">
           <h4>Acquire</h4>
           <p>More tokens</p>
           <p>equals</p>
-          <p>Access greater benefits</p>
+          <p>Greater benefits</p>
         </div>
         <div className="bg-white">
-          <h4>HODL</h4>
+          <h4>Stake</h4>
           <p>More time</p>
           <p>equals</p>
-          <p>More entries every month</p>
+          <p>More rewards</p>
         </div>
       </div>
       <div className="grid gap-2 col-content text-center">
@@ -69,10 +69,18 @@ export const MembershipSection = ({
       <MembershipSell testID={`${testID}.promo`} />
       <hr />
       <div className="col-content">
+        <p>Not interested in membership?</p>
         <p>
-          Not interested in membership but still want your chance at giveaway
+          Bag VIRGIN tokens to inherit from membership demand or become a
+          liquidity provider to profit by supporting the market.
         </p>
-        <p>Become a liquidity provider for...</p>
+      </div>
+      <div className="col-content">
+        <ol>
+          <li>Connect your wallet</li>
+          <li>Hold 1 or more VIRGIN tokens</li>
+          <li>Access the members area</li>
+        </ol>
       </div>
     </Section>
   );

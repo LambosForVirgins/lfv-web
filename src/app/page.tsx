@@ -5,7 +5,6 @@ import { CommunitySection } from "../sections/CommunitySection/CommunitySection"
 import { MembershipSection } from "../sections/MembershipSection/MembershipSection";
 import { PurchaseSection } from "../sections/PurchaseSection/PurchaseSection";
 import { AboutSection } from "../sections/AboutSection/AboutSection";
-import { SubmissionSection } from "../sections/SubmissionSection/SubmissionSection";
 
 export async function generateMetadata({
   params: { locale },
@@ -41,14 +40,12 @@ export default function LandingPage() {
   return (
     <>
       <MembershipSection testID={"membership"} />
-      <SectionBreak testID={`section`} className="col-full sticky bottom-0" />
+      {/* <SectionBreak testID={`section`} className="col-full sticky bottom-0" />
       <PurchaseSection testID={`purchase`} />
       <SectionBreak testID={`section`} className="col-full sticky bottom-0" />
       <AboutSection testID={`about`} />
       <SectionBreak testID={`section`} className="col-full sticky bottom-0" />
-      <CommunitySection testID={"community"} />
-      <SectionBreak testID={`section`} className="col-full sticky bottom-0" />
-      <SubmissionSection testID={"submission"} />
+      <CommunitySection testID={"community"} /> */}
     </>
   );
 }

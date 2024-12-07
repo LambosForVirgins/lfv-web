@@ -11,6 +11,7 @@ import { SolanaProvider } from "../providers/SolanaProvider";
 import PlausibleProvider from "next-plausible";
 import { Footer } from "../components/Footer/Footer";
 import Image from "next/image";
+import Script from "next/script";
 
 export const metadata: Metadata = {
   title: Brand.displayName,
@@ -32,6 +33,7 @@ export default async function RootLayout({
           "antialiased grid auto-flow-row grid-cols-layout"
         )}
       >
+        <Script src="https://unpkg.com/@oddbird/css-anchor-positioning" />
         <PlausibleProvider
           domain="lambosforvirgins.com"
           // taggedEvents
@@ -44,9 +46,7 @@ export default async function RootLayout({
                 <Header testID={`header`} className="col-content" />
               </div>
               {children}
-              <div className="grid col-full grid-cols-subgrid">
-                <Footer testID="footer" />
-              </div>
+
               <div className="grid col-full gap-5 sticky bottom-0 left-0 right-0 bg-red-500">
                 <div className="relative col-content" style={{ height: 60 }}>
                   <Image
@@ -61,6 +61,9 @@ export default async function RootLayout({
                 <div className="col-content">
                   <span>Disclaimers</span>
                 </div>
+              </div>
+              <div className="grid col-full grid-cols-subgrid">
+                <Footer testID="footer" />
               </div>
             </SolanaProvider>
           </LocaleProvider>

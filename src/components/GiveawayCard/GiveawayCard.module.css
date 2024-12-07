@@ -1,9 +1,12 @@
 .frame {
+    position: relative;
     display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr auto;
     background-color: white;
-    border-radius: 6px;
+    border-radius: 8px;
+    transition: transform 300ms ease;
     aspect-ratio: 1;
-    padding: 16px;
 
     &.disabled {
         color: rgba(0, 0, 0, 0.75);
@@ -12,29 +15,75 @@
     }
 
     &.disabled img {
-        opacity: 0.75;
+        opacity: 0.6;
+    }
+
+    .image {
+        position: absolute;
+        transition: inset 300ms ease, filter 300ms ease;
+        inset: -12px;
+        display: grid;
+        justify-content: center;
+    }
+
+    &:hover {
+        transform: scale(1.05);
+    }
+
+    &:hover .image {
+        inset: 0;
+        filter: blur(4px);
     }
 }
 
-.label {
-    text-align: center;
-    padding: 6px;
-    outline: 2px solid blue;
+.featured {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
 }
 
-.description {
-    text-align: center;
-    outline: 2px solid green;
-}
-
-.overlay {
+.content {
+    background: linear-gradient(#FFFFFF00, #FFFFFF4D 20%, #FFFFFF);
     position: relative;
+    padding: 16px;
+    gap: 16px;
 
-    &:before {
-        content: '';
-        position: absolute;
-        outline: 2px solid red;
-        inset: 0;
-        backdrop-filter: blur(4px);
+    .title {
+        text-align: center;
+        font-family: var(--font-leading);
+        font-size: 1.78rem;
+        z-index: 1;
+    }
+
+    .description {
+        text-align: center;
+    }
+
+    .button {
+        color: #fff;
+        background-color: #c12126;
+        min-width: 42px;
+        min-height: 42px;
+        padding: 0 16px;
+        border-radius: 8px;
+
+        &.outlined {
+            background-color: transparent;
+            color: #c12126;
+            border: 2px solid #c12126;
+        }
+
+        &.muted {
+            background-color: transparent;
+            color: #787878;
+            border: 2px solid #d5d5d5;
+        }
+    }
+
+    .actions {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+        gap: 8px;
     }
 }

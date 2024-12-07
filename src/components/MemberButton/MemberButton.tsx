@@ -5,6 +5,7 @@ import { Popover } from "../Popover/Popover";
 
 interface MemberButtonProps extends Common.ComponentProps {
   name: string;
+  className?: string;
   onClick?: () => void;
 }
 
@@ -18,10 +19,10 @@ export const MemberButton = forwardRef<
       popoverTarget={"members"}
       ref={ref}
       data-testid={testID}
-      className={styles.frame}
+      className={clsx(props.className, styles.frame)}
     >
       <span className={clsx(styles.icon, styles.badge)} />
-      <span className={styles.labels}>
+      <span className={styles.content}>
         <span>{name}</span>
         <span className={styles.progress}>
           <span className={styles.indicator} style={{ width: `44%` }} />

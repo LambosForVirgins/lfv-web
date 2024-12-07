@@ -11,6 +11,7 @@
     "test": "vitest"
   },
   "dependencies": {
+    "@oddbird/css-anchor-positioning": "^0.4.0",
     "@oddbird/popover-polyfill": "^0.5.2",
     "@raydium-io/raydium-sdk-v2": "^0.1.92-alpha",
     "@solana/pay": "^0.2.5",

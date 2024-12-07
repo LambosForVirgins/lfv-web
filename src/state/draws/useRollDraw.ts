@@ -11,7 +11,7 @@ export const useRollDraw = (drawId: string) => {
   const rollDrawHash = async (): Promise<DrawRound | null> => {
     try {
       setLoading(true);
-      const result = await fetch(`/api/draw/${drawId}/roll`, {
+      const result = await fetch(`/api/draw/${drawId}/remix`, {
         method: "POST",
       }).then((res) => res.json() as Promise<DrawRound>);
 

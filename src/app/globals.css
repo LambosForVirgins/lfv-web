@@ -30,6 +30,7 @@ body {
   color: var(--foreground);
   background: var(--background);
   font-family: var(--font-base), Arial, Helvetica, sans-serif;
+  interpolate-size: allow-keywords;
 }
 
 @layer utilities {

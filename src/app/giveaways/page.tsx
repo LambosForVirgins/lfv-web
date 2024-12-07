@@ -28,15 +28,17 @@ export const GiveawaySection = ({ testID }: Common.ComponentProps) => {
       </div>
       <div data-testid={`${testID}.collection`} className={styles.collection}>
         {giveaways.map((promo, index) => (
-          <Link href={`/giveaways/${promo.id}`} key={index}>
-            <GiveawayCard
-              testID={`${testID}.reward`}
-              label={promo.title}
-              description={promo.description}
-              criteria={promo.criteria}
-            />
-          </Link>
+          <GiveawayCard
+            key={promo.id}
+            testID={`${testID}.reward`}
+            label={promo.title}
+            description={promo.description}
+            criteria={promo.criteria}
+          />
         ))}
+      </div>
+      <div>
+        <h2>Previous Giveaways</h2>
       </div>
     </div>
   );
