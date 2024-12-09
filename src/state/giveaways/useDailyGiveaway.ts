@@ -1,18 +1,40 @@
-import { useMemo, useState } from "react";
-import { useGiveaway } from "./useGiveaway";
+import { useCallback, useState } from "react";
+import { enterDraw } from "../draws/functions";
+import { DrawEntry } from "../types";
+import { useRecoilValue } from "recoil";
+import { dailyGiveawayDrawSelector } from "../draws/selectors";
 
 export const useDailyGiveaway = () => {
   const [errors, setErrors] = useState<string[]>([]);
-  const [entries, setEntries] = useState([]);
+  const [pending, setPending] = useState(false);
+  const draw = useRecoilValue(dailyGiveawayDrawSelector);
 
-  const { giveaway, enterDraw } = useGiveaway("bc923fbe");
+  const enterCurrentDraw = useCallback(
+    async (details: DrawEntry) => {
+      if (!draw) return;
+      setPending(true);
+      try {
+        const result = await enterDraw(draw.id, details);
 
-  const currentDraw = useMemo(() => {
-    return giveaway?.draws[giveaway.draws.length - 1];
-  }, [giveaway]);
+        if (result.error) {
+          throw new Error(result.error);
+        }
+
+        console.log("Result", result);
+        return result;
+      } catch (err: any) {
+        console.log(err);
+        setErrors([...errors, err.message]);
+        throw err;
+      }
+    },
+    [draw, errors]
+  );
 
   return {
-    draw: currentDraw,
-    enterDraw,
+    errors,
+    pending,
+    draw,
+    enterDraw: enterCurrentDraw,
   };
 };

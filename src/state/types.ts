@@ -1,14 +1,17 @@
 export enum DrawStatus {
-  Closed = 0,
-  Pending = 1,
-  Open = 2,
+  Pending = 0,
+  Open,
+  Locked,
+  Closed,
 }
 
-export type DrawLog = {
+type RemixEvent = {
   timeStamp: number;
   sender: string;
   hash: string;
 };
+
+export type DrawEvent = RemixEvent;
 
 export type DrawEntry = {
   id: string;
@@ -16,31 +19,52 @@ export type DrawEntry = {
   name?: string;
 };
 
-export type DrawRound = {
+export type EntryRecord = {
+  drawId: string;
+  address: string;
+  name?: string;
+  count: number;
+};
+
+export type DrawRecord = {
   id: string;
-  drawNumber: number;
+  giveawayId: string;
   timeOpens: number;
   timeCloses: number;
   timeDraws: number;
-  seed: string;
+  seed: string | null;
   winner: number | null;
   status: DrawStatus;
   entries: DrawEntry[];
-  logs: DrawLog[];
+  events: DrawEvent[];
 };
 
-export type Giveaway = {
+export type DrawRound = DrawRecord & {
+  seed: null;
+  winner: null;
+};
+
+export type DrawResult = DrawRecord & {
+  status: DrawStatus.Closed;
+  seed: string;
+  winner: number;
+};
+
+export type GiveawayRecord = {
   id: string;
   title: string;
   description: string | undefined | null;
   active: boolean;
   providers: string[];
   criteria: EntryCriteria[];
-  draws: string[];
+};
+
+export type Giveaway = GiveawayRecord & {
+  draws: DrawRecord[];
 };
 
 export type EntryCriteria = {
   type: string;
-  parameter: string;
+  parameter?: string;
   value: number | number[] | undefined | null;
 };

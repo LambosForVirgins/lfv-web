@@ -6,12 +6,15 @@
 
 :root {
   --background: #FFF766;
-  --foreground: #171a1f;
+  --foreground: #171717;
 
   --bg-red-100: #ea916e;
 
   --bg-red-400: #de3b40;
   --bg-red-500: #c12126;
+
+  --column-layout: [full-start] minmax(0, 1fr) [content-start] minmax(320px, 960px) [content-end] minmax(0, 1fr) [full-end];
+  --panel-layout: repeat(auto-fit, minmax(320px, 1fr));
 }
 
 /* 
@@ -31,6 +34,13 @@ body {
   background: var(--background);
   font-family: var(--font-base), Arial, Helvetica, sans-serif;
   interpolate-size: allow-keywords;
+}
+
+mark {
+  color: #fff;
+  background-color: var(--bg-red-400);
+  font-family: var(--font-leading);
+  padding: 0.37rem 2rem;
 }
 
 @layer utilities {

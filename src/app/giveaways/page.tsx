@@ -4,27 +4,17 @@ import ProtectedRoute from "@/src/components/ProtectedRoute/ProtectedRoute";
 import { GiveawayCard } from "@/src/components/GiveawayCard/GiveawayCard";
 import { RecoilRoot } from "recoil";
 import { useGiveaways } from "@/src/state/giveaways/useGiveaways";
-import { useDraw } from "@/src/state/draws/useDraws";
-import { useRollDraw } from "@/src/state/draws/useRollDraw";
 import styles from "./GiveawaysSection.module.css";
-import Link from "next/link";
-import { SlotMachine } from "@/src/components/SlotMachine/SlotMachine";
-import { useState } from "react";
 import clsx from "classnames";
 import { DrawMachine } from "@/src/components/DrawMachine/DrawMachine";
 
 export const GiveawaySection = ({ testID }: Common.ComponentProps) => {
   const { giveaways } = useGiveaways();
-  const { draw: currentDraw } = useDraw(1);
 
   return (
     <div data-testid={testID} className={clsx("col-content", styles.frame)}>
       <div data-testid={`${testID}.feature`} className={styles.banner}>
-        {currentDraw ? (
-          <DrawMachine testID={`${testID}.draw`} drawId={currentDraw.id} />
-        ) : (
-          <h1>Next mega giveaway in 10 days</h1>
-        )}
+        <DrawMachine testID={`${testID}.draw`} drawId={"we3t54wa"} />
       </div>
       <div data-testid={`${testID}.collection`} className={styles.collection}>
         {giveaways.map((promo, index) => (

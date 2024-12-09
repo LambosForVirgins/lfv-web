@@ -11,7 +11,9 @@ import { SolanaProvider } from "../providers/SolanaProvider";
 import PlausibleProvider from "next-plausible";
 import { Footer } from "../components/Footer/Footer";
 import Image from "next/image";
-import Script from "next/script";
+import { Subscribe } from "../components/Subscribe/Subscribe";
+import { Disclaimers } from "../components/Disclaimers/Disclaimers";
+import { PromoSection } from "../components/PromoSection/PromoSection";
 
 export const metadata: Metadata = {
   title: Brand.displayName,
@@ -33,7 +35,6 @@ export default async function RootLayout({
           "antialiased grid auto-flow-row grid-cols-layout"
         )}
       >
-        <Script src="https://unpkg.com/@oddbird/css-anchor-positioning" />
         <PlausibleProvider
           domain="lambosforvirgins.com"
           // taggedEvents
@@ -42,29 +43,19 @@ export default async function RootLayout({
         >
           <LocaleProvider initialLocale={"en"} messages={messages}>
             <SolanaProvider>
-              <div className="grid col-full grid-cols-subgrid bg-red-500">
+              <div className="grid col-full grid-cols-subgrid bg-red-500 sticky top-0 left-0 right-0">
                 <Header testID={`header`} className="col-content" />
               </div>
-              {children}
-
-              <div className="grid col-full gap-5 sticky bottom-0 left-0 right-0 bg-red-500">
-                <div className="relative col-content" style={{ height: 60 }}>
-                  <Image
-                    src={"/images/banner.png"}
-                    alt={"banner"}
-                    width={618}
-                    height={123}
-                    className="justify-self-center absolute"
-                    style={{ top: -100, right: 0 }}
-                  />
-                </div>
-                <div className="col-content">
-                  <span>Disclaimers</span>
-                </div>
-              </div>
-              <div className="grid col-full grid-cols-subgrid">
-                <Footer testID="footer" />
-              </div>
+              <section className="col-full grid grid-cols-subgrid">
+                {children}
+              </section>
+              <PromoSection
+                testID="promo"
+                className="col-full gap-5 sticky bottom-0 left-0 right-0"
+              />
+              <Subscribe testID="subscribe" className="col-full" />
+              <Footer testID="footer" className="col-full" />
+              <Disclaimers testID="disclaimers" className="col-full" />
             </SolanaProvider>
           </LocaleProvider>
         </PlausibleProvider>

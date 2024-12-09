@@ -1,10 +1,11 @@
 import { useEffect } from "react";
 import { useRecoilState } from "recoil";
 import { drawRoundSelector } from "./selectors";
-import { getCurrentDraw } from "./functions";
+import { enterDraw, getCurrentDraw } from "./functions";
+import { type DrawEntry } from "../types";
 
-export const useDraw = (drawNumber: number) => {
-  const [round, setRound] = useRecoilState(drawRoundSelector(drawNumber));
+export const useDraw = (drawId: string) => {
+  const [round, setRound] = useRecoilState(drawRoundSelector(drawId));
 
   useEffect(() => {
     getCurrentDraw().then((draw) => {
@@ -13,18 +14,12 @@ export const useDraw = (drawNumber: number) => {
     });
   }, [setRound]);
 
-  const enterDraw = async (details: { address: string; name: string }) => {
-    const body = JSON.stringify(details);
-
-    return await fetch(`/api/draw/${drawNumber}/enter`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body,
-    }).then((res) => res.json());
+  const enterSelectedDraw = async (details: DrawEntry) => {
+    return await enterDraw(drawId, details);
   };
 
   return {
     draw: round,
-    enterDraw,
+    enterDraw: enterSelectedDraw,
   };
 };

@@ -1,16 +1,15 @@
-import { type Giveaway } from "@/src/state/types";
-import { v4 as generateRandom } from "uuid";
-import { DrawDB } from "./DrawDB";
-import { createDraw } from "./DrawBuilder";
+import { type GiveawayRecord } from "@/src/state/types";
 
 class GiveawayDatabase {
-  private readonly _records: Giveaway[] = [];
+  private readonly _records: GiveawayRecord[] = [];
 
-  constructor(_initialGiveaways: Giveaway[] = []) {
+  constructor(_initialGiveaways: GiveawayRecord[] = []) {
     this._records = _initialGiveaways;
   }
 
-  async all(options?: { filters?: { active?: boolean } }): Promise<Giveaway[]> {
+  async all(options?: {
+    filters?: { active?: boolean };
+  }): Promise<GiveawayRecord[]> {
     if (options?.filters) {
       return this._records.filter((record) => {
         if (options.filters?.active) {
@@ -22,12 +21,10 @@ class GiveawayDatabase {
     return this._records;
   }
 
-  async find(giveawayId: string): Promise<Giveaway | undefined> {
+  async find(giveawayId: string): Promise<GiveawayRecord | undefined> {
     return this._records.find((record) => record.id === giveawayId);
   }
 }
-DrawDB.addDraw(createDraw(1, "36ffef35"));
-DrawDB.addDraw(createDraw(2, "2a934bf9").open());
 
 export const GiveawayDB = new GiveawayDatabase([
   {
@@ -37,8 +34,10 @@ export const GiveawayDB = new GiveawayDatabase([
       "Top up your holdings with 10,000 and 100,000 VIRGIN awarded every day",
     active: true,
     providers: ["LambosForVirgins"],
-    criteria: [{ type: "balance", parameter: "VIRGIN", value: 1 }],
-    draws: ["36ffef35", "2a934bf9"],
+    criteria: [
+      { type: "balance", parameter: "VIRGIN", value: 1 },
+      { type: "entries", value: 1 },
+    ],
   },
   {
     id: "b079ae3a",
@@ -47,7 +46,6 @@ export const GiveawayDB = new GiveawayDatabase([
     active: true,
     providers: ["ABC Bullion"],
     criteria: [{ type: "balance", parameter: "VIRGIN", value: 1000 }],
-    draws: [],
   },
   {
     id: "b079ae3a",
@@ -56,7 +54,6 @@ export const GiveawayDB = new GiveawayDatabase([
     active: true,
     providers: ["Gates Foundation"],
     criteria: [{ type: "balance", parameter: "VIRGIN", value: 100_000 }],
-    draws: [],
   },
   {
     id: "fa36b192",
@@ -65,7 +62,6 @@ export const GiveawayDB = new GiveawayDatabase([
     active: true,
     providers: ["Some Watch Company"],
     criteria: [{ type: "balance", parameter: "VIRGIN", value: 25_000 }],
-    draws: [],
   },
   {
     id: "aa22a5f7",
@@ -74,7 +70,6 @@ export const GiveawayDB = new GiveawayDatabase([
     active: true,
     providers: ["The Whales"],
     criteria: [{ type: "balance", parameter: "VIRGIN", value: 10_000 }],
-    draws: [],
   },
   {
     id: "c57d992d",
@@ -84,7 +79,6 @@ export const GiveawayDB = new GiveawayDatabase([
     active: true,
     providers: ["Travel World"],
     criteria: [{ type: "balance", parameter: "VIRGIN", value: 17_000 }],
-    draws: [],
   },
   {
     id: "c57d523i",
@@ -93,7 +87,6 @@ export const GiveawayDB = new GiveawayDatabase([
     active: false,
     providers: ["God"],
     criteria: [{ type: "balance", parameter: "VIRGIN", value: 17_000 }],
-    draws: [],
   },
   {
     id: "005cc69b",
@@ -102,6 +95,5 @@ export const GiveawayDB = new GiveawayDatabase([
     active: true,
     providers: ["LambosForVirgins"],
     criteria: [],
-    draws: [],
   },
 ]);

@@ -1,13 +1,19 @@
 import { useRecoilValue } from "recoil";
 import { giveawaySelector } from "./selectors";
-import { enterDraw } from "./functions";
-import { DrawEntry } from "../types";
+import { associatedDrawsSelector } from "../draws/selectors";
 
 export const useGiveaway = (giveawayId: string) => {
   const giveaway = useRecoilValue(giveawaySelector(giveawayId));
 
   return {
     giveaway,
-    enterDraw: (details: DrawEntry) => enterDraw(giveawayId, details),
+  };
+};
+
+export const useGiveawayDraws = (giveawayId: string) => {
+  const draws = useRecoilValue(associatedDrawsSelector(giveawayId));
+
+  return {
+    draws,
   };
 };

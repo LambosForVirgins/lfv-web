@@ -1,0 +1,10 @@
+.frame {
+    display: grid;
+    background-color: #1a1a1a;
+    color: #fff;
+    padding: 16px;
+}
+
+.content {
+    grid-column: content;
+}

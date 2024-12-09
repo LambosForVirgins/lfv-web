@@ -30,9 +30,8 @@ const config: Config = {
         "texture-lambo": "url('/images/lambo-texture.png')",
       },
       gridTemplateColumns: {
-        panels: "repeat(auto-fit, minmax(320px, 1fr))",
-        layout:
-          "[full-start] minmax(0, 1fr) [content-start] minmax(320px, 960px) [content-end] minmax(0, 1fr) [full-end]",
+        panels: "var(--panel-layout)",
+        layout: "var(--column-layout)",
         actions: "repeat(auto-fit, minmax(60px, 1fr))",
       },
       gridColumn: {

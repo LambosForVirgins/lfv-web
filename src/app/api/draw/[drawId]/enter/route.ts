@@ -1,5 +1,6 @@
 import { DrawStatus } from "@/src/state/types";
 import { DrawDB } from "@/src/utils/gaming/DrawDB";
+import { EntryDB } from "@/src/utils/gaming/EntryDB";
 import { NextRequest, NextResponse } from "next/server";
 import { v4 as generateRandom } from "uuid";
 
@@ -7,12 +8,21 @@ interface DrawEntryParams {
   drawId: string;
 }
 
+const accountBalance = 1;
+
 export async function POST(
   req: NextRequest,
   { params }: { params: DrawEntryParams }
 ) {
   const body = await req.json();
   const draw = await DrawDB.find(params.drawId);
+
+  if (accountBalance < 1) {
+    return NextResponse.json(
+      { error: "You don't have enough entries" },
+      { status: 400 }
+    );
+  }
 
   if (!draw) {
     return NextResponse.json({ error: "Draw not found" }, { status: 400 });
@@ -40,7 +50,7 @@ export async function POST(
     name: body.name,
   };
 
-  draw.entries.push(entry);
+  EntryDB.addEntry(entry);
 
   return NextResponse.json(entry, { status: 200 });
 }

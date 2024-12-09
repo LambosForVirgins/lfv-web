@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useSetRecoilState } from "recoil";
 import { DrawRound } from "../types";
 import { roundSelector } from "./selectors";
+import { rollDraw } from "./functions";
 
 export const useRollDraw = (drawId: string) => {
   const [loading, setLoading] = useState(false);
@@ -11,12 +12,10 @@ export const useRollDraw = (drawId: string) => {
   const rollDrawHash = async (): Promise<DrawRound | null> => {
     try {
       setLoading(true);
-      const result = await fetch(`/api/draw/${drawId}/remix`, {
-        method: "POST",
-      }).then((res) => res.json() as Promise<DrawRound>);
+      const result = await rollDraw(drawId);
 
       setRound(result);
-      setSelected(result.logs.length);
+      setSelected(result.events.length);
       setLoading(false);
 
       return result;

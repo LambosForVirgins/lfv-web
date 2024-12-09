@@ -1,8 +1,8 @@
 import { DefaultValue, selectorFamily } from "recoil";
-import { Giveaway } from "../types";
+import { type GiveawayRecord } from "../types";
 import { giveawaysAtom } from "./atoms";
 
-export const giveawaySelector = selectorFamily<Giveaway | null, string>({
+export const giveawaySelector = selectorFamily<GiveawayRecord | null, string>({
   key: "giveaways-selector",
   get:
     (giveawayId: string) =>
@@ -13,7 +13,7 @@ export const giveawaySelector = selectorFamily<Giveaway | null, string>({
     },
   set:
     (giveawayId: string) =>
-    ({ set }, newValue: Giveaway | DefaultValue) => {
+    ({ set }, newValue: GiveawayRecord | DefaultValue) => {
       if (newValue instanceof DefaultValue) return;
 
       set(giveawaysAtom, (prev) => {

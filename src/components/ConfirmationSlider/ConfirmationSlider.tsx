@@ -8,6 +8,7 @@ interface ConfirmationSliderProps extends Common.ComponentProps {
   label: string;
   tolerance?: number;
   className?: string;
+  loading?: boolean;
   onChange?: (percentage: number) => void;
   onComplete?: (metrics: InteractionMetrics) => Promise<boolean>;
 }
@@ -122,7 +123,12 @@ export const ConfirmationSlider = ({
       ref={containerRef}
       data-testid={testID}
       data-seed={generateRandom()}
-      className={clsx(props.className, styles.frame, styles.channel)}
+      className={clsx(
+        props.className,
+        styles.frame,
+        styles.channel,
+        props.loading && styles.loading
+      )}
       onMouseMove={handleMouseMove}
       onMouseUp={deselectSliderHandle}
       onMouseLeave={deselectSliderHandle}

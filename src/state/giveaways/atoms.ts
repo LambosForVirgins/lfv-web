@@ -1,8 +1,8 @@
 import { atom } from "recoil";
-import { type Giveaway } from "../types";
+import { type GiveawayRecord } from "../types";
 import { fetchGiveaways } from "./functions";
 
-export const giveawaysAtom = atom<Giveaway[]>({
+export const giveawaysAtom = atom<GiveawayRecord[]>({
   key: "giveaways-atom",
   default: fetchGiveaways(),
 });

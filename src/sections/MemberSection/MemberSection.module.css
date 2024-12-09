@@ -1,0 +1,15 @@
+.frame {}
+
+.title {
+    transform: skewY(-3deg);
+    font-size: 4rem;
+    line-height: 4rem;
+    max-width: 600px;
+}
+
+.subtitle {
+    transform: skewY(-2deg);
+    font-size: 3rem;
+    line-height: 3rem;
+    max-width: 600px;
+}

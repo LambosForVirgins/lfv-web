@@ -4,7 +4,7 @@ import { useState } from "react";
 
 export const DailyEntrySlider = ({ testID }: Common.ComponentProps) => {
   const [hasEntered, setHasEntered] = useState(false);
-  const { draw, enterDraw } = useDailyGiveaway();
+  const { pending, draw, enterDraw, errors } = useDailyGiveaway();
 
   console.log(draw);
 
@@ -12,7 +12,10 @@ export const DailyEntrySlider = ({ testID }: Common.ComponentProps) => {
     try {
       if (!draw) throw new Error("No draw available");
 
-      const result = enterDraw({ id: draw, address: "abc123", name: "Test" });
+      const result = await enterDraw({
+        address: "abc123",
+        name: "Test",
+      });
 
       console.log("REsult", JSON.stringify(result, null, " "));
       setHasEntered(true);
@@ -42,6 +45,7 @@ export const DailyEntrySlider = ({ testID }: Common.ComponentProps) => {
       name={"daily"}
       label={`Slide to enter today's draw`}
       onComplete={enterDailyDraw}
+      loading={pending}
     />
   );
 };

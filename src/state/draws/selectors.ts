@@ -2,32 +2,30 @@ import { DefaultValue, selector, selectorFamily } from "recoil";
 import { DrawRound } from "../types";
 import { drawRoundsAtom } from "./atoms";
 
-export const drawRoundSelector = selectorFamily<DrawRound, number>({
+export const drawRoundSelector = selectorFamily<DrawRound | null, string>({
   key: "draw-round-selector",
   get:
-    (drawNumber: number) =>
+    (drawId: string) =>
     ({ get }) => {
       const rounds = get(drawRoundsAtom);
-      return rounds[drawNumber];
+      return rounds.find((round) => round.id === drawId) ?? null;
     },
   set:
-    (drawNumber: number) =>
-    ({ set }, newValue: DrawRound | DefaultValue) => {
-      if (newValue instanceof DefaultValue) return;
+    (drawId: string) =>
+    ({ set }, newValue: DrawRound | DefaultValue | null) => {
+      if (!newValue || newValue instanceof DefaultValue) return;
 
       set(drawRoundsAtom, (prev) => {
         const updated = [...prev];
-        updated[drawNumber] = newValue;
+        updated.map((round) => {
+          if (round.id === drawId) {
+            return newValue;
+          }
+          return round;
+        });
         return updated;
       });
     },
-});
-
-export const currentSeedSelector = selector<string>({
-  key: "current-seed-selector",
-  get: ({ get }) => {
-    return get(roundSelector(""))?.seed;
-  },
 });
 
 export const roundSelector = selectorFamily<DrawRound, string>({
@@ -49,4 +47,30 @@ export const roundSelector = selectorFamily<DrawRound, string>({
         return updated;
       });
     },
+});
+
+export const associatedDrawsSelector = selectorFamily<DrawRound[], string>({
+  key: "associated-draws-selector",
+  get:
+    (giveawayId: string) =>
+    ({ get }) => {
+      const rounds = get(drawRoundsAtom);
+      return rounds.filter((round) => round.giveawayId === giveawayId);
+    },
+});
+
+export const dailyGiveawayDrawSelector = selector<DrawRound | null>({
+  key: "daily-giveaway-draw-selector",
+  get: ({ get }) => {
+    const draws = get(associatedDrawsSelector("bc923fbe"));
+
+    return draws[draws.length - 1] ?? null;
+  },
+  set: ({ set }, newValue) => {
+    if (newValue === null || newValue instanceof DefaultValue) return;
+
+    set(drawRoundsAtom, (prev) => {
+      return [...prev, newValue];
+    });
+  },
 });

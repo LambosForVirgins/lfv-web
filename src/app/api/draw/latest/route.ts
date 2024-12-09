@@ -2,11 +2,11 @@ import { DrawDB } from "@/src/utils/gaming/DrawDB";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
-  const draws = await DrawDB.all();
+  const draw = await DrawDB.getCurrentDraw();
 
-  if (draws.length === 0) {
+  if (!draw) {
     return NextResponse.json({ error: "No open draws" }, { status: 400 });
   }
 
-  return NextResponse.json(draws, { status: 200 });
+  return NextResponse.json(draw, { status: 200 });
 }
