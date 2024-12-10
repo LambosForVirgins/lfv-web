@@ -1,7 +1,11 @@
+"use client";
+
 import { forwardRef } from "react";
 import styles from "./MemberButton.module.css";
 import clsx from "classnames";
 import { Popover } from "../Popover/Popover";
+import { useRecoilValue } from "recoil";
+import { availableCreditSelector } from "@/src/state/wallet/selectors";
 
 interface MemberButtonProps extends Common.ComponentProps {
   name: string;
@@ -13,6 +17,8 @@ export const MemberButton = forwardRef<
   HTMLButtonElement,
   React.PropsWithChildren<MemberButtonProps>
 >(({ testID, name, children, ...props }, ref) => {
+  // const balance = useRecoilValue(availableCreditSelector);
+
   return (
     <button
       {...props}

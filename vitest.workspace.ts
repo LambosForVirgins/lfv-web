@@ -1,4 +1,5 @@
 import { defineWorkspace } from "vitest/config";
+import path from "path";
 
 export default defineWorkspace([
   {
@@ -17,6 +18,11 @@ export default defineWorkspace([
       // you might want to disable it, if you don't have tests that rely on CSS
       // since parsing CSS is slow
       css: false,
+    },
+    resolve: {
+      alias: {
+        "@": path.resolve(__dirname, "./"),
+      },
     },
   },
 ]);

@@ -9,18 +9,21 @@ import clsx from "classnames";
 import { DrawMachine } from "@/src/components/DrawMachine/DrawMachine";
 
 export const GiveawaySection = ({ testID }: Common.ComponentProps) => {
-  const { giveaways } = useGiveaways();
+  const { giveaways, currentDraw } = useGiveaways();
 
   return (
     <div data-testid={testID} className={clsx("col-content", styles.frame)}>
       <div data-testid={`${testID}.feature`} className={styles.banner}>
-        <DrawMachine testID={`${testID}.draw`} drawId={"we3t54wa"} />
+        {currentDraw && (
+          <DrawMachine testID={`${testID}.draw`} drawId={currentDraw.id} />
+        )}
       </div>
       <div data-testid={`${testID}.collection`} className={styles.collection}>
-        {giveaways.map((promo, index) => (
+        {giveaways.map((promo) => (
           <GiveawayCard
             key={promo.id}
             testID={`${testID}.reward`}
+            drawId={promo.id}
             label={promo.title}
             description={promo.description}
             criteria={promo.criteria}

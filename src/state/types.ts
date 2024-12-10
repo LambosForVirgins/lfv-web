@@ -32,6 +32,7 @@ export type DrawRecord = {
   timeOpens: number;
   timeCloses: number;
   timeDraws: number;
+  price: number;
   seed: string | null;
   winner: number | null;
   status: DrawStatus;

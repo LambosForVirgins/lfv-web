@@ -10,7 +10,6 @@ import { LocaleProvider } from "../providers/LocaleProvider";
 import { SolanaProvider } from "../providers/SolanaProvider";
 import PlausibleProvider from "next-plausible";
 import { Footer } from "../components/Footer/Footer";
-import Image from "next/image";
 import { Subscribe } from "../components/Subscribe/Subscribe";
 import { Disclaimers } from "../components/Disclaimers/Disclaimers";
 import { PromoSection } from "../components/PromoSection/PromoSection";
@@ -43,7 +42,7 @@ export default async function RootLayout({
         >
           <LocaleProvider initialLocale={"en"} messages={messages}>
             <SolanaProvider>
-              <div className="grid col-full grid-cols-subgrid bg-red-500 sticky top-0 left-0 right-0">
+              <div className="grid col-full grid-cols-subgrid bg-red-500 sticky top-0 left-0 right-0 z-50">
                 <Header testID={`header`} className="col-content" />
               </div>
               <section className="col-full grid grid-cols-subgrid">

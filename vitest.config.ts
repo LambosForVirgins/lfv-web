@@ -9,16 +9,17 @@ dotenvConfig({
 export default defineConfig({
   plugins: [react()],
   test: {
+    globals: true,
     environment: "jsdom",
     include: ["./src/**/*.test.(ts|tsx)"],
     coverage: {
       include: ["src"],
       exclude: ["**/index.ts"],
       thresholds: {
-        statements: 80,
-        branches: 80,
-        functions: 80,
-        lines: 80,
+        statements: 100,
+        branches: 100,
+        functions: 100,
+        lines: 100,
       },
       skipFull: true,
     },

@@ -62,7 +62,7 @@ export const associatedDrawsSelector = selectorFamily<DrawRound[], string>({
 export const dailyGiveawayDrawSelector = selector<DrawRound | null>({
   key: "daily-giveaway-draw-selector",
   get: ({ get }) => {
-    const draws = get(associatedDrawsSelector("bc923fbe"));
+    const draws = get(associatedDrawsSelector("giveaway-bc923fbe"));
 
     return draws[draws.length - 1] ?? null;
   },

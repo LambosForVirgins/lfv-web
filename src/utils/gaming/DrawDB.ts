@@ -17,6 +17,7 @@ class DrawDatabase {
   }
 
   async find(drawId: string): Promise<DrawRecord | null> {
+    console.log("drawId", drawId, this._draws);
     return this._draws.find((draw) => draw.id === drawId) ?? null;
   }
 
@@ -25,8 +26,8 @@ class DrawDatabase {
   }
 }
 
-const draw1 = createDrawResult("bc923fbe", "36ffef35"),
-  draw2 = createDrawResult("bc923fbe", "2a934bf9"),
-  latestDraw = createDraw("bc923fbe", "we3t54wa").open();
+const draw1 = createDrawResult("giveaway-bc923fbe", "36ffef35"),
+  draw2 = createDrawResult("giveaway-bc923fbe", "2a934bf9"),
+  latestDraw = createDraw("giveaway-bc923fbe", "we3t54wa").open();
 
 export const DrawDB = new DrawDatabase([draw1, draw2, latestDraw]);

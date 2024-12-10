@@ -16,6 +16,7 @@ class DrawBuilder implements DrawRecord {
   timeCloses: number;
   timeDraws: number;
   winner: number;
+  price: number;
   /**
    * The number of entry tokens required to enter the draw.
    * Defaults to 1 in most cases.
@@ -25,11 +26,12 @@ class DrawBuilder implements DrawRecord {
   readonly entries: DrawEntry[] = [];
 
   constructor(_giveawayId: string, id?: string, _duration: number = 60) {
-    this.id = id || generateRandom();
+    this.id = `draw-${id || generateRandom()}`;
     this.giveawayId = _giveawayId;
     this.timeOpens = Date.now();
     this.timeCloses = Date.now() + _duration * 60 * 1000;
     this.timeDraws = this.timeCloses + 3600000;
+    this.price = 1;
     this.seed = generateRandom().substring(0, 8);
     this.status = DrawStatus.Pending;
     this.winner = this.getSelectedEntry();
@@ -75,6 +77,7 @@ class DrawBuilder implements DrawRecord {
       timeOpens: this.timeOpens,
       timeCloses: this.timeCloses,
       timeDraws: this.timeDraws,
+      price: this.price,
       winner: this.winner,
       events: this.events,
       entries: this.entries,
@@ -82,8 +85,8 @@ class DrawBuilder implements DrawRecord {
   }
 }
 
-export const createDraw = (giveawayIdId: string, id?: string) =>
-  new DrawBuilder(giveawayIdId, id);
+export const createDraw = (giveawayId: string, id?: string) =>
+  new DrawBuilder(giveawayId, id);
 
-export const createDrawResult = (giveawayIdId: string, id?: string) =>
-  new DrawBuilder(giveawayIdId, id).close();
+export const createDrawResult = (giveawayId: string, id?: string) =>
+  new DrawBuilder(giveawayId, id).close();

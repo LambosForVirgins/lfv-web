@@ -28,7 +28,7 @@ class GiveawayDatabase {
 
 export const GiveawayDB = new GiveawayDatabase([
   {
-    id: "bc923fbe",
+    id: "giveaway-bc923fbe",
     title: "Daily Top Up",
     description:
       "Top up your holdings with 10,000 and 100,000 VIRGIN awarded every day",
@@ -40,7 +40,7 @@ export const GiveawayDB = new GiveawayDatabase([
     ],
   },
   {
-    id: "b079ae3a",
+    id: "giveaway-b079ae3a",
     title: "Gold Bullion",
     description: null,
     active: true,
@@ -48,7 +48,7 @@ export const GiveawayDB = new GiveawayDatabase([
     criteria: [{ type: "balance", parameter: "VIRGIN", value: 1000 }],
   },
   {
-    id: "b079ae3a",
+    id: "giveaway-b079ae3a",
     title: "Jeffrey's Island",
     description: `Only the purest virgins can qualify for this giveaway.`,
     active: true,
@@ -56,7 +56,7 @@ export const GiveawayDB = new GiveawayDatabase([
     criteria: [{ type: "balance", parameter: "VIRGIN", value: 100_000 }],
   },
   {
-    id: "fa36b192",
+    id: "giveaway-fa36b192",
     title: "Rolex Giveaway",
     description: null,
     active: true,
@@ -64,7 +64,7 @@ export const GiveawayDB = new GiveawayDatabase([
     criteria: [{ type: "balance", parameter: "VIRGIN", value: 25_000 }],
   },
   {
-    id: "aa22a5f7",
+    id: "giveaway-aa22a5f7",
     title: "$10K Cash",
     description: "$10,000 USD in cash",
     active: true,
@@ -72,7 +72,7 @@ export const GiveawayDB = new GiveawayDatabase([
     criteria: [{ type: "balance", parameter: "VIRGIN", value: 10_000 }],
   },
   {
-    id: "c57d992d",
+    id: "giveaway-c57d992d",
     title: "Bahamas Escape",
     description:
       "Escape to the Bahama's with your favorite person on a one week getaway",
@@ -81,7 +81,7 @@ export const GiveawayDB = new GiveawayDatabase([
     criteria: [{ type: "balance", parameter: "VIRGIN", value: 17_000 }],
   },
   {
-    id: "c57d523i",
+    id: "giveaway-c57d523i",
     title: "Baby Jesus",
     description: "Mary Magdalene did it with her legs closed.",
     active: false,
@@ -89,7 +89,7 @@ export const GiveawayDB = new GiveawayDatabase([
     criteria: [{ type: "balance", parameter: "VIRGIN", value: 17_000 }],
   },
   {
-    id: "005cc69b",
+    id: "giveaway-005cc69b",
     title: "$100M Lambo",
     description: "Celebrating $100M USD Market Cap with a Lamborghini giveaway",
     active: true,

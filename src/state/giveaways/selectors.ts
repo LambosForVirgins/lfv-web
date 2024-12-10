@@ -1,6 +1,7 @@
 import { DefaultValue, selectorFamily } from "recoil";
 import { type GiveawayRecord } from "../types";
 import { giveawaysAtom } from "./atoms";
+import { drawEntriesAtom } from "../draws/atoms";
 
 export const giveawaySelector = selectorFamily<GiveawayRecord | null, string>({
   key: "giveaways-selector",
@@ -27,5 +28,16 @@ export const giveawaySelector = selectorFamily<GiveawayRecord | null, string>({
 
         return updated;
       });
+    },
+});
+
+export const drawEntryCountSelector = selectorFamily<number, string>({
+  key: "draw-entry-count-selector",
+  get:
+    (drawId: string) =>
+    ({ get }) => {
+      const entries = get(drawEntriesAtom);
+      const record = entries.find(({ drawId: id }) => id === drawId);
+      return record?.entries ?? 0;
     },
 });

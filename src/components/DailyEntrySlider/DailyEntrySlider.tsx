@@ -5,12 +5,15 @@ import { useState } from "react";
 export const DailyEntrySlider = ({ testID }: Common.ComponentProps) => {
   const [hasEntered, setHasEntered] = useState(false);
   const { pending, draw, enterDraw, errors } = useDailyGiveaway();
+  // const setCredit = useSetRecoilState(balanceAtom);
 
   console.log(draw);
 
   const enterDailyDraw = async (): Promise<boolean> => {
     try {
       if (!draw) throw new Error("No draw available");
+
+      // setCredit((credit) => ({ ...credit, pending: credit.pending + 1 }));
 
       const result = await enterDraw({
         address: "abc123",

@@ -1,8 +1,22 @@
-import { DrawDB } from "@/src/utils/gaming/DrawDB";
 import { NextRequest, NextResponse } from "next/server";
+import { createClient } from "edgedb";
+
+const client = createClient();
 
 export async function GET(req: NextRequest) {
-  const draws = await DrawDB.all();
+  const draws = await client.query(
+    `
+    select default::Draw {
+      id,
+      status,
+      timeCloses,
+      timeDraws,
+      timeOpens,
+      giveawayId := .giveaway.id
+    }
+    filter .status = DrawStatus.Open
+  `
+  );
 
   if (draws.length === 0) {
     return NextResponse.json({ error: "No open draws" }, { status: 400 });

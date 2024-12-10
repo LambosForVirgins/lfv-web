@@ -2,12 +2,10 @@
 
 import clsx from "classnames";
 import { useTranslations } from "next-intl";
-import Link from "next/link";
-import { LocaleButton } from "../Buttons/LocaleButton";
-import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
 import { MemberButton } from "../MemberButton/MemberButton";
 import { BoostButton } from "../BoostButton/BoostButton";
 import { useRouter } from "next/navigation";
+import { RecoilRoot } from "recoil";
 
 const GuestMenuItems = [
   {

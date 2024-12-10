@@ -1,13 +1,17 @@
-import { Giveaway, type EntryCriteria } from "@/src/state/types";
+import { type EntryCriteria } from "@/src/state/types";
 import styles from "./GiveawayCard.module.css";
 import clsx from "classnames";
 import { ProgressIndicator } from "../ProgressIndicator/ProgressIndicator";
 import Image from "next/image";
-import { Button } from "../Buttons/Button";
 import { getProgressFromBalance } from "@/src/utils/membership/getProgressFromBalance";
 import { validateEntryCriteria } from "@/src/utils/entry-criteria/validateEntryCriteria";
+import { useRecoilValue } from "recoil";
+import { drawEntryCountSelector } from "@/src/state/giveaways/selectors";
+import { useGiveaways } from "@/src/state/giveaways/useGiveaways";
+import { drawRoundSelector, roundSelector } from "@/src/state/draws/selectors";
 
 interface RewardCardProps extends Common.ComponentProps {
+  drawId: string;
   label: string;
   description?: string | null;
   criteria?: EntryCriteria[];
@@ -15,6 +19,46 @@ interface RewardCardProps extends Common.ComponentProps {
 }
 
 const mockBalanceVirgin = 15_432;
+
+const EntryButton = ({
+  testID,
+  ...props
+}: Common.ComponentProps & { drawId: string }) => {
+  const entries = useRecoilValue(drawEntryCountSelector(props.drawId));
+  const { loading, enterDraw } = useGiveaways();
+  const draws = useRecoilValue(roundSelector(props.drawId));
+
+  const enterGiveaway = async (drawId: string) => {
+    console.log("Entering giveaway", drawId);
+    await enterDraw(drawId, { address: "0x1234", name: "test" });
+  };
+
+  // TODO: Should only get a single draw and should check it's open
+  // We only want to show giveaways with current and future draws
+  if (!draws) {
+    return (
+      <button
+        data-testid={testID}
+        onClick={() => enterGiveaway(props.drawId)}
+        className={clsx(styles.button, styles.muted)}
+        disabled
+      >
+        {`No draws`}
+      </button>
+    );
+  }
+
+  return (
+    <button
+      data-testid={testID}
+      onClick={() => enterGiveaway(props.drawId)}
+      className={styles.button}
+      disabled={loading || entries > 0}
+    >
+      {entries > 0 ? `Entered` : `Enter draw`}
+    </button>
+  );
+};
 
 export const GiveawayCard = ({
   testID,
@@ -63,10 +107,7 @@ export const GiveawayCard = ({
               className={styles.button}
             >{`Stake more`}</button>
           ) : (
-            <button
-              data-testid={`${testID}.button`}
-              className={styles.button}
-            >{`Enter draw`}</button>
+            <EntryButton testID={`${testID}.enter`} drawId={props.drawId} />
           )}
         </div>
       </div>

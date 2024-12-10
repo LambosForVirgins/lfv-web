@@ -424,6 +424,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@edgedb/generate@npm:^0.5.6":
+  version: 0.5.6
+  resolution: "@edgedb/generate@npm:0.5.6"
+  dependencies:
+    "@iarna/toml": "npm:^2.2.5"
+    debug: "npm:^4.3.4"
+  peerDependencies:
+    edgedb: ^1.5.10
+  bin:
+    generate: dist/cli.js
+  checksum: 10/855f44497d8e985cd14bda54ca143cee8a741260af8bc24653248df8e4a2807d4445aacb65be5ead5d82eb45bffb3d0be0b839d1b13541733c79631d5e09b6f8
+  languageName: node
+  linkType: hard
+
 "@emurgo/cardano-serialization-lib-browser@npm:^11.5.0":
   version: 11.5.0
   resolution: "@emurgo/cardano-serialization-lib-browser@npm:11.5.0"
@@ -1055,6 +1069,13 @@ __metadata:
   version: 2.0.3
   resolution: "@humanwhocodes/object-schema@npm:2.0.3"
   checksum: 10/05bb99ed06c16408a45a833f03a732f59bf6184795d4efadd33238ff8699190a8c871ad1121241bb6501589a9598dc83bf25b99dcbcf41e155cdf36e35e937a3
+  languageName: node
+  linkType: hard
+
+"@iarna/toml@npm:^2.2.5":
+  version: 2.2.5
+  resolution: "@iarna/toml@npm:2.2.5"
+  checksum: 10/b61426dc1a3297bbcb24cb8e9c638663866b4bb6f28f2c377b167e4b1f8956d8d208c484b73bb59f4232249903545cc073364c43576d2d5ad66afbd730ad24a9
   languageName: node
   linkType: hard
 
@@ -6723,6 +6744,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"edgedb@npm:^1.5.12":
+  version: 1.5.12
+  resolution: "edgedb@npm:1.5.12"
+  dependencies:
+    debug: "npm:^4.3.4"
+    env-paths: "npm:^3.0.0"
+    semver: "npm:^7.6.2"
+    shell-quote: "npm:^1.8.1"
+    which: "npm:^4.0.0"
+  bin:
+    edgedb: dist/cli.mjs
+  checksum: 10/3af88a8da68dc3a9a82b6acb2d7310e37bb1dee3720a861fa0951cc73df1c977fd604c8996ccaf683f2912af84a9885d41fced67563c33d0e56823b834ad77b6
+  languageName: node
+  linkType: hard
+
 "electron-to-chromium@npm:^1.5.41":
   version: 1.5.50
   resolution: "electron-to-chromium@npm:1.5.50"
@@ -6849,6 +6885,13 @@ __metadata:
   version: 2.2.1
   resolution: "env-paths@npm:2.2.1"
   checksum: 10/65b5df55a8bab92229ab2b40dad3b387fad24613263d103a97f91c9fe43ceb21965cd3392b1ccb5d77088021e525c4e0481adb309625d0cb94ade1d1fb8dc17e
+  languageName: node
+  linkType: hard
+
+"env-paths@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "env-paths@npm:3.0.0"
+  checksum: 10/b2b0a0d0d9931a13d279c22ed94d78648a1cc5f408f05d47ff3e0c1616f0aa0c38fb33deec5e5be50497225d500607d57f9c8652c4d39c2f2b7608cd45768128
   languageName: node
   linkType: hard
 
@@ -9565,6 +9608,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "lfv@workspace:."
   dependencies:
+    "@edgedb/generate": "npm:^0.5.6"
     "@oddbird/css-anchor-positioning": "npm:^0.4.0"
     "@oddbird/popover-polyfill": "npm:^0.5.2"
     "@raydium-io/raydium-sdk-v2": "npm:^0.1.92-alpha"
@@ -9589,6 +9633,7 @@ __metadata:
     classnames: "npm:^2.5.1"
     date-fns: "npm:^4.1.0"
     dotenv: "npm:^16.4.5"
+    edgedb: "npm:^1.5.12"
     eslint: "npm:^8"
     eslint-config-next: "npm:14.2.16"
     eslint-config-prettier: "npm:^9.1.0"
@@ -12178,7 +12223,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"semver@npm:^7.3.5, semver@npm:^7.3.8, semver@npm:^7.6.0, semver@npm:^7.6.3":
+"semver@npm:^7.3.5, semver@npm:^7.3.8, semver@npm:^7.6.0, semver@npm:^7.6.2, semver@npm:^7.6.3":
   version: 7.6.3
   resolution: "semver@npm:7.6.3"
   bin:
@@ -12252,6 +12297,13 @@ __metadata:
   version: 3.0.0
   resolution: "shebang-regex@npm:3.0.0"
   checksum: 10/1a2bcae50de99034fcd92ad4212d8e01eedf52c7ec7830eedcf886622804fe36884278f2be8be0ea5fde3fd1c23911643a4e0f726c8685b61871c8908af01222
+  languageName: node
+  linkType: hard
+
+"shell-quote@npm:^1.8.1":
+  version: 1.8.2
+  resolution: "shell-quote@npm:1.8.2"
+  checksum: 10/3ae4804fd80a12ba07650d0262804ae3b479a62a6b6971a6dc5fa12995507aa63d3de3e6a8b7a8d18f4ce6eb118b7d75db7fcb2c0acbf016f210f746b10cfe02
   languageName: node
   linkType: hard
 

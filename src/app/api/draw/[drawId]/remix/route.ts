@@ -35,10 +35,11 @@ export async function POST(
     return NextResponse.json({ error: "Draw is not open" }, { status: 400 });
   }
 
-  const lastRoll = draw.entries[draw.entries.length - 1]?.hash || draw.seed;
+  const lastRoll =
+    draw.events[draw.events.length - 1]?.hash || draw.seed || generateRandom();
   const hash = mergeRandomly(lastRoll, generateRandom().substring(0, 8));
 
-  draw.entries.push({ hash, timeStamp: Date.now(), sender: "0x" });
+  draw.events.push({ hash, timeStamp: Date.now(), sender: "0x" });
 
   return NextResponse.json(draw, { status: 200 });
 }

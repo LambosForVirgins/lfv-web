@@ -15,6 +15,7 @@ export const useRollDraw = (drawId: string) => {
       const result = await rollDraw(drawId);
 
       setRound(result);
+      console.log(result);
       setSelected(result.events.length);
       setLoading(false);
 
