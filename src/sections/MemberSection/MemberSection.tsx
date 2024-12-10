@@ -23,10 +23,7 @@ export const MemberSection = ({ testID }: Common.ComponentProps) => {
   // const t = useTranslations("Members");
 
   return (
-    <section
-      data-testid={testID}
-      className="grid col-full grid-cols-subgrid p-5"
-    >
+    <section data-testid={testID} className="grid col-full grid-cols-subgrid">
       <div
         data-testid={`${testID}.banner`}
         className="grid col-full grid-cols-subgrid"
@@ -62,8 +59,8 @@ export const MemberSection = ({ testID }: Common.ComponentProps) => {
         <p>Entries accrued</p>
         <p>Staked tokens</p>
       </div>
-      <div className="col-content">
-        <div>
+      <div className="col-full bg-white grid-cols-subgrid">
+        <div className="col-content">
           Show the giveaways entered into. Feed life from entry to daily
           giveaway
         </div>

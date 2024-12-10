@@ -44,6 +44,8 @@ const MenuItems = [
   },
 ];
 
+const MENU_ACTIONS = [];
+
 interface HeaderProps extends Common.ComponentProps {
   className?: string;
 }
@@ -53,6 +55,8 @@ export const Header = ({ testID, ...props }: HeaderProps) => {
   const { push } = useRouter();
 
   const navigateToPath = (path: string) => () => push(path);
+
+  // Menu actions should be configurable per route and also communicate via channels with pages
 
   return (
     <div
