@@ -70,11 +70,14 @@ export const PurchaseSteps = ({ testID }: Common.ComponentProps) => {
   return (
     <ol className="instruct text-2xl">
       <li>
+        <span className={clsx(balance > MINIMUM_TOKEN_PRICE && "line-through")}>
+          {"Buy Solana through your exchange of choice (e.g. Coinspot)"}
+        </span>
+      </li>
+      <li>
         <span data-testid={testID} className="flex flex-col gap-4">
           <span className={clsx(connected && "line-through")}>
-            {shouldInstall
-              ? "Get one of the wallets below"
-              : "Choose your wallet below"}
+            {"Transfer to Phantom or wallet of your choice"}
           </span>
           <span className="col-span-2 flex gap-4 items-center">
             {wallets
@@ -102,24 +105,17 @@ export const PurchaseSteps = ({ testID }: Common.ComponentProps) => {
         </span>
       </li>
       <li>
-        <span className={clsx(balance > MINIMUM_TOKEN_PRICE && "line-through")}>
-          {balance >= MINIMUM_TOKEN_PRICE
-            ? "Buy some Solana"
-            : `Buy more Solana`}
-        </span>
-      </li>
-      <li>
         <span className="flex flex-col gap-4">
           <span className={clsx(tokenBalance > 0 && "line-through")}>
-            Buy $VIRGIN and get Lambo
+            {"Copy address above and swap Solana for $VIRGIN"}
           </span>
-          <span className="col-span-2 flex gap-4 items-center">
+          {/* <span className="col-span-2 flex gap-4 items-center">
             {exchanges.map((market) => (
               <a key={market.name} target={"_blank"} href={market.url}>
                 <img src={market.icon} width={62} height={62} />
               </a>
             ))}
-          </span>
+          </span> */}
         </span>
       </li>
       {tokenBalance > 0 && (
